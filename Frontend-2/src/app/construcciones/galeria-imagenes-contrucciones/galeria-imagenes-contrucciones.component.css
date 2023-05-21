@@ -1,0 +1,84 @@
+container-fluid {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.card-title {
+  font-size: clamp(16px, 2vw, 20px);
+}
+
+.carousel-inner .carousel-item img {
+  border-radius: 12px;
+  box-shadow: 0 2px 2px rgba(204, 197, 185, .5);
+  height: 400px;
+  width: 100%;
+}
+
+.carousel-indicators {
+  bottom: 0;
+}
+
+.carousel-indicators {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 15;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-left: 0;
+  margin-right: 15%;
+  margin-left: 15%;
+  list-style: none;
+}
+
+.carousel-indicators .active {
+  background-color: #f5593d;
+}
+
+.carousel-indicators li {
+  background-color: #fff;
+  border: 0;
+}
+
+.carousel-indicators li {
+  position: relative;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  width: 30px;
+  height: 3px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+}
+
+.carousel-inner .carousel-item img {
+  border-radius: 12px;
+  box-shadow: 0 2px 2px rgba(204, 197, 185, .5);
+  height: 400px;
+  width: 100%;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+.carousel-item {
+  position: relative;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000px;
+  perspective: 1000px;
+}
+
+
+.page-carousel {
+  border-radius: 12px !important;
+  border: none !important;
+}
