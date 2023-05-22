@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flaskext.mysql import MySQL
 from config import config
 from flask_cors import CORS
-
+import Dioses
 
 app = Flask(__name__)
 CORS(app) 
