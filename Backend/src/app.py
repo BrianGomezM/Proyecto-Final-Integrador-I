@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flaskext.mysql import MySQL
 from config import config
 from flask_cors import CORS
-import Dioses
+
 
 app = Flask(__name__)
 CORS(app) 
@@ -111,7 +111,53 @@ def actualizarConstruccion(codigo):
     except Exception as ex:
         return jsonify({"mensaje": "Error al actualizar la construcción"})
     
-
+@app.route('/dioses', methods=['GET'])
+def listarDioses():
+    try:
+        conn = mysql.connect()  # Establece la conexión a la base de datos
+        cursor = conn.cursor()
+        print("Conexión exitosa")
+        
+        # Aquí puedes ejecutar tus consultas SQL
+        # Por ejemplo:
+        sql = "SELECT * FROM dioses"
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        cursos = []
+        for fila in datos:
+            curso = {'cod': fila[0], 
+                     'nombre': fila[1], 
+                     'representacion': fila[2], 
+                     'historia': fila[3],
+                     'imagen':fila[4]}
+            cursos.append(curso)        
+        conn.close()  # Cierra la conexión a la base de datos
+        return jsonify({'dioses': cursos, 'mensaje': "Lista de dioses egipcios"})
+    except Exception as ex:
+        return jsonify({"mensaje":"Error"})
+    
+@app.route('/diosesById/<id>', methods=['GET'])
+def getGodById(id):
+    try:
+        conn = mysql.connect()  # Establece la conexión a la base de datos
+        cursor = conn.cursor()
+        print("Conexión exitosa")
+        sql = "SELECT * FROM dioses WHERE id_dios = %s"
+        cursor.execute(sql, (id,))
+        fila = cursor.fetchone()
+        if fila is not None:
+            curso = {'cod': fila[0], 
+                     'nombre': fila[1], 
+                     'representacion': fila[2], 
+                     'historia': fila[3],
+                     'imagen':fila[4]}
+            conn.close()  # Cierra la conexión a la base de datos
+            return jsonify({'Dios': curso, 'mensaje': "Se encontró el Dios"})
+        else:
+            return jsonify({"mensaje": "No se encontró la construcción"})
+    except Exception as ex:
+        return jsonify({"mensaje": "Error"})
+    
 
 def pagina_no_encontrada(error):
     return "<h1>La página que intentas buscar no existe....</h1>"

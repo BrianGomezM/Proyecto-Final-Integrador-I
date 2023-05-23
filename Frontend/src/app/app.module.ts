@@ -12,6 +12,7 @@ import { RegistrarUsuarioComponent } from './cuenta/registrar-usuario/registrar-
 import { InicioSesionComponent } from './cuenta/inicio-sesion/inicio-sesion.component';
 import { AdminLayoutComponent } from './contenedor/layout/admin-layout.component';
 import { ModalComponent } from './construcciones/galeria-imagenes-contrucciones/modal/modal.component';
+import { VerDetalleDiosComponent } from './religion/dioses/verDetalleDios/ver-detalle-dios/ver-detalle-dios.component';
 
 
 
@@ -32,7 +33,8 @@ import { ModalComponent } from './construcciones/galeria-imagenes-contrucciones/
     AsignarClaveComponent,
     RegistrarUsuarioComponent,
     AdminLayoutComponent,
-    ModalComponent
+    ModalComponent,
+    VerDetalleDiosComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Construccion } from 'app/servicios/servicios-contruccion/interface-construccion';
-import { ConsumoServiciosService } from '../../../servicios/servicios-contruccion/consumo-servicios.service';
+import { ConsumoServiciosService } from '../../../servicios/servicios-dioses/consumo-servicios.service';
+import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-explorar-dioses',
   templateUrl: './explorar-dioses.component.html',
@@ -8,19 +10,19 @@ import { ConsumoServiciosService } from '../../../servicios/servicios-contruccio
 })
 export class ExplorarDiosesComponent implements OnInit {
   tarjetasDuplicadas: any[] = [];
-  public construcciones: Array<Construccion> = [];
+  public listaDioses: Array<Dioses> = [];
 
   constructor(
+    private router: Router,
     private consumoServiciosService: ConsumoServiciosService
 
   ) { }
 
   ngOnInit(): void {
-    this.consumoServiciosService.getConstrucciones().subscribe(
-      (construcciones: Construccion[]) => {
-        this.construcciones = construcciones;
-        console.log(this.construcciones['construcciones']);
-        this.duplicarTarjetas(this.construcciones['construcciones']);
+    this.consumoServiciosService.getAllGods().subscribe(
+      (dioses: Dioses[]) => {
+        this.listaDioses = dioses['dioses'];
+        
       },
       (error: any) => {
         console.log('Error al obtener las construcciones:', error);
@@ -28,17 +30,10 @@ export class ExplorarDiosesComponent implements OnInit {
       }
     );
   }
-  
-  duplicarTarjetas(construcciones) {
-    this.tarjetasDuplicadas = construcciones.map(construccion => {
-      return {
-        construccion: construccion,
-        imagen: './assets/img/piramides-ginza.jpg'
-      };
-    });
-  }
 
-  
+  mostrarDetalles(dios:Dioses){
+    this.router.navigate(['/detalles-dios', dios.cod]);
+  }
   }
   
 

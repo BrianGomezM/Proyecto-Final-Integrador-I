@@ -23,6 +23,8 @@ export class GaleriaImagenesContruccionesComponent implements OnInit {
         this.construcciones = construcciones;
         console.log(this.construcciones['construcciones']);
         this.duplicarTarjetas(this.construcciones['construcciones']);
+        console.log("pRUEBA:" + this.tarjetasDuplicadas);
+        
       },
       (error: any) => {
         console.log('Error al obtener las construcciones:', error);

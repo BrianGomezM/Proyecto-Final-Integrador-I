@@ -5,6 +5,7 @@ import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { ExplorarDiosesComponent } from 'app/religion/dioses/explorar-dioses/explorar-dioses.component';
 import { GaleriaImagenesComponent } from 'app/religion/dioses/galeria-imagenes/galeria-imagenes.component';
 import { MitosHistoriaComponent } from 'app/religion/dioses/mitos-historia/mitos-historia.component';
+import { VerDetalleDiosComponent } from 'app/religion/dioses/verDetalleDios/ver-detalle-dios/ver-detalle-dios.component';
 import { CriaturasMitologicasComponent } from 'app/religion/mitologia/criaturas-mitologicas/criaturas-mitologicas.component';
 import { ExplorarMitologiaComponent } from 'app/religion/mitologia/explorar-mitologia/explorar-mitologia.component';
 import { GaleriaImagenesMitologicasComponent } from 'app/religion/mitologia/galeria-imagenes-mitologicas/galeria-imagenes-mitologicas.component';
@@ -23,7 +24,8 @@ import { UsuarioComponent } from 'app/usuario/usuario.component';
 export const AdminLayoutRoutes: Routes = [
     { path: 'usuario',                          component: UsuarioComponent },
     { path: 'dashboard',                        component: DashboardComponent },   
-    { path: 'explorar-dioses',                  component: ExplorarDiosesComponent },   
+    { path: 'explorar-dioses',                  component: ExplorarDiosesComponent },
+    { path: 'detalles-dios/:id',                component:VerDetalleDiosComponent},   
     { path: 'galeria-imagenes',                 component: GaleriaImagenesComponent  },   
     { path: 'galeria-imagenes-construcciones',  component:GaleriaImagenesContruccionesComponent },  
     

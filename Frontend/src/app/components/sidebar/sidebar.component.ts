@@ -17,6 +17,7 @@ export const ROUTES: RouteInfo[] = [
       { path: '/galeria-imagenes', title: 'Imágenes', icon: 'images', children: null }
     ]
   },
+
   {
     path: '#mitologia', id: 'mitologia', title: 'MITOLOGÍA', icon: 'diversity_2', children: [
       { path: '/explorar-mitologia', title: 'Mitologicas', icon: 'content_paste_search', children: null },
