@@ -150,7 +150,8 @@ def getGodById(id):
                      'nombre': fila[1], 
                      'representacion': fila[2], 
                      'historia': fila[3],
-                     'imagen':fila[4]}
+                     'imagen':fila[4],
+                     'roles':fila[5]}
             conn.close()  # Cierra la conexión a la base de datos
             return jsonify({'Dios': curso, 'mensaje': "Se encontró el Dios"})
         else:

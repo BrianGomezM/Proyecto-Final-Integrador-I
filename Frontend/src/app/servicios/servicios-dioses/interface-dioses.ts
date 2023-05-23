@@ -4,5 +4,6 @@ export interface Dioses{
     representacion:   string;
     historia:  string;
     imagen:string;
+    roles:string;
 
 }

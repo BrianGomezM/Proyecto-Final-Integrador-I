@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ConsumoServiciosService } from '../../../../servicios/servicios-dioses/consumo-servicios.service';
 import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ver-detalle-dios',
@@ -15,12 +16,23 @@ export class VerDetalleDiosComponent implements OnInit {
     nombre: '',
     representacion: '',
     historia: '',
-    imagen: ''
+    imagen: '',
+    roles: ''
   };
-  listaImagenes:string[]=['../../../../assets/dioses/isis.jpg','./assets/img/piramides-ginza.jpg','./assets/img/piramides-ginza.jpg']
+  listaImagenes:string[][]=[
+    ['./assets/dioses/ra/1.jpg','./assets/dioses/ra/2.jpg','./assets/dioses/ra/3.jpg','./assets/dioses/ra/4.jpg'],
+    ['./assets/dioses/osiris/1.jpg','./assets/dioses/osiris/2.jpg','./assets/dioses/osiris/3.jpg','./assets/dioses/osiris/4.jpg'],
+    ['./assets/dioses/isis/1.jpg','./assets/dioses/isis/2.jpg','./assets/dioses/isis/3.jpg','./assets/dioses/isis/4.jpg'],
+    ['./assets/dioses/horus/1.jpg','./assets/dioses/horus/2.jpg','./assets/dioses/horus/3.jpg','./assets/dioses/horus/4.jpg'],
+    ['./assets/dioses/anubis/1.jpg','./assets/dioses/anubis/2.jpg','./assets/dioses/anubis/3.jpg','./assets/dioses/anubis/4.jpg'],
+    ['./assets/dioses/thoth/1.jpg','./assets/dioses/thoth/2.jpg','./assets/dioses/thoth/3.jpg','./assets/dioses/thoth/4.jpg'],
+    ['./assets/dioses/hathor/1.jpg','./assets/dioses/hathor/2.jpg','./assets/dioses/hathor/3.jpg','./assets/dioses/hathor/4.jpg'],
+    ['./assets/dioses/seth/1.jpg','./assets/dioses/seth/2.jpg','./assets/dioses/seth/3.jpg','./assets/dioses/seth/4.jpg']
+  ]
 
 
   constructor(private route: ActivatedRoute,
+    private router: Router,
     private consumoServiciosService: ConsumoServiciosService) { }
 
   ngOnInit(): void {
@@ -44,6 +56,9 @@ export class VerDetalleDiosComponent implements OnInit {
         // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
       }
     );
+  }
+  regresar(){
+    this.router.navigate(['/explorar-dioses']);
   }
   
 }
