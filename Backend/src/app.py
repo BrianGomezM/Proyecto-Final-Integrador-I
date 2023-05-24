@@ -110,7 +110,8 @@ def actualizarConstruccion(codigo):
         return jsonify({"mensaje": "Construcción actualizada correctamente"})
     except Exception as ex:
         return jsonify({"mensaje": "Error al actualizar la construcción"})
-    
+
+#######################################################DIOSES#################################################################    
 @app.route('/dioses', methods=['GET'])
 def listarDioses():
     try:
@@ -158,7 +159,63 @@ def getGodById(id):
             return jsonify({"mensaje": "No se encontró la construcción"})
     except Exception as ex:
         return jsonify({"mensaje": "Error"})
+
+ #######################################################CRIATURAS#################################################################
+@app.route('/criaturas', methods=['GET'])
+def listarCriaturas():
+    try:
+        conn = mysql.connect()  # Establece la conexión a la base de datos
+        cursor = conn.cursor()
+        print("Conexión exitosa")
+        
+        # Aquí puedes ejecutar tus consultas SQL
+        # Por ejemplo:
+        sql = "SELECT * FROM criaturas"
+        cursor.execute(sql)
+        datos = cursor.fetchall()
+        cursos = []
+        for fila in datos:
+            curso = {'cod': fila[0], 
+                     'nombre': fila[1], 
+                     'historia': fila[2], 
+                     'representacion': fila[3],
+                     'origen': fila[4],
+                     'caracteristicas': fila[5],
+                     'rol': fila[6],
+                     'imagen':fila[7]
+                     }
+            cursos.append(curso)        
+        conn.close()  # Cierra la conexión a la base de datos
+        return jsonify({'criaturas': cursos, 'mensaje': "Lista de criaturas egipcias"})
+    except Exception as ex:
+        return jsonify({"mensaje":"Error"})
     
+@app.route('/criaturasById/<id>', methods=['GET'])
+def getCriaturaById(id):
+    try:
+        conn = mysql.connect()  # Establece la conexión a la base de datos
+        cursor = conn.cursor()
+        print("Conexión exitosa")
+        sql = "SELECT * FROM criaturas WHERE id_criatura = %s"
+        cursor.execute(sql, (id,))
+        fila = cursor.fetchone()
+        if fila is not None:
+            curso = {'cod': fila[0], 
+                     'nombre': fila[1], 
+                     'historia': fila[2], 
+                     'representacion': fila[3],
+                     'origen': fila[4],
+                     'caracteristicas': fila[5],
+                     'rol': fila[6],
+                     'imagen':fila[7]
+                     }
+            conn.close()  # Cierra la conexión a la base de datos
+            return jsonify({'criatura': curso, 'mensaje': "Se encontró la criatura"})
+        else:
+            return jsonify({"mensaje": "No se encontró la construcción"})
+    except Exception as ex:
+        return jsonify({"mensaje": "Error"})
+      
 
 def pagina_no_encontrada(error):
     return "<h1>La página que intentas buscar no existe....</h1>"
@@ -167,5 +224,7 @@ if __name__ == '__main__':
     app.config.from_object(config['development'])
     app.register_error_handler(404, pagina_no_encontrada), 444
     app.run()
-    
+
+
+
 #https://www.youtube.com/watch?v=D6LZnrDbQPM&ab_channel=UskoKruM2010

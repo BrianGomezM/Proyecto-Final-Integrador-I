@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ConsumoServiciosService } from '../../../servicios/servicios-dioses/consumo-servicios.service';
-import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
+import { ConsumoServiciosService } from '../../../servicios/servicios-criaturas/consumo-servicios.service';
+import { Criatura } from 'app/servicios/servicios-criaturas/interface-criaturas';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-criaturas-mitologicas',
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CriaturasMitologicasComponent implements OnInit {
   tarjetasDuplicadas: any[] = [];
-  public listaDioses: Array<Dioses> = [];
+  public listaCriaturas: Array<Criatura> = [];
 
   constructor(
     private router: Router,
@@ -18,9 +18,10 @@ export class CriaturasMitologicasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.consumoServiciosService.getAllGods().subscribe(
-      (dioses: Dioses[]) => {
-        this.listaDioses = dioses['dioses'];
+    this.consumoServiciosService.getAllCriaturas().subscribe(
+      (criaturas: Criatura[]) => {
+        this.listaCriaturas = criaturas['criaturas'];
+        console.log(this.listaCriaturas);
         
       },
       (error: any) => {
@@ -30,7 +31,7 @@ export class CriaturasMitologicasComponent implements OnInit {
     );
   }
 
-  mostrarDetalles(dios:Dioses){
-    this.router.navigate(['/detalles-dios', dios.cod]);
+  mostrarDetalles(criatura:Criatura){
+    this.router.navigate(['/detalles-criatura', criatura.cod]);
   }
 }

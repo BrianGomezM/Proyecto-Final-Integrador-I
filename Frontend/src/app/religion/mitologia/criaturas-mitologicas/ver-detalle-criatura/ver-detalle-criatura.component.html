@@ -1,0 +1,98 @@
+<div class="main-content">
+    <div class="container-fluid">
+        
+  <div class="col-md-10">
+    <div class="card">
+        <div class="card-header card-header-text card-header-primary">
+          <div class="card-text">
+            <h4 class="card-title">{{detalleCriatura.nombre}}</h4>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+                <div class="card-body">
+                    <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carouselExample" [class.active]="index === 0" *ngFor="let tarjeta of listaImagenes[detalleCriatura.cod-1]; let index = index" [attr.data-slide-to]="index"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item" *ngFor="let tarjeta of listaImagenes[detalleCriatura.cod-1]; let index = index" [class.active]="index === 0">
+                                <img [src]="tarjeta" class="img" alt="Slide {{ index }}">
+                                <div class="carousel-caption">
+                                    <p></p>
+                                </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-body">
+                    <div class="title">Representación:</div>
+                    <p class="description">
+                        {{detalleCriatura.representacion}}
+                    </p>
+                    <div class="title">Historia:</div>
+                    <p class="text-justify description">
+                        {{detalleCriatura.historia}}
+                    </p>
+                    <div class="title">Rol en la cultura egipcia:</div>
+                    <p class="description">
+                        {{detalleCriatura.rol}}
+                    </p>
+                    <div class="title">Origen:</div>
+                    <p class="description">
+                        {{detalleCriatura.origen}}
+                    </p>
+                    <div class="title">Principales características:</div>
+                    <p class="description">
+                        {{detalleCriatura.caracteristicas}}
+                    </p>
+                    <button (click)="regresar()" class="btn btn-primary">Regresar</button>
+                </div>
+
+        </div>
+
+    </div>
+</div>
+        <!-- <div class="row">
+            <ng-container>
+                <div class="col-md-12">
+                    <div class="row">
+                        
+                        <div class="card card-product" data-count="7">
+                            <div data-header-animation="true" class="card-header card-header-image">
+
+                            </div>                          
+                            <div class="card-body">                    
+                                <h4 class="card-title"><a href="#pablo"></a></h4>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">                            
+
+                                        <p class="card-category"></p>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div> -->
+    </div>
+</div>
+
+<ng-template #noInfoTemplate>
+    <div class="text-center">
+        <p>No se encontró información disponible.</p>
+    </div>
+</ng-template>
+
+

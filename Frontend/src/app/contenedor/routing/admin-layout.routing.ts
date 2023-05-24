@@ -7,6 +7,7 @@ import { GaleriaImagenesComponent } from 'app/religion/dioses/galeria-imagenes/g
 import { MitosHistoriaComponent } from 'app/religion/dioses/mitos-historia/mitos-historia.component';
 import { VerDetalleDiosComponent } from 'app/religion/dioses/verDetalleDios/ver-detalle-dios/ver-detalle-dios.component';
 import { CriaturasMitologicasComponent } from 'app/religion/mitologia/criaturas-mitologicas/criaturas-mitologicas.component';
+import { VerDetalleCriaturaComponent } from 'app/religion/mitologia/criaturas-mitologicas/ver-detalle-criatura/ver-detalle-criatura.component';
 import { ExplorarMitologiaComponent } from 'app/religion/mitologia/explorar-mitologia/explorar-mitologia.component';
 import { GaleriaImagenesMitologicasComponent } from 'app/religion/mitologia/galeria-imagenes-mitologicas/galeria-imagenes-mitologicas.component';
 import { CeremoniasComponent } from 'app/religion/religion/ceremonias/ceremonias.component';
@@ -25,7 +26,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'usuario',                          component: UsuarioComponent },
     { path: 'dashboard',                        component: DashboardComponent },   
     { path: 'explorar-dioses',                  component: ExplorarDiosesComponent },
-    { path: 'detalles-dios/:id',                component:VerDetalleDiosComponent},   
+    { path: 'detalles-dios/:id',                component:VerDetalleDiosComponent}, 
+    { path: 'detalles-criatura/:id',            component:VerDetalleCriaturaComponent},   
     { path: 'galeria-imagenes',                 component: GaleriaImagenesComponent  },   
     { path: 'galeria-imagenes-construcciones',  component:GaleriaImagenesContruccionesComponent },  
     

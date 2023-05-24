@@ -13,6 +13,8 @@ import { InicioSesionComponent } from './cuenta/inicio-sesion/inicio-sesion.comp
 import { AdminLayoutComponent } from './contenedor/layout/admin-layout.component';
 import { ModalComponent } from './construcciones/galeria-imagenes-contrucciones/modal/modal.component';
 import { VerDetalleDiosComponent } from './religion/dioses/verDetalleDios/ver-detalle-dios/ver-detalle-dios.component';
+import { VerDetalleCriaturaComponent } from './religion/mitologia/criaturas-mitologicas/ver-detalle-criatura/ver-detalle-criatura.component';
+
 
 
 
@@ -34,7 +36,8 @@ import { VerDetalleDiosComponent } from './religion/dioses/verDetalleDios/ver-de
     RegistrarUsuarioComponent,
     AdminLayoutComponent,
     ModalComponent,
-    VerDetalleDiosComponent
+    VerDetalleDiosComponent,
+    VerDetalleCriaturaComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
