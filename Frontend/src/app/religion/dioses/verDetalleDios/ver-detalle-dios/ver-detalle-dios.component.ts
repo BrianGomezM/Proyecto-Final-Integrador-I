@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ConsumoServiciosService } from '../../../../servicios/servicios-dioses/consumo-servicios.service';
 import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
 import { Router } from '@angular/router';
+import { Recurso } from 'app/servicios/recursos.interface';
 
 @Component({
   selector: 'app-ver-detalle-dios',
@@ -19,16 +20,9 @@ export class VerDetalleDiosComponent implements OnInit {
     imagen: '',
     roles: ''
   };
-  listaImagenes:string[][]=[
-    ['./assets/dioses/ra/1.jpg','./assets/dioses/ra/2.jpg','./assets/dioses/ra/3.jpg','./assets/dioses/ra/4.jpg'],
-    ['./assets/dioses/osiris/1.jpg','./assets/dioses/osiris/2.jpg','./assets/dioses/osiris/3.jpg','./assets/dioses/osiris/4.jpg'],
-    ['./assets/dioses/isis/1.jpg','./assets/dioses/isis/2.jpg','./assets/dioses/isis/3.jpg','./assets/dioses/isis/4.jpg'],
-    ['./assets/dioses/horus/1.jpg','./assets/dioses/horus/2.jpg','./assets/dioses/horus/3.jpg','./assets/dioses/horus/4.jpg'],
-    ['./assets/dioses/anubis/1.jpg','./assets/dioses/anubis/2.jpg','./assets/dioses/anubis/3.jpg','./assets/dioses/anubis/4.jpg'],
-    ['./assets/dioses/thoth/1.jpg','./assets/dioses/thoth/2.jpg','./assets/dioses/thoth/3.jpg','./assets/dioses/thoth/4.jpg'],
-    ['./assets/dioses/hathor/1.jpg','./assets/dioses/hathor/2.jpg','./assets/dioses/hathor/3.jpg','./assets/dioses/hathor/4.jpg'],
-    ['./assets/dioses/seth/1.jpg','./assets/dioses/seth/2.jpg','./assets/dioses/seth/3.jpg','./assets/dioses/seth/4.jpg']
-  ]
+  listaImagenes:Recurso = {
+    imagenes: []
+  };
 
 
   constructor(private route: ActivatedRoute,
@@ -47,6 +41,16 @@ export class VerDetalleDiosComponent implements OnInit {
   }
 
   loadGodsDetails(diosId){
+    this.consumoServiciosService.getImagenesDetails(diosId).subscribe(
+      (recurso: Recurso[]) => {
+        this.listaImagenes.imagenes = recurso['imagenes'];
+        console.log(this.listaImagenes.imagenes)
+      },
+      (error: any) => {
+        console.log('Error al obtener las construcciones:', error); 
+      }
+    );  
+
     this.consumoServiciosService.getGodDetails(diosId).subscribe(
       (dioses: Dioses[]) => {
         this.detalleDios = dioses['Dios'];

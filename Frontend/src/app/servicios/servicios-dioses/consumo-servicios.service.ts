@@ -4,6 +4,7 @@ import { Observable, catchError } from 'rxjs';
 import { environment } from 'environments/environment.prod';
 import {Dioses } from '../servicios-dioses/interface-dioses';
 import { throwError } from 'rxjs';
+import { Recurso } from '../recursos.interface';
 
 
 @Injectable({
@@ -37,5 +38,17 @@ export class ConsumoServiciosService {
           return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
         }));    
       }
+      getImagenesDetails(idDios):Observable<Recurso[]>{
+        let  url =this.baseUrl+'diosesImgById/'+idDios;
+        let header=new HttpHeaders();
+        header.append('Content-Type', 'application/json');
+        header.append('Access-Control-Allow-Origin', 'http://localhost');
+        return this.http.get<Recurso[]>(url, { headers: header }).pipe(
+          catchError(error => {
+            console.log('Error en la solicitud:', error);
+            // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
+            return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
+          }));    
+        }
 
 }

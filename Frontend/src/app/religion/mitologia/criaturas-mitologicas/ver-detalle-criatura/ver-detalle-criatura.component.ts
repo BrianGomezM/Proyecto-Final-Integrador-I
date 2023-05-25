@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ConsumoServiciosService } from '../../../../servicios/servicios-criaturas/consumo-servicios.service';
 import { Criatura } from 'app/servicios/servicios-criaturas/interface-criaturas';
 import { Router } from '@angular/router';
+import { Recurso } from 'app/servicios/recursos.interface';
 @Component({
   selector: 'app-ver-detalle-criatura',
   templateUrl: './ver-detalle-criatura.component.html',
@@ -22,16 +23,9 @@ export class VerDetalleCriaturaComponent implements OnInit {
     rol:'',
     imagen:''
   };
-  listaImagenes:string[][]=[
-    ['./assets/criaturaes/ra/1.jpg','./assets/criaturaes/ra/2.jpg','./assets/criaturaes/ra/3.jpg','./assets/criaturaes/ra/4.jpg'],
-    ['./assets/criaturaes/osiris/1.jpg','./assets/criaturaes/osiris/2.jpg','./assets/criaturaes/osiris/3.jpg','./assets/criaturaes/osiris/4.jpg'],
-    ['./assets/criaturaes/isis/1.jpg','./assets/criaturaes/isis/2.jpg','./assets/criaturaes/isis/3.jpg','./assets/criaturaes/isis/4.jpg'],
-    ['./assets/criaturaes/horus/1.jpg','./assets/criaturaes/horus/2.jpg','./assets/criaturaes/horus/3.jpg','./assets/criaturaes/horus/4.jpg'],
-    ['./assets/criaturaes/anubis/1.jpg','./assets/criaturaes/anubis/2.jpg','./assets/criaturaes/anubis/3.jpg','./assets/criaturaes/anubis/4.jpg'],
-    ['./assets/criaturaes/thoth/1.jpg','./assets/criaturaes/thoth/2.jpg','./assets/criaturaes/thoth/3.jpg','./assets/criaturaes/thoth/4.jpg'],
-    ['./assets/criaturaes/hathor/1.jpg','./assets/criaturaes/hathor/2.jpg','./assets/criaturaes/hathor/3.jpg','./assets/criaturaes/hathor/4.jpg'],
-    ['./assets/criaturaes/seth/1.jpg','./assets/criaturaes/seth/2.jpg','./assets/criaturaes/seth/3.jpg','./assets/criaturaes/seth/4.jpg']
-  ]
+  listaImagenes:Recurso = {
+    imagenes: []
+  };
 
 
   constructor(private route: ActivatedRoute,
@@ -50,18 +44,26 @@ export class VerDetalleCriaturaComponent implements OnInit {
   }
 
   loadGodsDetails(criaturaId){
+    this.consumoServiciosService.getImagenesDetails(criaturaId).subscribe(
+      (recurso: Recurso[]) => {
+        this.listaImagenes.imagenes = recurso['imagenes'];
+        console.log(this.listaImagenes.imagenes)
+      },
+      (error: any) => {
+        console.log('Error al obtener las construcciones:', error); 
+      }
+    );   
     this.consumoServiciosService.getCriaturaDetails(criaturaId).subscribe(
       (criatura: Criatura[]) => {
         this.detalleCriatura = criatura['criatura'];
       },
       (error: any) => {
         console.log('Error al obtener las construcciones:', error);
-        // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
       }
     );
   }
   regresar(){
-    this.router.navigate(['/explorar-criaturaes']);
+    this.router.navigate(['/criaturas-mitologicas']);
   }
   
 

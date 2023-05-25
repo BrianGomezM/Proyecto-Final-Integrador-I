@@ -153,13 +153,33 @@ def getGodById(id):
                      'historia': fila[3],
                      'imagen':fila[4],
                      'roles':fila[5]}
-            conn.close()  # Cierra la conexión a la base de datos
+            conn.close()  
             return jsonify({'Dios': curso, 'mensaje': "Se encontró el Dios"})
         else:
             return jsonify({"mensaje": "No se encontró la construcción"})
     except Exception as ex:
         return jsonify({"mensaje": "Error"})
-
+    
+@app.route('/diosesImgById/<id>', methods=['GET'])
+def getDiosesImgById(id):
+    try:
+        curso=[]
+        conn = mysql.connect() 
+        cursor = conn.cursor()
+        print("Conexión exitosa")
+        sql = "SELECT imagen_url FROM imagenes WHERE oidTabla=2 and oidRecurso  = %s"
+        cursor.execute(sql, (id,))
+        fila = cursor.fetchone()
+        if fila is not None:
+            while fila is not None:
+                
+                    curso.append(fila[0])
+                    fila = cursor.fetchone()
+            return jsonify({'imagenes': curso, 'mensaje': "Se encontró la criatura"})
+        else:
+            return jsonify({"mensaje": "No se encontró la construcción"})
+    except Exception as ex:
+        return jsonify({"mensaje": "Error"})
  #######################################################CRIATURAS#################################################################
 @app.route('/criaturas', methods=['GET'])
 def listarCriaturas():
@@ -215,7 +235,27 @@ def getCriaturaById(id):
             return jsonify({"mensaje": "No se encontró la construcción"})
     except Exception as ex:
         return jsonify({"mensaje": "Error"})
-      
+    
+@app.route('/criaturasImgById//<id>', methods=['GET'])
+def getCriaturaImgById(id):
+    try:
+        curso=[]
+        conn = mysql.connect()  # Establece la conexión a la base de datos
+        cursor = conn.cursor()
+        print("Conexión exitosa")
+        sql = "SELECT imagen_url FROM imagenes WHERE oidTabla=3 and oidRecurso  = %s"
+        cursor.execute(sql, (id,))
+        fila = cursor.fetchone()
+        if fila is not None:
+            while fila is not None:
+                
+                    curso.append(fila[0])
+                    fila = cursor.fetchone()
+            return jsonify({'imagenes': curso, 'mensaje': "Se encontró la criatura"})
+        else:
+            return jsonify({"mensaje": "No se encontró la construcción"})
+    except Exception as ex:
+        return jsonify({"mensaje": "Error"})
 
 def pagina_no_encontrada(error):
     return "<h1>La página que intentas buscar no existe....</h1>"

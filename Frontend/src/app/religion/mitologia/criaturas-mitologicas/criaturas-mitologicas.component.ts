@@ -18,11 +18,10 @@ export class CriaturasMitologicasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.consumoServiciosService.getAllCriaturas().subscribe(
       (criaturas: Criatura[]) => {
         this.listaCriaturas = criaturas['criaturas'];
-        console.log(this.listaCriaturas);
-        
       },
       (error: any) => {
         console.log('Error al obtener las construcciones:', error);

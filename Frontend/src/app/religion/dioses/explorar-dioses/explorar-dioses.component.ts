@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConsumoServiciosService } from '../../../servicios/servicios-dioses/consumo-servicios.service';
 import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
 import { Router } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-explorar-dioses',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 export class ExplorarDiosesComponent implements OnInit {
   tarjetasDuplicadas: any[] = [];
   public listaDioses: Array<Dioses> = [];
-
+  isLoading=true;
   constructor(
     private router: Router,
     private consumoServiciosService: ConsumoServiciosService
