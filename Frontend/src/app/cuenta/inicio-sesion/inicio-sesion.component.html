@@ -34,7 +34,7 @@
                                                 <i class="material-icons">email</i>
                                             </span>
                                         </div>
-                                        <input type="email" placeholder="Ingrese su correo" class="form-control">
+                                        <input type="email" placeholder="Ingrese su correo" class="form-control" [(ngModel)]="usuario.correo">
                                     </div>
                                 </span>
                                 <span class="bmd-form-group">
@@ -45,12 +45,12 @@
                                                 <i class="material-icons">lock_outline</i>
                                             </span>
                                         </div>
-                                        <input type="password" placeholder="Ingrese su contraseña" class="form-control">
+                                        <input type="password" placeholder="Ingrese su contraseña" class="form-control" [(ngModel)]="usuario.password">
                                     </div>
                                 </span>
                                 <span class="bmd-form-group">
                                     <p style="margin-top: 30px;"><a href="/">¿Olvidó su Contraseña</a>?</p>
-                                    <p style="margin-bottom: 5px;"><a href="/">Crear cuenta</a></p>
+                                    <p style="margin-bottom: 5px;"><a href="#/registrar">Crear cuenta</a></p>
                                     <a href="/" class="btn btn-just-icon btn-link">
                                         <i class="fa fa-facebook-official" style="font-size:36px"></i>
                                     </a>                                   
@@ -61,7 +61,7 @@
                             </div>
      
                             <div style="text-align: center;">
-                                <a href="#pablo" class="btn btn-warning" style="margin-top: 5px;">Ingresar</a>
+                                <button href="#pablo" class="btn btn-warning" style="margin-top: 5px;" (click)="hacerLogin()">Ingresar</button>
                             </div>
                         </div>
                     </form>

@@ -12,7 +12,8 @@ import { RegistrarUsuarioComponent } from './cuenta/registrar-usuario/registrar-
 import { InicioSesionComponent } from './cuenta/inicio-sesion/inicio-sesion.component';
 import { AdminLayoutComponent } from './contenedor/layout/admin-layout.component';
 import { ModalComponent } from './construcciones/galeria-imagenes-contrucciones/modal/modal.component';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -24,6 +25,8 @@ import { ModalComponent } from './construcciones/galeria-imagenes-contrucciones/
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [
     AppComponent,

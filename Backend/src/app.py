@@ -110,15 +110,84 @@ def actualizarConstruccion(codigo):
         return jsonify({"mensaje": "Construcción actualizada correctamente"})
     except Exception as ex:
         return jsonify({"mensaje": "Error al actualizar la construcción"})
-    
+@app.route('/registrar_usuario', methods=['POST'])
+def registrar_usuario():
+    usuario = request.get_json()  # Obtener los datos enviados desde el frontend
+    resultado = guardar_usuario(usuario)  # Guardar los datos en la base de datos
 
+    return jsonify(resultado)
+
+def guardar_usuario(usuario):
+    try:
+        conn = mysql.connect()  # Establecer la conexión a la base de datos
+        cursor = conn.cursor()
+
+        # Insertar los datos del usuario en la base de datos
+        sql = "INSERT INTO usuario (nombre, apellido, telefono, correo, password, urlAvatar) VALUES (%s, %s, %s, %s, %s, %s)"
+        valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], usuario['urlAvatar'])
+        cursor.execute(sql, valores)
+
+        conn.commit()  # Confirmar los cambios en la base de datos
+        conn.close()  # Cerrar la conexión a la base de datos
+
+        return {'mensaje': 'El usuario se registró correctamente'}
+    except Exception as ex:
+        return {'mensaje': str(ex)}
+@app.route('/login', methods=['POST'])  
+def login(): 
+    try:
+        param = request.args.get('param')
+
+        if param:
+            # Realizar la consulta con el parámetro de búsqueda
+            usuarios = consultarUsuariosLike(param)
+        else:
+            # No se proporcionó un parámetro de búsqueda
+            # Devolver una respuesta de error o manejarlo según tus necesidades
+            return jsonify({'mensaje': 'No se proporcionó un parámetro de búsqueda'})
+
+        # Devolver la respuesta en formato JSON
+        return jsonify(usuarios)
+
+    except Exception as ex:
+        # Error en el procesamiento de la solicitud
+        return jsonify({'mensaje': 'Error al obtener los usuarios'})
 
 def pagina_no_encontrada(error):
     return "<h1>La página que intentas buscar no existe....</h1>"
+
+def consultarUsuariosLike(param):
+    sql = "SELECT * FROM usuario WHERE nombre LIKE '%{}%'".format(param)
+       # Aquí debes adaptar tu lógica de consulta a la base de datos y ejecutar la consulta
+    # El siguiente código es solo un ejemplo y debes reemplazarlo con tu propia lógica
+    # para ejecutar la consulta y obtener los resultados
+    resultado = ejecutar_consulta(sql)
+    usuarios = []
+
+    for fila in resultado:
+        # Aquí debes adaptar la forma en que se almacenan los resultados en la lista de usuarios
+        # según la estructura de los objetos Usuario en tu aplicación
+        usuario = {
+            'nombre': fila['nombre'],
+            'apellido': fila['apellido'],
+            'telefono': fila['telefono'],
+            'correo': fila['correo'],
+            'password': fila['password'],
+            'url_avatar': fila['url_avatar']
+        }
+        usuarios.append(usuario)
+
+    return usuarios
+
+def ejecutar_consulta(sql):
+    # Aquí debes implementar tu lógica de conexión a la base de datos y ejecución de la consulta
+    # Retorna el resultado de la consulta en el formato adecuado
+    resultado = [...]
+    return resultado
 
 if __name__ == '__main__':
     app.config.from_object(config['development'])
     app.register_error_handler(404, pagina_no_encontrada), 444
     app.run()
     
-#https://www.youtube.com/watch?v=D6LZnrDbQPM&ab_channel=UskoKruM2010
+#https://www.youtube.com/watch?v=D6LZnrDbQPM&ab_channel=UskoKruM2010  33:48
