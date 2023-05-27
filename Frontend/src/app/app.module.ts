@@ -11,7 +11,7 @@ import { AsignarClaveComponent } from './cuenta/asignar-clave/asignar-clave.comp
 import { RegistrarUsuarioComponent } from './cuenta/registrar-usuario/registrar-usuario.component';
 import { InicioSesionComponent } from './cuenta/inicio-sesion/inicio-sesion.component';
 import { AdminLayoutComponent } from './contenedor/layout/admin-layout.component';
-import { ModalComponent } from './construcciones/galeria-imagenes-contrucciones/modal/modal.component';
+
 
 
 
@@ -32,7 +32,6 @@ import { ModalComponent } from './construcciones/galeria-imagenes-contrucciones/
     AsignarClaveComponent,
     RegistrarUsuarioComponent,
     AdminLayoutComponent,
-    ModalComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

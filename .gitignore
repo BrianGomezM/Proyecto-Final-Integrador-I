@@ -2,3 +2,7 @@ Frontend/node_modules/
 Frontend/.angular/
 __pycache__/
 .DS_Store
+Frontend/angular.json
+Frontend/package-lock.json
+Frontend/package.json
+Backend/src/__pycache__/config.cpython-310.pyc
