@@ -1,340 +1,41 @@
-from flask import Flask, jsonify, request
+from flask import Blueprint, Flask, jsonify, request
+from flask_cors import CORS
 from flaskext.mysql import MySQL
 from config import config
-from flask_cors import CORS
+from controllers.arquitectura_controller import arquitectura_app
 
+#FIRMA DE LA CLASE APP.PY
+#configurar y ejecutar una aplicación Flask que proporciona una API web. 
+# La aplicación se encarga de manejar las rutas y las solicitudes HTTP, así como de interactuar con una base de datos MySQL.
 
+# Instancia de la aplicación Flask.
 app = Flask(__name__)
-CORS(app) 
-# Configuración de la conexión a la base de datos MySQL
+
+#Habilita el manejo de solicitudes de recursos cruzados (CORS) para permitir peticiones desde dominios diferentes al de la aplicación.
+CORS(app)
+
+#Configuraciones de conexión a la base de datos MySQL obtenidas del archivo de configuración.
 app.config['MYSQL_DATABASE_HOST'] = config['development'].MYSQL_HOST
 app.config['MYSQL_DATABASE_USER'] = config['development'].MYSQL_USER
 app.config['MYSQL_DATABASE_PASSWORD'] = config['development'].MYSQL_PASSWORD
 app.config['MYSQL_DATABASE_DB'] = config['development'].MYSQL_DB
 
-mysql = MySQL(app)
+#Registra el blueprint 
+#en la aplicación Flask, lo que significa que las rutas y controladores definidos en el blueprint estarán disponibles en la aplicación.
+app.register_blueprint(arquitectura_app)
 
-
-
-@app.route('/arquitectura', methods=['GET'])
-def listarAquitectura():
-    try:
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        sql = "SELECT * FROM arquitectura"
-        cursor.execute(sql)
-        datos = cursor.fetchall()
-        cursos = []
-        for fila in datos:
-            curso = {'cod': fila[0], 'nombre': fila[1], 'resumen': fila[2], 'historia': fila[3], 'ubicacion': fila[4], 'lugar': fila[5], 'fecha': fila[6]}
-            cursos.append(curso)        
-        conn.close()  # Cierra la conexión a la base de datos
-        return jsonify({'construcciones': cursos, 'mensaje': "Lista de construcciones egipcias"})
-    except Exception as ex:
-        return jsonify({"mensaje":"Error"})
-
-@app.route('/arquitectura/<codigo>', methods=['GET'])
-def buscarConstruccion(codigo):
-    try:
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        
-        # Aquí puedes ejecutar tus consultas SQL
-        # Por ejemplo:
-        sql = "SELECT * FROM arquitectura WHERE oid = %s"
-        cursor.execute(sql, (codigo,))
-        datos = cursor.fetchone()
-        if datos is not None:
-            curso = {'cod': fila[0], 'nombre': fila[1], 'resumen': fila[2], 'historia': fila[3], 'ubicacion': fila[4], 'lugar': fila[5], 'fecha': fila[6]}
-            conn.close()  # Cierra la conexión a la base de datos
-            return jsonify({'construccion': curso, 'mensaje': "Se encontró la construcción"})
-        else:
-            return jsonify({"mensaje": "No se encontró la construcción"})
-    except Exception as ex:
-        return jsonify({"mensaje": "Error"})
-
-@app.route('/arquitectura', methods=['POST'])
-def registrarConstruccion():
-    
-    try:
-        nombre_construccion = request.json.get('nombreConstruccion')
-        print(nombre_construccion)
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-
-        # Aquí puedes ejecutar tus consultas SQL
-        # Por ejemplo:
-        sql = "INSERT INTO arquitectura (nombre_construccion) VALUES (%s)"
-        cursor.execute(sql, (nombre_construccion,))
-        conn.commit()  # Realiza el commit después de ejecutar la consulta
-        conn.close()  # Cierra la conexión a la base de datos
-        return jsonify({"mensaje": "Se registró correctamente"})
-    except Exception as ex:
-        return jsonify({"mensaje": "Error"})
-    
-@app.route('/arquitectura/<codigo>', methods=['DELETE'])
-def eliminarConstruccion(codigo):
-    try:
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        # Aquí puedes ejecutar tus consultas SQL
-        # Por ejemplo:
-        sql = "DELETE FROM arquitectura WHERE codigo = %s"
-        cursor.execute(sql, (codigo,))
-        conn.commit()  # Realiza el commit después de ejecutar la consulta
-        conn.close()  # Cierra la conexión a la base de datos
-        return jsonify({"mensaje": "Construcción eliminada correctamente"})
-    except Exception as ex:
-        return jsonify({"mensaje": "Error al eliminar la construcción"})
-
-@app.route('/arquitectura/<codigo>', methods=['PUT'])
-def actualizarConstruccion(codigo):
-    try:
-        nombre_construccion = request.json.get('nombreConstruccion')
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        # Aquí puedes ejecutar tus consultas SQL
-        # Por ejemplo:
-        sql = "UPDATE arquitectura SET nombre_construccion = %s WHERE codigo = %s"
-        cursor.execute(sql, (nombre_construccion, codigo))
-        conn.commit()  # Realiza el commit después de ejecutar la consulta
-        conn.close()  # Cierra la conexión a la base de datos
-        return jsonify({"mensaje": "Construcción actualizada correctamente"})
-    except Exception as ex:
-        return jsonify({"mensaje": "Error al actualizar la construcción"})
-
-#######################################################DIOSES#################################################################    
-###################################################################################################
-# Método: listarDioses
-# Descripción:
-# Este método se utiliza para obtener una lista de todos los dioses egipcios.
-# Realiza una consulta a la base de datos para obtener los datos de todos los dioses
-# y los devuelve como respuesta en formato JSON.
-#
-# URL: /dioses
-#
-# Método HTTP: GET
-###################################################################################################
-@app.route('/dioses', methods=['GET'])
-def listarDioses():
-    try:
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        
-        # Aquí puedes ejecutar tus consultas SQL
-        # Por ejemplo:
-        sql = "SELECT * FROM dioses"
-        cursor.execute(sql)
-        datos = cursor.fetchall()
-        cursos = []
-        for fila in datos:
-            curso = {'cod': fila[0], 
-                     'nombre': fila[1], 
-                     'representacion': fila[2], 
-                     'historia': fila[3],
-                     'imagen':fila[4]}
-            cursos.append(curso)        
-        conn.close()  # Cierra la conexión a la base de datos
-        return jsonify({'dioses': cursos, 'mensaje': "Lista de dioses egipcios"})
-    except Exception as ex:
-        return jsonify({"mensaje":"Error"})
-    
-###################################################################################################
-# Método: getGodById
-# Descripción:
-# Este método se utiliza para obtener los datos de un dios específico por su ID.
-# Busca en la base de datos los campos asociados al dios y los devuelve como
-# respuesta en formato JSON.
-#
-# URL: /diosesById/<id>
-#
-# Método HTTP: GET
-# Parámetros de URL: <id> (int): El ID del dios que se desea obtener.
-###################################################################################################
-
-@app.route('/diosesById/<id>', methods=['GET'])
-def getGodById(id):
-    try:
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        sql = "SELECT * FROM dioses WHERE id_dios = %s"
-        cursor.execute(sql, (id,))
-        fila = cursor.fetchone()
-        if fila is not None:
-            curso = {'cod': fila[0], 
-                     'nombre': fila[1], 
-                     'representacion': fila[2], 
-                     'historia': fila[3],
-                     'imagen':fila[4],
-                     'roles':fila[5]}
-            conn.close()  
-            return jsonify({'Dios': curso, 'mensaje': "Se encontró el Dios"})
-        else:
-            return jsonify({"mensaje": "No se encontró la construcción"})
-    except Exception as ex:
-        return jsonify({"mensaje": "Error"})
-    
-###################################################################################################
-# Método: getDiosesImgById
-# Descripción:
-# Este método se utiliza para obtener las imágenes de un dios específico por su ID.
-# Busca en la base de datos las imágenes asociadas al dios y las devuelve como
-# respuesta en formato JSON.
-#
-# URL: /diosesImgById/<id>
-#
-# Método HTTP: GET
-# Parámetros de URL: <id> (int): El ID del dios para el cual se desean obtener las imágenes.
-###################################################################################################
-
-@app.route('/diosesImgById/<id>', methods=['GET'])
-def getDiosesImgById(id):
-    try:
-        curso=[]
-        conn = mysql.connect() 
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        sql = "SELECT imagen_url FROM imagenes WHERE oidTabla=2 and oidRecurso  = %s"
-        cursor.execute(sql, (id,))
-        fila = cursor.fetchone()
-        if fila is not None:
-            while fila is not None:
-                
-                    curso.append(fila[0])
-                    fila = cursor.fetchone()
-            return jsonify({'imagenes': curso, 'mensaje': "Se encontró la criatura"})
-        else:
-            return jsonify({"mensaje": "No se encontró la construcción"})
-    except Exception as ex:
-        return jsonify({"mensaje": "Error"})
- #######################################################CRIATURAS#################################################################
-
-###################################################################################################
-# Método: listarCriaturas
-# Descripción:
-# Este método se utiliza para obtener una lista de todas las criaturas egipcias.
-# Realiza una consulta a la base de datos para obtener los datos de todas las criaturas
-# y los devuelve como respuesta en formato JSON.
-#
-# URL: /criaturas
-#
-# Método HTTP: GET
-###################################################################################################
-@app.route('/criaturas', methods=['GET'])
-def listarCriaturas():
-    try:
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        
-        # Aquí puedes ejecutar tus consultas SQL
-        # Por ejemplo:
-        sql = "SELECT * FROM criaturas"
-        cursor.execute(sql)
-        datos = cursor.fetchall()
-        cursos = []
-        for fila in datos:
-            curso = {'cod': fila[0], 
-                     'nombre': fila[1], 
-                     'historia': fila[2], 
-                     'representacion': fila[3],
-                     'origen': fila[4],
-                     'caracteristicas': fila[5],
-                     'rol': fila[6],
-                     'imagen':fila[7]
-                     }
-            cursos.append(curso)        
-        conn.close()  # Cierra la conexión a la base de datos
-        return jsonify({'criaturas': cursos, 'mensaje': "Lista de criaturas egipcias"})
-    except Exception as ex:
-        return jsonify({"mensaje":"Error"})
-    
-###################################################################################################
-# Método: getCriaturaById
-# Descripción:
-# Este método se utiliza para obtener los datos de una criatura específica por su ID.
-# Busca en la base de datos los campos asociados a la criatura y los devuelve como
-# respuesta en formato JSON.
-#
-# URL: /criaturasById/<id>
-#
-# Método HTTP: GET
-# Parámetros de URL: <id> (int): El ID de la criatura que se desea obtener.
-###################################################################################################
-@app.route('/criaturasById/<id>', methods=['GET'])
-def getCriaturaById(id):
-    try:
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        sql = "SELECT * FROM criaturas WHERE id_criatura = %s"
-        cursor.execute(sql, (id,))
-        fila = cursor.fetchone()
-        if fila is not None:
-            curso = {'cod': fila[0], 
-                     'nombre': fila[1], 
-                     'historia': fila[2], 
-                     'representacion': fila[3],
-                     'origen': fila[4],
-                     'caracteristicas': fila[5],
-                     'rol': fila[6],
-                     'imagen':fila[7]
-                     }
-            conn.close()  # Cierra la conexión a la base de datos
-            return jsonify({'criatura': curso, 'mensaje': "Se encontró la criatura"})
-        else:
-            return jsonify({"mensaje": "No se encontró la construcción"})
-    except Exception as ex:
-        return jsonify({"mensaje": "Error"})
-###################################################################################################
-# Método: getCriaturaImgById
-
-# Descripción:
-# Este método se utiliza para obtener las imágenes de una criatura específica por su ID. 
-# Busca en la base de datos las imágenes asociadas a la criatura y las devuelve como 
-# respuesta en formato JSON.
-
-# URL: /criaturasImgById/<id>
-
-# Método HTTP: GET
-# Parámetros de URL: <id> (int): El ID de la criatura para la cual se desean obtener las imágenes.
-###################################################################################################
-
-@app.route('/criaturasImgById//<id>', methods=['GET'])
-def getCriaturaImgById(id):
-    try:
-        curso=[]
-        conn = mysql.connect()  # Establece la conexión a la base de datos
-        cursor = conn.cursor()
-        print("Conexión exitosa")
-        sql = "SELECT imagen_url FROM imagenes WHERE oidTabla=3 and oidRecurso  = %s"
-        cursor.execute(sql, (id,))
-        fila = cursor.fetchone()
-        if fila is not None:
-            while fila is not None:
-                
-                    curso.append(fila[0])
-                    fila = cursor.fetchone()
-            return jsonify({'imagenes': curso, 'mensaje': "Se encontró la criatura"})
-        else:
-            return jsonify({"mensaje": "No se encontró la construcción"})
-    except Exception as ex:
-        return jsonify({"mensaje": "Error"})
-
+# Función que maneja el error 404 (página no encontrada) y devuelve una respuesta HTML con un mensaje correspondiente.
 def pagina_no_encontrada(error):
     return "<h1>La página que intentas buscar no existe....</h1>"
 
 if __name__ == '__main__':
+
+    # Carga las configuraciones específicas para el entorno de desarrollo en la aplicación Flask.
     app.config.from_object(config['development'])
-    app.register_error_handler(404, pagina_no_encontrada), 444
+
+    #Registra la función 
+    #como manejador para el error 404 en la aplicación.
+    app.register_error_handler(404, pagina_no_encontrada)
+
+    # Inicia la aplicación Flask y la ejecuta en el servidor local.
     app.run()
-
-
-
