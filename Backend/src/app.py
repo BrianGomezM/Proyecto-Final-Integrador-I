@@ -5,6 +5,8 @@ from config import config
 from controllers.arquitectura_controller import arquitectura_app
 from controllers.dioses_controller import dioses_app
 from controllers.criaturas_controller import criaturas_app
+from controllers.controllerLogin import login_app
+from controllers.controllerUsuario import usuario_app
 
 #FIRMA DE LA CLASE APP.PY
 #configurar y ejecutar una aplicación Flask que proporciona una API web. 
@@ -27,6 +29,9 @@ app.config['MYSQL_DATABASE_DB'] = config['development'].MYSQL_DB
 app.register_blueprint(arquitectura_app)
 app.register_blueprint(dioses_app)
 app.register_blueprint(criaturas_app)
+app.register_blueprint(usuario_app)
+app.register_blueprint(login_app)
+
 # Función que maneja el error 404 (página no encontrada) y devuelve una respuesta HTML con un mensaje correspondiente.
 def pagina_no_encontrada(error):
     return "<h1>La página que intentas buscar no existe....</h1>"
