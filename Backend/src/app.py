@@ -14,7 +14,7 @@ app.config['MYSQL_DATABASE_DB'] = config['development'].MYSQL_DB
 
 mysql = MySQL(app)
 
-# Resto de tu código...
+
 
 @app.route('/arquitectura', methods=['GET'])
 def listarAquitectura():
@@ -22,9 +22,6 @@ def listarAquitectura():
         conn = mysql.connect()  # Establece la conexión a la base de datos
         cursor = conn.cursor()
         print("Conexión exitosa")
-        
-        # Aquí puedes ejecutar tus consultas SQL
-        # Por ejemplo:
         sql = "SELECT * FROM arquitectura"
         cursor.execute(sql)
         datos = cursor.fetchall()
@@ -112,6 +109,17 @@ def actualizarConstruccion(codigo):
         return jsonify({"mensaje": "Error al actualizar la construcción"})
 
 #######################################################DIOSES#################################################################    
+###################################################################################################
+# Método: listarDioses
+# Descripción:
+# Este método se utiliza para obtener una lista de todos los dioses egipcios.
+# Realiza una consulta a la base de datos para obtener los datos de todos los dioses
+# y los devuelve como respuesta en formato JSON.
+#
+# URL: /dioses
+#
+# Método HTTP: GET
+###################################################################################################
 @app.route('/dioses', methods=['GET'])
 def listarDioses():
     try:
@@ -137,6 +145,19 @@ def listarDioses():
     except Exception as ex:
         return jsonify({"mensaje":"Error"})
     
+###################################################################################################
+# Método: getGodById
+# Descripción:
+# Este método se utiliza para obtener los datos de un dios específico por su ID.
+# Busca en la base de datos los campos asociados al dios y los devuelve como
+# respuesta en formato JSON.
+#
+# URL: /diosesById/<id>
+#
+# Método HTTP: GET
+# Parámetros de URL: <id> (int): El ID del dios que se desea obtener.
+###################################################################################################
+
 @app.route('/diosesById/<id>', methods=['GET'])
 def getGodById(id):
     try:
@@ -160,6 +181,19 @@ def getGodById(id):
     except Exception as ex:
         return jsonify({"mensaje": "Error"})
     
+###################################################################################################
+# Método: getDiosesImgById
+# Descripción:
+# Este método se utiliza para obtener las imágenes de un dios específico por su ID.
+# Busca en la base de datos las imágenes asociadas al dios y las devuelve como
+# respuesta en formato JSON.
+#
+# URL: /diosesImgById/<id>
+#
+# Método HTTP: GET
+# Parámetros de URL: <id> (int): El ID del dios para el cual se desean obtener las imágenes.
+###################################################################################################
+
 @app.route('/diosesImgById/<id>', methods=['GET'])
 def getDiosesImgById(id):
     try:
@@ -181,6 +215,18 @@ def getDiosesImgById(id):
     except Exception as ex:
         return jsonify({"mensaje": "Error"})
  #######################################################CRIATURAS#################################################################
+
+###################################################################################################
+# Método: listarCriaturas
+# Descripción:
+# Este método se utiliza para obtener una lista de todas las criaturas egipcias.
+# Realiza una consulta a la base de datos para obtener los datos de todas las criaturas
+# y los devuelve como respuesta en formato JSON.
+#
+# URL: /criaturas
+#
+# Método HTTP: GET
+###################################################################################################
 @app.route('/criaturas', methods=['GET'])
 def listarCriaturas():
     try:
@@ -210,6 +256,18 @@ def listarCriaturas():
     except Exception as ex:
         return jsonify({"mensaje":"Error"})
     
+###################################################################################################
+# Método: getCriaturaById
+# Descripción:
+# Este método se utiliza para obtener los datos de una criatura específica por su ID.
+# Busca en la base de datos los campos asociados a la criatura y los devuelve como
+# respuesta en formato JSON.
+#
+# URL: /criaturasById/<id>
+#
+# Método HTTP: GET
+# Parámetros de URL: <id> (int): El ID de la criatura que se desea obtener.
+###################################################################################################
 @app.route('/criaturasById/<id>', methods=['GET'])
 def getCriaturaById(id):
     try:
@@ -235,7 +293,20 @@ def getCriaturaById(id):
             return jsonify({"mensaje": "No se encontró la construcción"})
     except Exception as ex:
         return jsonify({"mensaje": "Error"})
-    
+###################################################################################################
+# Método: getCriaturaImgById
+
+# Descripción:
+# Este método se utiliza para obtener las imágenes de una criatura específica por su ID. 
+# Busca en la base de datos las imágenes asociadas a la criatura y las devuelve como 
+# respuesta en formato JSON.
+
+# URL: /criaturasImgById/<id>
+
+# Método HTTP: GET
+# Parámetros de URL: <id> (int): El ID de la criatura para la cual se desean obtener las imágenes.
+###################################################################################################
+
 @app.route('/criaturasImgById//<id>', methods=['GET'])
 def getCriaturaImgById(id):
     try:
@@ -267,4 +338,3 @@ if __name__ == '__main__':
 
 
 
-#https://www.youtube.com/watch?v=D6LZnrDbQPM&ab_channel=UskoKruM2010
