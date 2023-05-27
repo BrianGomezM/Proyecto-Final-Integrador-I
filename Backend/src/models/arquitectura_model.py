@@ -151,7 +151,7 @@ class Arquitectura:
             datos = cursor.fetchall()
             construcciones = []
             for fila in datos:
-                construccion = {'cod': fila[0], 'imagen_url': fila[1], 'oidRecurso': fila[2], 'oidTabla': fila[3]}
+                construccion = {'cod': fila[0], 'imagen_url': fila[3], 'oidRecurso': fila[1], 'oidTabla': fila[2]}
                 construcciones.append(construccion)
             conn.close()
             return construcciones

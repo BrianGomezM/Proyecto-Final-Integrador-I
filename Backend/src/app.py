@@ -3,6 +3,8 @@ from flask_cors import CORS
 from flaskext.mysql import MySQL
 from config import config
 from controllers.arquitectura_controller import arquitectura_app
+from controllers.dioses_controller import dioses_app
+from controllers.criaturas_controller import criaturas_app
 
 #FIRMA DE LA CLASE APP.PY
 #configurar y ejecutar una aplicación Flask que proporciona una API web. 
@@ -23,7 +25,8 @@ app.config['MYSQL_DATABASE_DB'] = config['development'].MYSQL_DB
 #Registra el blueprint 
 #en la aplicación Flask, lo que significa que las rutas y controladores definidos en el blueprint estarán disponibles en la aplicación.
 app.register_blueprint(arquitectura_app)
-
+app.register_blueprint(dioses_app)
+app.register_blueprint(criaturas_app)
 # Función que maneja el error 404 (página no encontrada) y devuelve una respuesta HTML con un mensaje correspondiente.
 def pagina_no_encontrada(error):
     return "<h1>La página que intentas buscar no existe....</h1>"
