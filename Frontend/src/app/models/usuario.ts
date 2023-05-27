@@ -7,7 +7,8 @@ export class Usuario{
         public telefono:string='',
         public correo:string='',
         public password:string='' ,
-        public urlAvatar:string=''
+        public urlAvatar:string='',
+        public sexo:string=''
     ){
 
     }

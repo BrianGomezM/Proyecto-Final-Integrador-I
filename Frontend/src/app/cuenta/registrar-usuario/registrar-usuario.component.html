@@ -26,7 +26,7 @@
             </div>
             <div class="row">
               <div class="col-md-12 col-sm-4 d-flex justify-content-center">
-                <div class="col-sm-6 text-center">
+                <div class="col-sm-5 text-center">
                   <div class="input-group form-control-lg mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
@@ -84,8 +84,11 @@
                         </i>
                       </span>
                       <mat-form-field class="example-full-width">
-                        <input class="form-control" matInput placeholder="Contraseña" type="password">
-
+                        <input formControlName="password" matInput placeholder="Escriba su contraseña" type="password" required minlength="8">
+                        <mat-error *ngIf="usuarioForm.controls['password'].hasError('required')">
+                          Contraseña es requerida
+                        </mat-error>
+                          <mat-error *ngIf="usuarioForm.controls['password'].hasError('minlength')">La contraseña debe tener al menos 8 caracteres</mat-error>
                       </mat-form-field>
                     </div>
                     <div class="input-group-prepend">
@@ -95,32 +98,33 @@
                         </i>
                       </span>
                       <mat-form-field class="example-full-width">
-                        <input formControlName="password" matInput placeholder="Repetir contraseña" type="password" [(ngModel)]="usuario.password" required>
-                        <mat-error *ngIf="usuarioForm.controls['password'].hasError('required')">
+                        <input formControlName="confirmPassword" matInput placeholder="Repetir contraseña" type="password" [(ngModel)]="usuario.password" required passwordMismatch>
+                        <mat-error *ngIf="usuarioForm.controls['confirmPassword'].hasError('required')">
                           Contraseña es requerida
                         </mat-error>
+                        <mat-error *ngIf="usuarioForm.controls['confirmPassword'].hasError('passwordMismatch')">Las contraseñas no coinciden</mat-error>
                       </mat-form-field>
-                    </div>
+                      </div>
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="material-icons">
                           transgender
                         </i>
                       </span>
-                      <div class="radio-group">
+                      <div style="margin-top: 30px;"class="radio-group">
                         <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" value="masculino"> Masculino
+                            <input formControlName="sexo" type="radio" name="optionsRadios" value="masculino" [(ngModel)]="usuario.sexo"> Masculino
                           </label>
                         </div>
                         <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" value="femenino"> Femenino
+                            <input formControlName="sexo" type="radio" name="optionsRadios" value="femenino" [(ngModel)]="usuario.sexo"> Femenino
                           </label>
                         </div>
                         <div class="radio">
                           <label>
-                            <input type="radio" name="optionsRadios" value="otro"> Otro
+                            <input formControlName="sexo" type="radio" name="optionsRadios" value="otro" [(ngModel)]="usuario.sexo"> Otro
                           </label>
                         </div>
                       </div>
