@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ConsumoServiciosService } from '../../../servicios/servicios-criaturas/consumo-servicios.service';
 import { Criatura } from 'app/servicios/servicios-criaturas/interface-criaturas';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-criaturas-mitologicas',
   templateUrl: './criaturas-mitologicas.component.html',

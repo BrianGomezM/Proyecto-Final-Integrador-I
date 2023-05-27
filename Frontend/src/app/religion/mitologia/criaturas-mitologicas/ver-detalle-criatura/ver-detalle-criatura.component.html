@@ -36,23 +36,21 @@
             <div class="col-md-6">
                 <div class="card-body">
                     <div class="title">Representación:</div>
-                    <p class="description">
+                    <p class="card-description-custom">
                         {{detalleCriatura.representacion}}
                     </p>
                     <div class="title">Historia:</div>
-                    <p class="text-justify description">
-                        {{detalleCriatura.historia}}
-                    </p>
+                    <p class="text-justify card-description-custom" [innerHTML]="historiaFinal"></p>
                     <div class="title">Rol en la cultura egipcia:</div>
-                    <p class="description">
+                    <p class="card-description-custom">
                         {{detalleCriatura.rol}}
                     </p>
                     <div class="title">Origen:</div>
-                    <p class="description">
+                    <p class="card-description-custom">
                         {{detalleCriatura.origen}}
                     </p>
                     <div class="title">Principales características:</div>
-                    <p class="description">
+                    <p class="card-description-custom">
                         {{detalleCriatura.caracteristicas}}
                     </p>
                     <button (click)="regresar()" class="btn btn-primary">Regresar</button>

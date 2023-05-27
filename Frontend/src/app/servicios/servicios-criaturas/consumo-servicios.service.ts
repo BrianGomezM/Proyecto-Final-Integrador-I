@@ -14,6 +14,11 @@ export class ConsumoServiciosService {
   private baseUrl:string = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
+/**
+ * Obtiene todas las criaturas.
+ * @returns Un Observable que emite un arreglo de objetos de tipo Criatura.
+ */
+
   getAllCriaturas():Observable<Criatura[]>{
     let  url =this.baseUrl+'criaturas';
     let header=new HttpHeaders();
@@ -22,10 +27,16 @@ export class ConsumoServiciosService {
     return this.http.get<Criatura[]>(url, { headers: header }).pipe(
       catchError(error => {
         console.log('Error en la solicitud:', error);
-        // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
         return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
       }));    
     }
+
+/**
+ * Obtiene los detalles de una criatura específica.
+ * @param idCriatura El ID de la criatura del cual se desean obtener los detalles.
+ * @returns Un Observable que emite un arreglo de objetos de tipo Criatura.
+ */
+
     getCriaturaDetails(idCriatura):Observable<Criatura[]>{
       let  url =this.baseUrl+'criaturasById/'+idCriatura;
       let header=new HttpHeaders();
@@ -34,10 +45,14 @@ export class ConsumoServiciosService {
       return this.http.get<Criatura[]>(url, { headers: header }).pipe(
         catchError(error => {
           console.log('Error en la solicitud:', error);
-          // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
           return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
         }));    
       }
+/**
+ * Obtiene los detalles de las imágenes asociadas a una criatura específica.
+ * @param idCriatura El ID de la criatura del cual se desean obtener los detalles de las imágenes.
+ * @returns Un Observable que emite un arreglo de objetos de tipo Recurso.
+ */
 
       getImagenesDetails(idCriatura):Observable<Recurso[]>{
         let  url =this.baseUrl+'criaturasImgById/'+idCriatura;
@@ -47,7 +62,6 @@ export class ConsumoServiciosService {
         return this.http.get<Recurso[]>(url, { headers: header }).pipe(
           catchError(error => {
             console.log('Error en la solicitud:', error);
-            // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
             return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
           }));    
         }

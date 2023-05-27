@@ -4,6 +4,8 @@ import { ConsumoServiciosService } from '../../../../servicios/servicios-criatur
 import { Criatura } from 'app/servicios/servicios-criaturas/interface-criaturas';
 import { Router } from '@angular/router';
 import { Recurso } from 'app/servicios/recursos.interface';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-ver-detalle-criatura',
   templateUrl: './ver-detalle-criatura.component.html',
@@ -23,12 +25,15 @@ export class VerDetalleCriaturaComponent implements OnInit {
     rol:'',
     imagen:''
   };
+  historiaFinal:SafeHtml;
   listaImagenes:Recurso = {
     imagenes: []
   };
 
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
     private router: Router,
     private consumoServiciosService: ConsumoServiciosService) { }
 
@@ -42,7 +47,10 @@ export class VerDetalleCriaturaComponent implements OnInit {
 
     this.loadGodsDetails(this.criaturaId)
   }
-
+/**
+ * Carga los detalles e imagenes  asociados a una criatura específica.
+ * @param criaturaId El ID de la criatura del cual se desean cargar los detalles de imágenes y criatura.
+ */
   loadGodsDetails(criaturaId){
     this.consumoServiciosService.getImagenesDetails(criaturaId).subscribe(
       (recurso: Recurso[]) => {
@@ -56,12 +64,17 @@ export class VerDetalleCriaturaComponent implements OnInit {
     this.consumoServiciosService.getCriaturaDetails(criaturaId).subscribe(
       (criatura: Criatura[]) => {
         this.detalleCriatura = criatura['criatura'];
+        this.historiaFinal = this.sanitizer.bypassSecurityTrustHtml(this.detalleCriatura.historia);
       },
       (error: any) => {
         console.log('Error al obtener las construcciones:', error);
       }
     );
   }
+
+  /**
+ * Navega de regreso a la página de criaturas mitológicas.
+ */
   regresar(){
     this.router.navigate(['/criaturas-mitologicas']);
   }

@@ -20,6 +20,9 @@ export class ExplorarDiosesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  /**
+ * Obtiene todos los dioses.
+ */
     this.consumoServiciosService.getAllGods().subscribe(
       (dioses: Dioses[]) => {
         this.listaDioses = dioses['dioses'];
@@ -27,11 +30,14 @@ export class ExplorarDiosesComponent implements OnInit {
       },
       (error: any) => {
         console.log('Error al obtener las construcciones:', error);
-        // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
       }
     );
   }
 
+  /**
+ * Lleva al componente que permite ver cada Dios a detalle.
+ * @param dios El objeto de tipo Dioses que representa al dios del cual se desean mostrar los detalles.
+ */
   mostrarDetalles(dios:Dioses){
     this.router.navigate(['/detalles-dios', dios.cod]);
   }

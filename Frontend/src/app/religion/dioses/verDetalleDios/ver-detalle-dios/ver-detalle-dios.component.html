@@ -35,17 +35,17 @@
             </div>
             <div class="col-md-6">
                 <div class="card-body">
+                    <div class="title">Rol en la cultura egipcia:</div>
+                    <p class="card-description-custom">
+                        {{detalleDios.roles}}
+                    </p>
                     <div class="title">Representación:</div>
-                    <p class="description">
+                    <p class="card-description-custom">
                         {{detalleDios.representacion}}
                     </p>
                     <div class="title">Historia:</div>
-                    <p class="text-justify description">
-                        {{detalleDios.historia}}
-                    </p>
-                    <div class="title">Rol en la cultura egipcia:</div>
-                    <p class="description">
-                        {{detalleDios.roles}}
+                    <p class="text-justify card-description-custom" [innerHTML]="historiaFinal">
+                        
                     </p>
                     <button (click)="regresar()" class="btn btn-primary">Regresar</button>
                 </div>

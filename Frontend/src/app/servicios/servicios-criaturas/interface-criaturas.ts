@@ -1,3 +1,6 @@
+/**
+ * Interfaz que representa a una criatura mitologica de la base de datos.
+ */
 export interface Criatura{
     cod?:      number;
     nombre:    string;

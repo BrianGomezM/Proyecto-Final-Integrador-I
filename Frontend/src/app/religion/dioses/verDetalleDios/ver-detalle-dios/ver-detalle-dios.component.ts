@@ -4,7 +4,7 @@ import { ConsumoServiciosService } from '../../../../servicios/servicios-dioses/
 import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
 import { Router } from '@angular/router';
 import { Recurso } from 'app/servicios/recursos.interface';
-
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 @Component({
   selector: 'app-ver-detalle-dios',
   templateUrl: './ver-detalle-dios.component.html',
@@ -20,31 +20,40 @@ export class VerDetalleDiosComponent implements OnInit {
     imagen: '',
     roles: ''
   };
+
+
+  historiaFinal:SafeHtml;
+
   listaImagenes:Recurso = {
     imagenes: []
   };
 
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private sanitizer: DomSanitizer,
+    private route: ActivatedRoute,
     private router: Router,
     private consumoServiciosService: ConsumoServiciosService) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.diosId = params['id'];
-      // Aquí puedes utilizar el ID para cargar la información completa del dios egipcio
       console.log('ID del dios:', this.diosId);
-      // Realiza las operaciones necesarias para cargar la información completa del dios con el ID proporcionado
     });
 
     this.loadGodsDetails(this.diosId)
-  }
 
+  }
+/**
+ * Carga los detalles y las imágenes asociadas a un dios específico, llamado al servicio.
+ * @param diosId El ID del dios del cual se desean cargar los detalles de las imágenes.
+ */
   loadGodsDetails(diosId){
     this.consumoServiciosService.getImagenesDetails(diosId).subscribe(
       (recurso: Recurso[]) => {
         this.listaImagenes.imagenes = recurso['imagenes'];
         console.log(this.listaImagenes.imagenes)
+
       },
       (error: any) => {
         console.log('Error al obtener las construcciones:', error); 
@@ -54,6 +63,7 @@ export class VerDetalleDiosComponent implements OnInit {
     this.consumoServiciosService.getGodDetails(diosId).subscribe(
       (dioses: Dioses[]) => {
         this.detalleDios = dioses['Dios'];
+        this.historiaFinal = this.sanitizer.bypassSecurityTrustHtml(this.detalleDios.historia);
       },
       (error: any) => {
         console.log('Error al obtener las construcciones:', error);
@@ -61,6 +71,10 @@ export class VerDetalleDiosComponent implements OnInit {
       }
     );
   }
+
+  /**
+ * Navega de regreso a la página de dioses.
+ */
   regresar(){
     this.router.navigate(['/explorar-dioses']);
   }

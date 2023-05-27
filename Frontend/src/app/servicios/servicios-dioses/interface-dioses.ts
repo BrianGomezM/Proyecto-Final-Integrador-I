@@ -1,3 +1,7 @@
+/**
+ * Interfaz que representa a un dios que viene de la base de datos.
+ * 
+ */
 export interface Dioses{
     cod?:      number;
     nombre:    string;

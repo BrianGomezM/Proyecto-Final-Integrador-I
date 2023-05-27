@@ -14,6 +14,10 @@ export class ConsumoServiciosService {
   private baseUrl:string = environment.baseUrl;
   constructor(private http: HttpClient) {}
 
+  /**
+ * Obtiene todos los dioses.
+ * @returns Un Observable que emite un arreglo de objetos de tipo Dioses.
+ */
   getAllGods():Observable<Dioses[]>{
     let  url =this.baseUrl+'dioses';
     let header=new HttpHeaders();
@@ -22,10 +26,15 @@ export class ConsumoServiciosService {
     return this.http.get<Dioses[]>(url, { headers: header }).pipe(
       catchError(error => {
         console.log('Error en la solicitud:', error);
-        // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
         return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
       }));    
     }
+/**
+ * Obtiene los detalles de un dios específico.
+ * @param idDios El ID del dios del cual se desean obtener los detalles.
+ * @returns Un Observable que emite un arreglo de objetos de tipo Dioses.
+ */
+
     getGodDetails(idDios):Observable<Dioses[]>{
       let  url =this.baseUrl+'diosesById/'+idDios;
       let header=new HttpHeaders();
@@ -34,10 +43,15 @@ export class ConsumoServiciosService {
       return this.http.get<Dioses[]>(url, { headers: header }).pipe(
         catchError(error => {
           console.log('Error en la solicitud:', error);
-          // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
           return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
         }));    
       }
+
+/**
+ * Obtiene los detalles de las imágenes asociadas a un dios específico.
+ * @param idDios El ID del dios del cual se desean obtener los detalles de las imágenes.
+ * @returns Un Observable que emite un arreglo de objetos de tipo Recurso.
+ */
       getImagenesDetails(idDios):Observable<Recurso[]>{
         let  url =this.baseUrl+'diosesImgById/'+idDios;
         let header=new HttpHeaders();
@@ -46,7 +60,6 @@ export class ConsumoServiciosService {
         return this.http.get<Recurso[]>(url, { headers: header }).pipe(
           catchError(error => {
             console.log('Error en la solicitud:', error);
-            // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
             return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
           }));    
         }
