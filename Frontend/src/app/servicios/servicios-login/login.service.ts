@@ -17,11 +17,11 @@ export class LoginService{
 
     public login(usuario: Usuario) {
         //console.log(usuario);
-        let url = this.UrlBase + '/login';
+        let url = this.UrlBase + 'login';
         let header = new HttpHeaders();
         header = header.append('Content-Type', 'application/json');
         header = header.append('Access-Control-Allow-Methods', 'POST, GET, DELETE, PUT');
-        header = header.append('Access-Control-Allow-Origin', 'http://localhost:8080');
+        header = header.append('Access-Control-Allow-Origin', 'http://localhost');
         
         return this.http.post<Usuario[]>(url, usuario, { headers: header }).pipe(
             catchError(error => {

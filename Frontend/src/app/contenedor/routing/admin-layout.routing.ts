@@ -46,4 +46,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'rituales',                         component: RitualesComponent }, 
     { path: 'prueba',                           component: PruebasComponent },
     { path: 'podio',                            component: PodioComponent  },
+    
 ];

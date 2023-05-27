@@ -3,7 +3,7 @@ import { Usuario } from 'app/models/usuario';
 import { EventEmitter } from '@angular/core';
 import { UsuarioService } from 'app/servicios/servicios-usuarios/usuarioService';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -20,7 +20,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   usuarioForm: FormGroup;
 
 
-  constructor(public servicioUsuario:UsuarioService, private formBuilder:FormBuilder) {
+  constructor(private router: Router, public servicioUsuario:UsuarioService, private formBuilder:FormBuilder) {
     this.usuarioForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -77,10 +77,12 @@ export class RegistrarUsuarioComponent implements OnInit {
             this.usuarioCreado.emit(this.usuario);
             this.usuario = new Usuario("", "", "", "", "", "");
             alert("Cuenta creada exitosamente!");
+            this.router.navigate(['/login']);
           }
         });
     } else {
       alert("Complete los campos requeridos");
+      
     }
   }
   
