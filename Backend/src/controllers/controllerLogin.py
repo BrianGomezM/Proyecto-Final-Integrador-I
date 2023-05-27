@@ -8,6 +8,7 @@ from flask import Flask
 # Crear el blueprint para el controlador de login
 login_app = Blueprint('login_app', __name__)
 
+CORS(login_app)
 # Método: POST
 # Datos de entrada: Se espera un JSON en el cuerpo de la solicitud que contenga el campo
 # nombreConstruccion con el nombre de la construcción que se desea registrar.
