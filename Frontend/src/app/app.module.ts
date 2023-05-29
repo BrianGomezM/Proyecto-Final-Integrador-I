@@ -14,7 +14,8 @@ import { AdminLayoutComponent } from './contenedor/layout/admin-layout.component
 import { VerDetalleDiosComponent } from './religion/dioses/verDetalleDios/ver-detalle-dios/ver-detalle-dios.component';
 import { VerDetalleCriaturaComponent } from './religion/mitologia/criaturas-mitologicas/ver-detalle-criatura/ver-detalle-criatura.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -27,6 +28,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     RouterModule,
     MatProgressSpinnerModule,
     AppRoutingModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   declarations: [
     AppComponent,
