@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from 'app/servicios/servicios-login/tokenService';
 
 export interface RouteInfo {
   path: string;
@@ -10,7 +11,7 @@ export interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'INICIO', icon: 'home', children: null },
-  { path: '/usuario', title: 'PERFIL', icon: 'face', children: null },
+  { path: '/modificar', title: 'PERFIL', icon: 'face', children: null },
   {
     path: '#dioses', id: 'dioses', title: 'DIOSES', icon: 'auto_stories', children: [
       { path: '/explorar-dioses', title: 'Dioses', icon: 'psychology_alt', children: null },
@@ -46,8 +47,7 @@ export const ROUTES: RouteInfo[] = [
       { path: '/prueba', title: 'Prueba', icon: 'score', children: null },
       { path: '/podio', title: 'Podio', icon: 'leaderboard', children: null }
     ]
-  },
-  { path: '#cerrarSesion', title: 'CERRAR SESIÓN', icon: 'disabled_by_default', children: null },
+  }
 ];
 @Component({
   selector: 'app-sidebar',
@@ -60,6 +60,10 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+  }
+
+  constructor(public tokenService:TokenService){
+    
   }
   
   isMobileMenu() {
@@ -77,5 +81,9 @@ export class SidebarComponent implements OnInit {
       // Si se selecciona un nuevo menú, cerramos el menú anteriormente abierto y abrimos el nuevo
       this.activeMenuId = id;
     }
+  }
+  cerrarSesion(){
+    window.location.href = "/login";
+    this.tokenService.quitarToken();
   }
 }

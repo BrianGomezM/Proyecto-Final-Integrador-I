@@ -16,6 +16,7 @@ import { VerDetalleCriaturaComponent } from './religion/mitologia/criaturas-mito
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ModificarUsuarioComponent } from './cuenta/modificar-usuario/modificar-usuario.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { MatInputModule } from '@angular/material/input';
     RegistrarUsuarioComponent,
     AdminLayoutComponent,
     VerDetalleDiosComponent,
-    VerDetalleCriaturaComponent
+    VerDetalleCriaturaComponent,
+    ModificarUsuarioComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
