@@ -8,7 +8,7 @@
         <div class="card">
           <div class="card-header card-header-rose card-header-icon">
             <div class="card-icon"><i class="material-icons">face</i></div>
-            <h4 class="card-title">Registro de Usuario</h4>
+            <h4 class="card-title">Registrar Usuario</h4>
           </div>
           <div data-color="rose" id="wizardProfile" class="card-body card-wizard">
             <div class="row">
@@ -16,7 +16,7 @@
                 <div class="picture-container">
                   <div class="picture">
                     <img src="./assets/img/default-avatar.png" id="wizardPicturePreview" title="" class="picture-src">
-                    <input formControlName="urlAvatar" type="file" id="wizard-picture" [(ngModel)]="usuario.urlAvatar" required>
+                    <input formControlName="urlAvatar" type="file" #ImagenUsuario accept="image/*" (change)="archivoCargado($event)">
                   </div>
                   <h6 class="description">
                     Choose Picture
