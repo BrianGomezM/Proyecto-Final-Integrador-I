@@ -25,12 +25,22 @@ export class UsuarioService{
         this.usuarios.push(usuario); //agregando el usuario al arreglo
     }
 
-    public getUsuarios(){
-        //defino la url donde esta el servicio
-       let  url =this.UrlBase + 'modificar_usuario';
-       return this.http.get<Usuario[]>(url,{headers:this.tokenService.obtenerHeaders()});
+    public getUsuarios() {
+      // Defino la URL donde está el servicio
+      let url = this.UrlBase + 'listar_usuarios';
+      
+      let headers = new HttpHeaders();
+      headers = headers.append('Content-Type', 'application/json');
+      headers = headers.append('Access-Control-Allow-Origin', 'http://localhost');
+      headers = headers.append('Access-Control-Allow-Methods', 'POST, GET, DELETE, PUT');
+      
+      return this.http.get<Usuario[]>(url, { headers: headers }).pipe(
+        catchError(error => {
+          console.log('Error en la solicitud:', error);
+          return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
+        })
+      );
     }
-
 
     public crearUsuario(usuario:Usuario){
 

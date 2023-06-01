@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from 'app/models/usuario';
 import { UsuarioService } from 'app/servicios/servicios-usuarios/usuarioService';
 import { Router } from '@angular/router';
+import { LoginService } from 'app/servicios/servicios-login/login.service';
 
 @Component({
   selector: 'app-modificar-usuario',
@@ -16,10 +17,12 @@ export class ModificarUsuarioComponent implements OnInit {
 
   usuarios : Usuario[]=[];
 
+
+
   usuario:Usuario = new Usuario("","","","","","","",1);
   @Output() usuarioModificado = new EventEmitter<Usuario>();
 
-  constructor(private router: Router, public servicioUsuario:UsuarioService, private formBuilder:FormBuilder) {
+  constructor(private router: Router, public servicioUsuario:UsuarioService, private formBuilder:FormBuilder, public servicioLogin:LoginService) {
     this.usuarioForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -30,6 +33,7 @@ export class ModificarUsuarioComponent implements OnInit {
       urlAvatar: [Validators.nullValidator],
       sexo: [Validators.nullValidator],
     },{ validators: this.passwordMatchValidator });
+ 
    }
 
    passwordMatchValidator(formGroup: FormGroup) {
@@ -44,6 +48,7 @@ export class ModificarUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cargarUsuarios();
   }
 
    modificarUsuario(): void {
@@ -67,10 +72,21 @@ export class ModificarUsuarioComponent implements OnInit {
   //   }
    }
 
-  // cargarUsuarios(){
-  //   this.servicioUsuario.getUsuarios().subscribe((res: Usuario[]) => {
-  //     this.usuarios = res;
-  //   });
-  // }
+  cargarUsuarios() {
+    var usuarioLocalStorage = this.servicioLogin.obtenerLocalStorageUsuario();
+    console.log(usuarioLocalStorage);
+    
+    this.servicioUsuario.getUsuarios().subscribe((res: any) => {
+      if (res && res.usuarios) {
+        this.usuarios = res.usuarios;
+        console.log(this.usuarios);
+  
+        // Buscar el usuario logueado en el arreglo de usuarios
+        this.usuario = this.usuarios.find(u => u.correo === usuarioLocalStorage.correo);
+        console.log(this.usuario);
+      }
+    });
+  }
+  
 
 }
