@@ -5,10 +5,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './contenedor/layout/admin-layout.component';
 import { InicioSesionComponent } from './cuenta/inicio-sesion/inicio-sesion.component';
 import { RegistrarUsuarioComponent } from './cuenta/registrar-usuario/registrar-usuario.component';
+import { LoginGuard } from './guards/login.guard';
+import { ModificarUsuarioComponent } from './cuenta/modificar-usuario/modificar-usuario.component';
 
 const routes: Routes = [
   {
     path: 'login',
+    canActivate: [LoginGuard],
     component: InicioSesionComponent
   },
   {
@@ -27,6 +30,10 @@ const routes: Routes = [
   {
     path: 'registrar',
     component: RegistrarUsuarioComponent
+  },
+  {
+    path: 'modificar',
+    component: ModificarUsuarioComponent
   }
 ];
 

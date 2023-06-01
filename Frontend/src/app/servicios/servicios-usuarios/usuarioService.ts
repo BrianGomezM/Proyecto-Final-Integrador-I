@@ -25,6 +25,11 @@ export class UsuarioService{
         this.usuarios.push(usuario); //agregando el usuario al arreglo
     }
 
+    public getUsuarios(){
+        //defino la url donde esta el servicio
+       let  url =this.UrlBase + 'modificar_usuario';
+       return this.http.get<Usuario[]>(url,{headers:this.tokenService.obtenerHeaders()});
+    }
 
 
     public crearUsuario(usuario:Usuario){
@@ -45,6 +50,11 @@ export class UsuarioService{
             return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
           }));    
     }
+
+
+
+
+
 
 
 
