@@ -102,7 +102,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
   
   toBack(){
-    window.location.href = '/login';
+    window.location.href = '/dashboard';
   }
 
 

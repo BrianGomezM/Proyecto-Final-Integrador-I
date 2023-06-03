@@ -119,6 +119,10 @@ export class ModificarUsuarioComponent implements OnInit {
     // Asigna la URL de la imagen al elemento img
     this.usuario.urlAvatar = urlImagen;
   }
+
+  toBack(){
+    window.location.href = '/dashboard';
+  }
   
 
 }
