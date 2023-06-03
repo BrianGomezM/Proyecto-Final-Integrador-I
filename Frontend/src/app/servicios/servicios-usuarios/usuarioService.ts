@@ -61,6 +61,18 @@ export class UsuarioService{
           }));    
     }
 
+    public modificarUsuario(usuario:Usuario){
+        //defino la url donde está el servicio
+        let  url = this.UrlBase + 'modificar_usuario';
+        return this.http.put<Usuario[]>(url,usuario,{headers:this.tokenService.obtenerHeaders()}).pipe(
+          catchError(error => {
+            console.log('Error en la solicitud:', error);
+            // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
+            return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
+          }));    
+      }
+    }
+
 
 
 
@@ -96,6 +108,6 @@ export class UsuarioService{
     //     return this.http.get<Usuario[]>(url,{headers:header});
     //   }
 
-}
+
 
 

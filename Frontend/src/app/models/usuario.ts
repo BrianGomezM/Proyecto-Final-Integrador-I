@@ -1,5 +1,5 @@
 export class Usuario{
-
+    //Aquí se asigna los atributos que tendrá la clase usuario
     id:number=0;
     constructor(
         public nombre:string='',

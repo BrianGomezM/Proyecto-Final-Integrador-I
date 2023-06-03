@@ -101,6 +101,9 @@ export class RegistrarUsuarioComponent implements OnInit {
     }
   }
   
+  toBack(){
+    window.location.href = '/login';
+  }
 
 
 

@@ -15,24 +15,25 @@ CORS(usuario_app)
 # Datos de salida: Devuelve un JSON con un mensaje indicando que se registró correctamente usuario. En caso de error, devuelve un mensaje de error.
 @usuario_app.route('/registrar_usuario', methods=['POST'])
 def registrar_usuario():
+    usuario = request.get_json()  # Obtener los datos enviados desde el frontend
+    resultado = Usuario.guardar_usuario(usuario)  # Guardar los datos en la base de datos
 
-    if Usuario.registrar_usuario():
-        return jsonify({"mensaje": "Se registró correctamente"})
-    else:
-        return jsonify({"mensaje": "Error"})
+    return jsonify(resultado)
+
+
     
 # Método: PUT
 #Datos de entrada: El parámetro <codigo> representa el código de la construcción que se desea actualizar. Se espera un 
 #JSON en el cuerpo de la solicitud que contenga el campo nombreConstruccion con el nuevo nombre de la construcción.
 #Datos de salida: Devuelve un JSON con un mensaje indicando que se actualizó el usuario correctamente. En caso de error,
 #devuelve un mensaje de error al actualizar el usuario.
-# @usuario_app.route('/modificar_usuario', methods=['PUT'])
-# def modificar_usuario():
+@usuario_app.route('/modificar_usuario', methods=['PUT'])
+def modificar_usuario():
 
-#     if Usuario.modificar_usuario():
-#         return jsonify({"mensaje": "El usuario se actualizó correctamente"})
-#     else:
-#         return jsonify({"mensaje": "Error, no se puedo actualizar"})
+    usuario = request.get_json()  # Obtener los datos enviados desde el frontend
+    resultado = Usuario.actualizar_usuario(usuario)  # Actualizar los datos en la base de datos
+
+    return jsonify(resultado)
     
 #Método: GET
 #Datos de entrada: No se requieren datos de entrada.

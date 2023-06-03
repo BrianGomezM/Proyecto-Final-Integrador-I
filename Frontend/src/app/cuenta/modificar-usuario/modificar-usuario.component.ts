@@ -4,6 +4,7 @@ import { Usuario } from 'app/models/usuario';
 import { UsuarioService } from 'app/servicios/servicios-usuarios/usuarioService';
 import { Router } from '@angular/router';
 import { LoginService } from 'app/servicios/servicios-login/login.service';
+import { TokenService } from 'app/servicios/servicios-login/tokenService';
 
 @Component({
   selector: 'app-modificar-usuario',
@@ -22,7 +23,13 @@ export class ModificarUsuarioComponent implements OnInit {
   usuario:Usuario = new Usuario("","","","","","","",1);
   @Output() usuarioModificado = new EventEmitter<Usuario>();
 
-  constructor(private router: Router, public servicioUsuario:UsuarioService, private formBuilder:FormBuilder, public servicioLogin:LoginService) {
+  constructor(
+    private router: Router, 
+    public servicioUsuario:UsuarioService, 
+    private formBuilder:FormBuilder, 
+    public servicioLogin:LoginService,
+    private servicioToken:TokenService
+    ) {
     this.usuarioForm = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellido: ['', Validators.required],
@@ -49,27 +56,34 @@ export class ModificarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarUsuarios();
+    this.convertirStringAImagen();
+    // Reiniciar el campo "contraseña" al cargar la página
+    this.usuarioForm.patchValue({
+      password: ''
+    });
   }
 
    modificarUsuario(): void {
-  //   if (this.usuarioForm.valid) {
-  //       this.servicioUsuario.crearUsuario(this.usuario).subscribe(respuesta => {
-  //         console.log(respuesta['mensaje'])
-  //         if(respuesta['mensaje'] === "El correo electrónico ya está registrado"){
-  //           alert("Pruebe con otro correo");
-  //         }
-  //         else{
-  //           //console.log(this.usuario);
-  //           this.usuarioModificado.emit(this.usuario);
-  //           this.usuario = new Usuario("", "", "", "", "", "");
-  //           alert("Cuenta creada exitosamente!");
-  //           this.router.navigate(['/login']);
-  //         }
-  //       });
-  //   } else {
-  //     alert("Complete los campos requeridos");
+    if (this.usuarioForm.valid) {
+        this.servicioUsuario.modificarUsuario(this.usuario).subscribe(respuesta => {
+          console.log(respuesta['mensaje'])
+          if(respuesta['mensaje'] === "El correo electrónico ya está registrado"){
+            alert("Pruebe con otro correo");
+          }
+          else{
+            //console.log(this.usuario);
+            this.usuarioModificado.emit(this.usuario);
+            this.usuario = new Usuario("", "", "", "", "", "");
+            alert("Cuenta modificada exitosamente!");
+            alert("Ingrese con sus nuevos datos");
+            this.servicioToken.quitarToken();
+            this.router.navigate(['/login']);
+          }
+        });
+    } else {
+      alert("Complete los campos requeridos");
       
-  //   }
+    }
    }
 
   cargarUsuarios() {
@@ -86,6 +100,24 @@ export class ModificarUsuarioComponent implements OnInit {
         console.log(this.usuario);
       }
     });
+  }
+
+  convertirStringAImagen(): void {
+    const stringImagen = this.usuario.urlAvatar;
+
+    console.log(stringImagen)
+  
+    const imagenDecodificada = atob(stringImagen.split(',')[1]); // Decodifica la cadena base64
+    const tipoImagen = stringImagen.split(',')[0].split(':')[1].split(';')[0]; // Obtiene el tipo de imagen (por ejemplo, 'image/png')
+  
+    // Crea un objeto Blob a partir de la imagen decodificada
+    const blob = new Blob([imagenDecodificada], { type: tipoImagen });
+  
+    // Crea una URL de objeto Blob
+    const urlImagen = URL.createObjectURL(blob);
+
+    // Asigna la URL de la imagen al elemento img
+    this.usuario.urlAvatar = urlImagen;
   }
   
 

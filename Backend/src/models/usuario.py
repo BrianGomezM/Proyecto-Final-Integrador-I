@@ -72,6 +72,50 @@ class Usuario:
         except Exception as ex:
             return {'mensaje': str(ex)}
         
+        
+    @staticmethod
+    # Este método recibe como parámetros el código de una construcción y el nuevo nombre que se desea asignar. 
+    # Realiza una actualización en la base de datos para modificar el nombre de la construcción.
+    #  Si la actualización se realiza correctamente, se devuelve True. En caso de error, se devuelve False.
+    #Firma: @staticmethod def modificarUsuario(codigo: str, nombre_construccion: str) -> json
+    #Entradas: Recibe dos parámetros: codigo de tipo str, que representa el código de la construcción a actualizar, y nombre_construccion de tipo str, que representa el nuevo nombre de la construcción.
+    #Salida: Devuelve True si la construcción se actualizó correctamente en la base de datos, o False en caso de error.
+    @staticmethod
+    def modificar_usuario():
+        usuario = request.get_json()  # Obtener los datos enviados desde el frontend
+        resultado = Usuario.actualizar_usuario(usuario)  # Actualizar los datos en la base de datos
+
+        return jsonify(resultado)
+
+    @staticmethod
+    def actualizar_usuario(usuario):
+        try:
+            if 'id' not in usuario:
+                raise Exception("'id' no está presente en los datos del usuario")
+
+            conn = mysql.connect()  # Establecer la conexión a la base de datos
+            cursor = conn.cursor()
+
+            sql = "SELECT correo FROM usuario WHERE correo = %s"
+            cursor.execute(sql, (usuario['correo'],))
+            resultado = cursor.fetchone()
+            if resultado:
+                raise Exception("El correo electrónico ya está registrado")
+            
+            
+            # Actualizar los datos del usuario en la base de datos
+            sql = "UPDATE usuario SET nombre = %s, apellido = %s, telefono = %s, correo = %s, password = %s, urlAvatar = %s, sexo = %s, estado = %s WHERE id = %s"
+            valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], usuario['urlAvatar'], usuario['sexo'], usuario['estado'], usuario['id'])
+            cursor.execute(sql, valores)
+
+            conn.commit()  # Confirmar los cambios en la base de datos
+            conn.close()  # Cerrar la conexión a la base de datos
+
+            return {'mensaje': 'El usuario se actualizó correctamente'}
+        except Exception as ex:
+            return {'mensaje': str(ex)}
+
+        
     # @staticmethod
     # def modificar_usuario():
     #     usuario = request.get_json()  # Obtener los datos enviados desde el frontend

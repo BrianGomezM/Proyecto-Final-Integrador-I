@@ -64,7 +64,7 @@ export class TokenService {
 
     obtenerHeaders() :HttpHeaders {
       return new HttpHeaders({
-        'Content-Type': 'aplication/json',
+        'Content-Type': 'application/json',
         'x-token': this.obtenerToken(),
         'Access-Control-Allow-Methods': '"POST, GET,DELETE,PUT"',
         'Access-Control-Allow-Origin': 'http://localhost',
