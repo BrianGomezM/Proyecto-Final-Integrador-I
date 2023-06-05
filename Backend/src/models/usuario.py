@@ -22,7 +22,10 @@ mysql = MySQL(app)
 
     
 #ruta_imagenes = "/almacenamiento/imagenes"
-ruta_imagenes = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "almacenamiento", "imagenes"))
+#ruta_imagenes = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "almacenamiento", "imagenes"))
+ruta_proyecto = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Ruta del directorio del proyecto
+ruta_imagenes = os.path.join(ruta_proyecto, "almacenamiento", "imagenes")
+
 
 @staticmethod
 def crear_carpetas(ruta):
@@ -42,10 +45,9 @@ def obtener_datos_imagen(imagen, ruta):
     encabezado, contenido = imagen.split(",", 1)
     extension = encabezado.split(";")
     extension = extension[0].split("/")
-    return [
-        ruta + str(uuid.uuid4()) + "." + extension[-1],
-        contenido
-    ]
+    nombre_archivo = str(uuid.uuid4()) + "." + extension[-1]
+    ruta_archivo = os.path.join(ruta, nombre_archivo)
+    return [ruta_archivo, contenido]
     
 @staticmethod
 def guardar_imagen(imagen, contenido):
@@ -100,9 +102,9 @@ class Usuario:
             if resultado:
                 raise Exception("El correo electrónico ya está registrado")
 
-            # Insertar los datos del usuario en la base de datos
+            # Insertar los datos del usuario en la base de datos, se guarda datos_imagen[0] para guardar la ubicación de la imagen ya codificada
             sql = "INSERT INTO usuario (nombre, apellido, telefono, correo, password, urlAvatar, sexo, estado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], usuario['urlAvatar'], usuario['sexo'], usuario['estado'])
+            valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], datos_imagen[0], usuario['sexo'], usuario['estado'])
             cursor.execute(sql, (valores))
 
 
@@ -155,7 +157,6 @@ class Usuario:
             return {'mensaje': 'El usuario se actualizó correctamente'}
         except Exception as ex:
             return {'mensaje': str(ex)}
-
         
     # @staticmethod
     # def modificar_usuario():
