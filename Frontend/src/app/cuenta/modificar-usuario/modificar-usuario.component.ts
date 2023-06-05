@@ -102,6 +102,19 @@ export class ModificarUsuarioComponent implements OnInit {
     });
   }
 
+  archivoCargado(event:any): void {
+    let archivo:File = event.target.files[0];
+    console.log(archivo);
+
+    (new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(archivo);
+      reader.onload = () => resolve(reader.result?.toString() ?? "");
+      reader.onerror = error => reject(error);
+    })).then(result => this.usuario.urlAvatar = result);
+  }
+
+
   convertirStringAImagen(): void {
     const stringImagen = this.usuario.urlAvatar;
 

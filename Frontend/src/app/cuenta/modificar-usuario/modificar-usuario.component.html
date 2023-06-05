@@ -16,7 +16,7 @@
                   <div class="picture-container">
                     <div class="picture">
                       <img src="./assets/img/default-avatar.png" id="wizardPicturePreview" title="" class="picture-src">
-                      <input formControlName="urlAvatar" type="file" id="wizard-picture" [(ngModel)]="usuario.urlAvatar" required>
+                      <input formControlName="urlAvatar" type="file" id="wizard-picture" (change)="archivoCargado($event)">
                     </div>
                     <h6 class="description">
                       Choose Picture

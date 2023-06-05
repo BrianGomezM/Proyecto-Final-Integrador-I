@@ -3,6 +3,9 @@ from config import config
 from flask_cors import CORS
 from flask import Flask, jsonify, request
 from datetime import datetime
+import os
+import uuid
+import base64
 
 
 # Configuración de la conexión a la base de datos MySQL
@@ -16,6 +19,39 @@ app.config['MYSQL_DATABASE_DB'] = config['development'].MYSQL_DB
 # Configuración de la conexión a la base de datos MySQL
 mysql = MySQL(app)
 
+
+    
+#ruta_imagenes = "/almacenamiento/imagenes"
+ruta_imagenes = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "almacenamiento", "imagenes"))
+
+@staticmethod
+def crear_carpetas(ruta):
+    partes = ruta.split("/")
+    ruta_carpeta = ""
+    for parte in partes:
+        if parte == "":
+            continue
+        
+        ruta_carpeta += "/" + parte
+        
+        if not os.path.isdir(ruta_carpeta):
+            os.mkdir(ruta_carpeta)
+
+@staticmethod
+def obtener_datos_imagen(imagen, ruta):
+    encabezado, contenido = imagen.split(",", 1)
+    extension = encabezado.split(";")
+    extension = extension[0].split("/")
+    return [
+        ruta + str(uuid.uuid4()) + "." + extension[-1],
+        contenido
+    ]
+    
+@staticmethod
+def guardar_imagen(imagen, contenido):
+    ruta_archivo = os.path.join(app.static_folder, imagen)
+    with open(ruta_archivo, "wb") as archivo:
+        archivo.write(base64.b64decode(contenido))
 
 class Usuario:
     
@@ -36,7 +72,7 @@ class Usuario:
         except Exception as ex:
             return None
 
-    
+
     
     @staticmethod
     def registrar_usuario():
@@ -52,6 +88,11 @@ class Usuario:
                 raise Exception("'nombre' no está presente en los datos del usuario")
             conn = mysql.connect()  # Establecer la conexión a la base de datos
             cursor = conn.cursor()
+            
+            ruta_imagen = ruta_imagenes  # Ruta de almacenamiento de las imágenes
+            os.makedirs(ruta_imagen, exist_ok=True)  # Crea la estructura de carpetas si no existe
+            datos_imagen = obtener_datos_imagen(usuario['urlAvatar'], ruta_imagen)
+            guardar_imagen(datos_imagen[0], datos_imagen[1])
             
             sql = "SELECT correo FROM usuario WHERE correo = %s"
             cursor.execute(sql, (usuario['correo'],))
@@ -150,6 +191,3 @@ class Usuario:
     #         return {'mensaje': 'El usuario se actualizó correctamente'}
     #     except Exception as ex:
     #         return {'mensaje': str(ex)}
-
-
-
