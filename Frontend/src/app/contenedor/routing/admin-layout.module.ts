@@ -9,7 +9,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 
-import { ExplorarConstruccionesComponent } from 'app/construcciones/explorar-construcciones/explorar-construcciones.component';
 import { GaleriaImagenesContruccionesComponent } from 'app/construcciones/galeria-imagenes-contrucciones/galeria-imagenes-contrucciones.component';
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { ExplorarDiosesComponent } from 'app/religion/dioses/explorar-dioses/explorar-dioses.component';
@@ -27,7 +26,7 @@ import { PodioComponent } from 'app/test/podio/podio.component';
 import { PruebasComponent } from 'app/test/pruebas/pruebas.component';
 import { UsuarioComponent } from 'app/usuario/usuario.component';
 import { AdminLayoutRoutes } from './admin-layout.routing';
-
+import { VerDetalleArquitecturaComponent } from 'app/construcciones/galeria-imagenes-contrucciones/ver-detalle-arquitectura/ver-detalle-arquitectura.component';
 
 @NgModule({
   imports: [
@@ -45,7 +44,7 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
   declarations: [
     DashboardComponent,
     UsuarioComponent,
-    ExplorarConstruccionesComponent,
+    ExplorarDiosesComponent,
     GaleriaImagenesContruccionesComponent,
     ExplorarDiosesComponent,
     GaleriaImagenesComponent,
@@ -60,6 +59,7 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
     RitualesComponent,
     PodioComponent ,
     PruebasComponent,
+    VerDetalleArquitecturaComponent,
   ]
 })
 

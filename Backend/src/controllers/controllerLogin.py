@@ -15,5 +15,15 @@ CORS(login_app)
 # Datos de salida: Devuelve un JSON con un mensaje indicando que se registró correctamente la construcción. En caso de error, devuelve un mensaje de error.
 @login_app.route('/login', methods=['POST'])
 def login_endpoint():
-    
     return Login.login()
+
+
+
+@login_app.route('/recuperarClave/', methods=['PUT'])
+def recuperarClave():
+    correo = request.json.get('correoR')
+    print(correo)
+    if Login.recuperarClave(correo):
+        return jsonify({"estado":200, "mensaje": "Contraseña recuperada"})
+    else:
+        return jsonify({"estado":500,"mensaje": "Problemas al recuperar"})

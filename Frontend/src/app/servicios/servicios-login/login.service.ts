@@ -31,6 +31,27 @@ export class LoginService{
             })
         ); 
     }
+
+    public recuperarClave(correo: String) {
+        let url = this.UrlBase + 'recuperarClave/';
+        let header = new HttpHeaders();
+        header = header.append('Content-Type', 'application/json');
+        header = header.append('Access-Control-Allow-Methods', 'PUT'); // Cambiar el método a PUT
+        header = header.append('Access-Control-Allow-Origin', 'http://localhost');
+        
+        // Crear un objeto con el correo a enviar
+        const body = {
+            correoR: correo
+        };
+        return this.http.put<String[]>(url, body, { headers: header }).pipe(
+          catchError(error => {
+            console.log('Error en la solicitud:', error);
+            // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
+            return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
+          })
+        ); 
+      }
+      
 }
 
 //     public login(usuario:Usuario){

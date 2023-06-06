@@ -18,6 +18,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 
+
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -39,7 +41,7 @@ import { MatInputModule } from '@angular/material/input';
     RegistrarUsuarioComponent,
     AdminLayoutComponent,
     VerDetalleDiosComponent,
-    VerDetalleCriaturaComponent
+    VerDetalleCriaturaComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

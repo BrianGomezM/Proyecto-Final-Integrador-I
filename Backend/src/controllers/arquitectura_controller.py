@@ -23,7 +23,6 @@ arquitectura_app = Blueprint('arquitectura_app', __name__)
 @arquitectura_app.route('/arquitectura', methods=['GET'])
 def listar_construcciones():
     construcciones = Arquitectura.listar_construcciones()
-
     if construcciones is not None:
         return jsonify({'construcciones': construcciones, 'mensaje': "Lista de construcciones egipcias"})
     else:

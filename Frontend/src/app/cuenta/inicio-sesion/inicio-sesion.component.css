@@ -19,7 +19,7 @@ html, body {
 }
   /* Estilo para que la imagen de fondo ocupe toda la pantalla */
   .page-header {
-    background-image: url('../../../assets/img/login.jpg');
+    background-image: url('../../../assets/img/img-app/login.jpg');
     flex-grow: 1;
     position: relative;
     background-size: cover;

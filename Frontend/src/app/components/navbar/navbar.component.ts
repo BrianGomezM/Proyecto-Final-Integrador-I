@@ -127,7 +127,9 @@ export class NavbarComponent implements OnInit {
             }
           }
         }
-      
+        if (titlee.includes("detalleArq/")) {
+          return 'Mas información';
+        }
         return 'Dashboard';
       }
       

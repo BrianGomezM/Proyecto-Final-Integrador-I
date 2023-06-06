@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { Construccion } from 'app/servicios/servicios-contruccion/interface-construccion';
 import { ConsumoServiciosService } from '../../servicios/servicios-contruccion/consumo-servicios.service';
 import { ImgConstruccion } from 'app/servicios/servicios-contruccion/interface-img-construccion';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,15 +18,13 @@ export class GaleriaImagenesContruccionesComponent implements OnInit {
   mostrarFormulario : boolean = false; 
   public datosArquitectura: any;
   public datosArquitecturaIMG: any;
-  constructor(private consumoServiciosService: ConsumoServiciosService, private elementRef: ElementRef) { }
+  constructor( private router: Router, private consumoServiciosService: ConsumoServiciosService, private elementRef: ElementRef) { }
 
   ngOnInit(): void {
     this.consumoServiciosService.getConstrucciones().subscribe(
       (construcciones: Construccion[]) => {
         this.construcciones = construcciones;
-        this.duplicarTarjetas(this.construcciones['construcciones']);
-        console.log("pRUEBA:" + this.tarjetasDuplicadas);
-        
+        this.duplicarTarjetas(this.construcciones['construcciones']);   
       },
       (error: any) => {
         console.log('Error al obtener las construcciones:', error);
@@ -42,8 +41,8 @@ export class GaleriaImagenesContruccionesComponent implements OnInit {
     Promise.all(promesas)
       .then((respuestas: any[]) => {
         respuestas.forEach((respuesta, index) => {
-          const imagenes = respuesta.construcciones.map((imagen) => imagen.imagen_url);
-          this.tarjetasDuplicadas.push({
+          const imagenes = respuesta.construcciones.map((imagen) => imagen.oidRecurso);
+          this.tarjetasDuplicadas.push({            
             construccion: construcciones[index],
             imagenes: imagenes
           });
@@ -54,26 +53,7 @@ export class GaleriaImagenesContruccionesComponent implements OnInit {
         // Realiza acciones de manejo de errores aquí
       });
   }
-  
-  
-  
-  
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: Event) {
-    if (!this.elementRef.nativeElement.contains(event.target)) {
-      this.cerrarFormulario();
-    }
+  public abrirModal(varCod): void {
+    this.router.navigate(['/detalleArq', varCod]);
   }
-
-  public abrirModal(varCod, varImg): void {
-    this.datosArquitectura = varCod;
-    this.datosArquitecturaIMG = varImg[0];
-    console.log(this.datosArquitecturaIMG)
-    this.mostrarFormulario = true;
-  }
-  cerrarFormulario(){
-    this.mostrarFormulario = false;
-  }
-
-  
 }

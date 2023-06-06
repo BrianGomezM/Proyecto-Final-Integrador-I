@@ -51,5 +51,6 @@ class Usuario:
             return {'mensaje': 'El usuario se registró correctamente'}
         except Exception as ex:
             return {'mensaje': str(ex)}
-
+        
+   
 

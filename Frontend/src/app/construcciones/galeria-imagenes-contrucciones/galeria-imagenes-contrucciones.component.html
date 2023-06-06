@@ -28,9 +28,9 @@
             </div>
             <div class="card-body">
               <h4 class="card-title"><a href="#pablo">{{ tarjeta.construccion.nombre }}</a></h4>
-              <div class="card-description" style="text-align: justify;">
+              <!--div class="card-description" style="text-align: justify;">
                 {{ tarjeta.construccion.resumen }}
-              </div>                      
+              </div -->                      
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -41,7 +41,7 @@
               </div>
               <div class="stats">
                 <div class="card-footer justify-content-center">
-                  <a (click)="abrirModal(tarjeta.construccion, tarjeta.imagenes)" class="btn btn-rose btn-link btn-lg">Ver más</a>
+                  <button mat-raised-button type="submit" (click)="abrirModal(tarjeta.construccion.cod)" class="btn btn-danger pull-right">Ver más</button>
                 </div>
               </div>
             </div>
@@ -55,53 +55,6 @@
 <ng-template #noInfoTemplate>
   <div class="text-center">
     <p>Buscando Información...</p>
-    <img src="../../../assets/img/cargando.gif" width="100px">
+    <img src="../../../assets/img/img-app/cargando.gif" width="100px">
   </div>
 </ng-template>
-
-<div *ngIf="mostrarFormulario" class="modal show d-block ar-most-formu" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title"> <strong>{{ datosArquitectura.nombre }}</strong></h4>
-        <button id="minimizeSidebar" (click)="cerrarFormulario()" class="btn btn-round btn-white btn-fill btn-just-icon">
-          <i _ngcontent-pgk-c101="" class="material-icons visible-on-sidebar-regular" style="color: red;">cancel</i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-md-12">
-            <carousel class="carousel-team">
-              <div class="carousel slide" tabindex="0">
-                <div class="carousel-inner" style="display: block;">
-                  <slide aria-hidden="false" class="item carousel-item active" style="width: 100%; order: 0;">
-                    <div class="item active">
-                      <div class="container">
-                        <div class="row">
-                          <div class="col-md-12">
-                            <img alt="First slide" class="d-block" [src]="datosArquitecturaIMG">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </slide>
-                </div>
-              </div>
-            </carousel>
-            <div class="wrapper">
-              <div class="category">
-                <strong>Lugar:</strong> {{ datosArquitectura.lugar }}<br>
-                <strong>Fecha:</strong> {{ datosArquitectura.fecha }}
-              </div>
-              <strong>Historia:</strong>
-              <div class="description" style="text-align: justify;">
-                {{ datosArquitectura.historia }}
-              </div>              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-

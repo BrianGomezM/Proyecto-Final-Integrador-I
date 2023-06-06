@@ -7,6 +7,7 @@ from controllers.dioses_controller import dioses_app
 from controllers.criaturas_controller import criaturas_app
 from controllers.controllerLogin import login_app
 from controllers.controllerUsuario import usuario_app
+from controllers.test_controller import test_app
 
 #FIRMA DE LA CLASE APP.PY
 #configurar y ejecutar una aplicación Flask que proporciona una API web. 
@@ -31,7 +32,7 @@ app.register_blueprint(dioses_app)
 app.register_blueprint(criaturas_app)
 app.register_blueprint(usuario_app)
 app.register_blueprint(login_app)
-
+app.register_blueprint(test_app)
 # Función que maneja el error 404 (página no encontrada) y devuelve una respuesta HTML con un mensaje correspondiente.
 def pagina_no_encontrada(error):
     return "<h1>La página que intentas buscar no existe....</h1>"

@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { ExplorarConstruccionesComponent } from 'app/construcciones/explorar-construcciones/explorar-construcciones.component';
 import { GaleriaImagenesContruccionesComponent } from 'app/construcciones/galeria-imagenes-contrucciones/galeria-imagenes-contrucciones.component';
+import { VerDetalleArquitecturaComponent } from 'app/construcciones/galeria-imagenes-contrucciones/ver-detalle-arquitectura/ver-detalle-arquitectura.component';
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { ExplorarDiosesComponent } from 'app/religion/dioses/explorar-dioses/explorar-dioses.component';
 import { GaleriaImagenesComponent } from 'app/religion/dioses/galeria-imagenes/galeria-imagenes.component';
@@ -31,7 +31,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'galeria-imagenes',                 component: GaleriaImagenesComponent  },   
     { path: 'galeria-imagenes-construcciones',  component:GaleriaImagenesContruccionesComponent },  
     
-    { path: 'explorar-construcciones',          component: ExplorarConstruccionesComponent  },   
+    { path: 'explorar-construcciones',          component: ExplorarDiosesComponent  },   
      
     
     { path: 'mitos-historia',                   component: MitosHistoriaComponent },   
@@ -46,5 +46,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'rituales',                         component: RitualesComponent }, 
     { path: 'prueba',                           component: PruebasComponent },
     { path: 'podio',                            component: PodioComponent  },
-    
+    { path: 'detalleArq/:id',                   component: VerDetalleArquitecturaComponent }
 ];

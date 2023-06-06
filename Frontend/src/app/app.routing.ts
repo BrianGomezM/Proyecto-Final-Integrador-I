@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './contenedor/layout/admin-layout.component';
 import { InicioSesionComponent } from './cuenta/inicio-sesion/inicio-sesion.component';
 import { RegistrarUsuarioComponent } from './cuenta/registrar-usuario/registrar-usuario.component';
+import { RecuperarClaveComponent } from './cuenta/recuperar-clave/recuperar-clave.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,10 @@ const routes: Routes = [
   {
     path: 'registrar',
     component: RegistrarUsuarioComponent
-  }
+  },{
+    path: 'olvidoClave',
+    component: RecuperarClaveComponent
+  },
 ];
 
 @NgModule({
