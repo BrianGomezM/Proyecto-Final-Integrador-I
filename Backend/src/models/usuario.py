@@ -1,7 +1,7 @@
 from flaskext.mysql import MySQL
 from config import config
 from flask_cors import CORS
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, url_for
 from datetime import datetime
 import os
 import uuid
@@ -22,9 +22,11 @@ mysql = MySQL(app)
 
     
 #ruta_imagenes = "/almacenamiento/imagenes"
-#ruta_imagenes = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "almacenamiento", "imagenes"))
+#ruta_imagenes = os.path.abspath(os.path.join(os.path.dirname(_file_), "..", "almacenamiento", "imagenes"))
 ruta_proyecto = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Ruta del directorio del proyecto
-ruta_imagenes = os.path.join(ruta_proyecto, "almacenamiento", "imagenes")
+ruta_imagenes = os.path.join(ruta_proyecto, "static", "imagenes")
+
+
 
 
 @staticmethod
@@ -67,7 +69,7 @@ class Usuario:
             datos = cursor.fetchall()
             usuarios = []
             for fila in datos:
-                usuario = {'id': fila[0], 'nombre': fila[1], 'apellido': fila[2], 'telefono': fila[3], 'correo': fila[4], 'password': fila[5], 'urlAvatar': fila[6], 'sexo': fila[7] , 'estado': fila[8]}
+                usuario = {'id': fila[0], 'nombre': fila[1], 'apellido': fila[2], 'telefono': fila[3], 'correo': fila[4], 'password': fila[5], 'urlAvatar': url_for('static', filename=fila[6], _external=True), 'sexo': fila[7] , 'estado': fila[8]}
                 usuarios.append(usuario)
             conn.close()
             return usuarios
@@ -96,17 +98,19 @@ class Usuario:
             datos_imagen = obtener_datos_imagen(usuario['urlAvatar'], ruta_imagen)
             guardar_imagen(datos_imagen[0], datos_imagen[1])
             
+            ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto)
+            
             sql = "SELECT correo FROM usuario WHERE correo = %s"
             cursor.execute(sql, (usuario['correo'],))
             resultado = cursor.fetchone()
             if resultado:
                 raise Exception("El correo electrónico ya está registrado")
 
-            # Insertar los datos del usuario en la base de datos, se guarda datos_imagen[0] para guardar la ubicación de la imagen ya codificada
+            # Insertar los datos del usuario en la base de datos, se guarda ruta_relativa para guardar la ubicación de la imagen relativa al proyecto
+            ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto).replace('\\', '/').replace('static/', '')
             sql = "INSERT INTO usuario (nombre, apellido, telefono, correo, password, urlAvatar, sexo, estado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-            valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], datos_imagen[0], usuario['sexo'], usuario['estado'])
+            valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], ruta_relativa, usuario['sexo'], usuario['estado'])
             cursor.execute(sql, (valores))
-
 
             conn.commit()  # Confirmar los cambios en la base de datos
             conn.close()  # Cerrar la conexión a la base de datos
@@ -114,7 +118,7 @@ class Usuario:
             return {'mensaje': 'El usuario se registró correctamente'}
         except Exception as ex:
             return {'mensaje': str(ex)}
-        
+            
         
     @staticmethod
     # Este método recibe como parámetros el código de una construcción y el nuevo nombre que se desea asignar. 

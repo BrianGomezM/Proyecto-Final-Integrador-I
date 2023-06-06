@@ -13,7 +13,7 @@ from controllers.controllerUsuario import usuario_app
 # La aplicación se encarga de manejar las rutas y las solicitudes HTTP, así como de interactuar con una base de datos MySQL.
 
 # Instancia de la aplicación Flask.
-app = Flask(__name__)
+app = Flask(__name__, static_url_path = '/static')
 
 #Habilita el manejo de solicitudes de recursos cruzados (CORS) para permitir peticiones desde dominios diferentes al de la aplicación.
 CORS(app)
