@@ -98,7 +98,7 @@ class Usuario:
             datos_imagen = obtener_datos_imagen(usuario['urlAvatar'], ruta_imagen)
             guardar_imagen(datos_imagen[0], datos_imagen[1])
             
-            ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto)
+            #ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto)
             
             sql = "SELECT correo FROM usuario WHERE correo = %s"
             cursor.execute(sql, (usuario['correo'],))
@@ -142,17 +142,27 @@ class Usuario:
 
             conn = mysql.connect()  # Establecer la conexión a la base de datos
             cursor = conn.cursor()
+            
+            ruta_imagen = ruta_imagenes  # Ruta de almacenamiento de las imágenes
+            os.makedirs(ruta_imagen, exist_ok=True)  # Crea la estructura de carpetas si no existe
+            datos_imagen = obtener_datos_imagen(usuario['urlAvatar'], ruta_imagen)
+            guardar_imagen(datos_imagen[0], datos_imagen[1])
+            
+            #ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto)
 
             sql = "SELECT correo FROM usuario WHERE correo = %s"
             cursor.execute(sql, (usuario['correo'],))
             resultado = cursor.fetchone()
-            if resultado:
+
+            # Verificar si el resultado coincide con el correo del mismo usuario
+            if resultado and resultado[0] != usuario['correo']:
                 raise Exception("El correo electrónico ya está registrado")
             
-            
             # Actualizar los datos del usuario en la base de datos
+             # Insertar los datos del usuario en la base de datos, se guarda ruta_relativa para guardar la ubicación de la imagen relativa al proyecto
+            ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto).replace('\\', '/').replace('static/', '')
             sql = "UPDATE usuario SET nombre = %s, apellido = %s, telefono = %s, correo = %s, password = %s, urlAvatar = %s, sexo = %s, estado = %s WHERE id = %s"
-            valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], usuario['urlAvatar'], usuario['sexo'], usuario['estado'], usuario['id'])
+            valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], ruta_relativa, usuario['sexo'], usuario['estado'], usuario['id'])
             cursor.execute(sql, valores)
 
             conn.commit()  # Confirmar los cambios en la base de datos
