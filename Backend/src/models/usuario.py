@@ -93,6 +93,7 @@ class Usuario:
             conn = mysql.connect()  # Establecer la conexión a la base de datos
             cursor = conn.cursor()
             
+            
             ruta_imagen = ruta_imagenes  # Ruta de almacenamiento de las imágenes
             os.makedirs(ruta_imagen, exist_ok=True)  # Crea la estructura de carpetas si no existe
             datos_imagen = obtener_datos_imagen(usuario['urlAvatar'], ruta_imagen)

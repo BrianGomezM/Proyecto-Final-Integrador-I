@@ -57,10 +57,7 @@ export class ModificarUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.cargarUsuarios();
     this.convertirStringAImagen();
-    // Reiniciar el campo "contraseña" al cargar la página
-    this.usuarioForm.patchValue({
-      password: ''
-    });
+
   }
 
    modificarUsuario(): void {
@@ -89,6 +86,10 @@ export class ModificarUsuarioComponent implements OnInit {
   cargarUsuarios() {
     var usuarioLocalStorage = this.servicioLogin.obtenerLocalStorageUsuario();
     console.log(usuarioLocalStorage);
+    // Reiniciar el campo "contraseña" al cargar la página
+    this.usuarioForm.patchValue({
+      password: ''
+    });
     
     this.servicioUsuario.getUsuarios().subscribe((res: any) => {
       if (res && res.usuarios) {
