@@ -40,8 +40,8 @@ class Usuario:
                 raise Exception("El correo electrónico ya está registrado")
 
             # Insertar los datos del usuario en la base de datos
-            sql = "INSERT INTO usuario (nombre, apellido, telefono, correo, password, urlAvatar, sexo) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], usuario['urlAvatar'], usuario['sexo'])
+            sql = "INSERT INTO usuario (nombre, apellido, telefono, correo, password, urlAvatar, sexo, estado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+            valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], usuario['urlAvatar'], usuario['sexo'], usuario['estado'])
             cursor.execute(sql, (valores))
 
 

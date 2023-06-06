@@ -16,6 +16,7 @@ export class LoginService{
     UrlBase:string = environment.baseUrl;
 
     public login(usuario: Usuario) {
+        this.guardarUsuarioAlLocalStorage(usuario);
         //console.log(usuario);
         let url = this.UrlBase + 'login';
         let header = new HttpHeaders();
@@ -52,6 +53,11 @@ export class LoginService{
         ); 
       }
       
+    //Me guarda el usuario que inició sesión al localStorage
+    guardarUsuarioAlLocalStorage(usuario : Usuario){
+        const item = JSON.stringify(usuario);
+        localStorage.setItem('usuarioLogeado', item);
+    }
 }
 
 //     public login(usuario:Usuario){

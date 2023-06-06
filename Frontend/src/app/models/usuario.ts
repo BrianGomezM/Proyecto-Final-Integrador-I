@@ -8,7 +8,8 @@ export class Usuario{
         public correo:string='',
         public password:string='' ,
         public urlAvatar:string='',
-        public sexo:string=''
+        public sexo:string='',
+        public estado:number=1
     ){
 
     }

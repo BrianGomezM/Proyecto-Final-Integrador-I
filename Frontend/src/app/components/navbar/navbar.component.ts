@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
+import { TokenService } from 'app/servicios/servicios-login/tokenService';
 
 @Component({
   selector: 'app-navbar',
@@ -15,7 +16,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    constructor(location: Location,  private element: ElementRef, public tokenService:TokenService, private router: Router) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -131,6 +132,10 @@ export class NavbarComponent implements OnInit {
           return 'Mas información';
         }
         return 'Dashboard';
+      }
+      cerrarSesion(){
+        window.location.href = "/pagina_principal";
+        this.tokenService.quitarToken();
       }
       
 }

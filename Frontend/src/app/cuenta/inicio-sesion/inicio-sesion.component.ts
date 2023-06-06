@@ -20,12 +20,12 @@ export class InicioSesionComponent implements OnInit {
 
   @Output() usuarioLogueado = new EventEmitter<Usuario>();
 
-  usuario:Usuario = new Usuario("","","","","","");
+  usuario:Usuario = new Usuario("","","","","","","");
 
   //tokenRandom:Token = this.tokenService.procesarToken();
 
   ngOnInit(): void {
-    //console.log(this.usuario)
+    console.log(this.usuario)
     //this.obtenerToken();
   }
 

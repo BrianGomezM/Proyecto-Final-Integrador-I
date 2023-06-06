@@ -6,10 +6,13 @@ import { AdminLayoutComponent } from './contenedor/layout/admin-layout.component
 import { InicioSesionComponent } from './cuenta/inicio-sesion/inicio-sesion.component';
 import { RegistrarUsuarioComponent } from './cuenta/registrar-usuario/registrar-usuario.component';
 import { RecuperarClaveComponent } from './cuenta/recuperar-clave/recuperar-clave.component';
+import { LoginGuard } from './guards/login.guard';
+import { ModificarUsuarioComponent } from './cuenta/modificar-usuario/modificar-usuario.component';
 
 const routes: Routes = [
   {
     path: 'login',
+    canActivate: [LoginGuard],
     component: InicioSesionComponent
   },
   {
@@ -31,7 +34,10 @@ const routes: Routes = [
   },{
     path: 'olvidoClave',
     component: RecuperarClaveComponent
-  },
+  },  {
+    path: 'modificar',
+    component: ModificarUsuarioComponent
+  }
 ];
 
 @NgModule({
