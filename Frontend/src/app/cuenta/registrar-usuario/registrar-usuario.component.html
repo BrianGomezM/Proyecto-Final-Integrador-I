@@ -15,7 +15,7 @@
               <div class="col-md-12 col-sm-4 d-flex justify-content-center">
                 <div class="picture-container">
                   <div class="picture">
-                    <img src="./assets/img/default-avatar.png" id="wizardPicturePreview" title="" class="picture-src">
+                    <img src="{{usuario.urlAvatar}}" id="wizardPicturePreview" title="" class="picture-src">
                     <input formControlName="urlAvatar" type="file" #ImagenUsuario accept="image/*" (change)="archivoCargado($event)">
                   </div>
                   <h6 class="description">
