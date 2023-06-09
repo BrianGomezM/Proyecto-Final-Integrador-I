@@ -43,6 +43,7 @@ export class ModificarUsuarioComponent implements OnInit {
  
    }
 
+   //Valida que las contraseñas sean iguales
    passwordMatchValidator(formGroup: FormGroup) {
     const passwordControl = formGroup.get('password');
     const confirmPasswordControl = formGroup.get('confirmPassword');
@@ -56,10 +57,10 @@ export class ModificarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.cargarUsuarios();
-    this.convertirStringAImagen();
 
   }
 
+  //Llama al servicio para hacer la actualización
    modificarUsuario(): void {
     if (this.usuarioForm.valid) {
         this.servicioUsuario.modificarUsuario(this.usuario).subscribe(respuesta => {
@@ -83,6 +84,7 @@ export class ModificarUsuarioComponent implements OnInit {
     }
    }
 
+   //Carga los usuarios que están en la base de datos
   cargarUsuarios() {
     var usuarioLocalStorage = this.servicioLogin.obtenerLocalStorageUsuario();
     console.log(usuarioLocalStorage);
@@ -90,7 +92,9 @@ export class ModificarUsuarioComponent implements OnInit {
     this.usuarioForm.patchValue({
       password: ''
     });
-    
+    //Compara el correo que se ingresó en el login con los que están en la base de datos,
+    //al encontrarlo, obtengo los datos de ese usuario para mostrarlos en el formulario,
+    //y así con más facilidad el usuario puede actualizar sus datos
     this.servicioUsuario.getUsuarios().subscribe((res: any) => {
       if (res && res.usuarios) {
         this.usuarios = res.usuarios;
@@ -103,6 +107,7 @@ export class ModificarUsuarioComponent implements OnInit {
     });
   }
 
+  //Pasa la imagen cargada a base 64
   archivoCargado(event:any): void {
     let archivo:File = event.target.files[0];
     console.log(archivo);
@@ -115,25 +120,7 @@ export class ModificarUsuarioComponent implements OnInit {
     })).then(result => this.usuario.urlAvatar = result);
   }
 
-
-  convertirStringAImagen(): void {
-    const stringImagen = this.usuario.urlAvatar;
-
-    console.log(stringImagen)
-  
-    const imagenDecodificada = atob(stringImagen.split(',')[1]); // Decodifica la cadena base64
-    const tipoImagen = stringImagen.split(',')[0].split(':')[1].split(';')[0]; // Obtiene el tipo de imagen (por ejemplo, 'image/png')
-  
-    // Crea un objeto Blob a partir de la imagen decodificada
-    const blob = new Blob([imagenDecodificada], { type: tipoImagen });
-  
-    // Crea una URL de objeto Blob
-    const urlImagen = URL.createObjectURL(blob);
-
-    // Asigna la URL de la imagen al elemento img
-    this.usuario.urlAvatar = urlImagen;
-  }
-
+  //funcionalidad al botón 'regresar', envía a la ruta /dashboard
   toBack(){
     window.location.href = '/dashboard';
   }
