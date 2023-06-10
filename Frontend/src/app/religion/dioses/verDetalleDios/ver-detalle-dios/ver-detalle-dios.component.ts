@@ -4,7 +4,7 @@ import { ConsumoServiciosService } from '../../../../servicios/servicios-dioses/
 import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
 import { Router } from '@angular/router';
 import { Recurso } from 'app/servicios/recursos.interface';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-ver-detalle-dios',
   templateUrl: './ver-detalle-dios.component.html',
@@ -12,6 +12,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class VerDetalleDiosComponent implements OnInit {
   diosId: string;
+  id:number;
   detalleDios:Dioses = {
     cod: undefined,
     nombre: '',
@@ -21,7 +22,16 @@ export class VerDetalleDiosComponent implements OnInit {
     roles: ''
   };
 
-
+  listaModelos:string[]=[ "assets/Modelos3D/RA/index.html",
+                          "assets/Modelos3D/OSIRIS/index.html",
+                          "assets/Modelos3D/ISIS/index.html",
+                          "assets/Modelos3D/HORUS/index.html",
+                          "assets/Modelos3D/ANUBIS/index.html",
+                          "assets/Modelos3D/THOTH/index.html",
+                          "assets/Modelos3D/HATHOR/index.html",
+                          "assets/Modelos3D/SETH/index.html"
+                        ]
+  modelo:SafeResourceUrl;
   historiaFinal:SafeHtml;
 
   listaImagenes:Recurso = {
@@ -38,12 +48,20 @@ export class VerDetalleDiosComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.diosId = params['id'];
-      console.log('ID del dios:', this.diosId);
+      this.id=Number(this.diosId);
+      console.log(this.listaModelos);
     });
 
     this.loadGodsDetails(this.diosId)
-
+    this.modelo=this.obtenerModelo()
+    console.log("Modelo: ", this.modelo);
   }
+
+obtenerModelo(){
+  var result=this.sanitizer.bypassSecurityTrustResourceUrl(this.listaModelos[this.id-1])
+  return result ;
+}
+
 /**
  * Carga los detalles y las imágenes asociadas a un dios específico, llamado al servicio.
  * @param diosId El ID del dios del cual se desean cargar los detalles de las imágenes.

@@ -17,12 +17,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ModificarUsuarioComponent } from './cuenta/modificar-usuario/modificar-usuario.component';
-
+import { CommonModule } from '@angular/common';
 
 
 
 @NgModule({
   imports: [
+    CommonModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
