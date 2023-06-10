@@ -30,7 +30,7 @@ class Test:
             conn = mysql.connect()   # Establece la conexión a la base de datos
             cursor = conn.cursor()
             print("Conexión exitosa")
-            sql = "SELECT ID_Pregunta, Pregunta, tp.nombreTipo, (SELECT respuesta FROM respuestas WHERE estado = 1 AND oidPregunta = ID_Pregunta) as rep FROM (SELECT ID_Pregunta, Pregunta, tipoDato, ROW_NUMBER() OVER (PARTITION BY tipoDato ORDER BY RAND()) AS row_num  FROM Preguntas  WHERE tipoDato IN (1)) AS subquery INNER JOIN tipoDato tp ON subquery.tipoDato = tp.oid WHERE row_num <= 7 ORDER BY tipoDato;"
+            sql = "SELECT ID_Pregunta, Pregunta, tp.nombreTipo, (SELECT respuesta FROM respuestas WHERE estado = 1 AND oidPregunta = ID_Pregunta) as rep FROM (SELECT p1.ID_Pregunta, p1.Pregunta, p1.tipoDato, (SELECT COUNT(*) FROM Preguntas p2  WHERE p2.tipoDato = p1.tipoDato AND p2.ID_Pregunta <= p1.ID_Pregunta) AS row_num  FROM Preguntas p1 WHERE tipoDato IN (1)) AS subquery INNER JOIN tipoDato tp ON subquery.tipoDato = tp.oid WHERE row_num <= 7 ORDER BY tipoDato;"
             cursor.execute(sql)
             datos = cursor.fetchall()
             preguntasLis = []
