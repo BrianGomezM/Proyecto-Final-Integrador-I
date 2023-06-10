@@ -204,6 +204,6 @@ def enviar_cambio_contrasena(usuario, correo, nueva_clave):
     # Enviar el mensaje
     with smtplib.SMTP('smtp.gmail.com', 587) as servidor:
         servidor.starttls()
-        servidor.login('pruebasraptorx@gmail.com', 'univalle123')
+        servidor.login('gmbrayan4@misena.edu.co', 'univalle123')
         servidor.send_message(mensaje)
         print('Correo enviado exitosamente')
