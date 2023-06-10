@@ -22,12 +22,13 @@ export class AuthGuard implements CanActivate {
       this.resultado = usuario;
   }
 
+  //método que impide acceder a rutas específicas de la página cuando el usuario no esté logeado (no haya token)
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log(this.resultado);
-      if (this.tokenService.obtenerToken() !== null) {
-        this.router.navigate(["#/login"]);
+      console.log(this.tokenService.obtenerToken());
+      if (!this.tokenService.obtenerToken()) {
+        this.router.navigate(["login"]);
         return false;
       }
       return true;

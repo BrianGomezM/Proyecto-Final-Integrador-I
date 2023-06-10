@@ -7,13 +7,15 @@ from controllers.dioses_controller import dioses_app
 from controllers.criaturas_controller import criaturas_app
 from controllers.controllerLogin import login_app
 from controllers.controllerUsuario import usuario_app
+from controllers.controller_mitos_historias import mitos_historias_app
+
 
 #FIRMA DE LA CLASE APP.PY
 #configurar y ejecutar una aplicación Flask que proporciona una API web. 
 # La aplicación se encarga de manejar las rutas y las solicitudes HTTP, así como de interactuar con una base de datos MySQL.
 
 # Instancia de la aplicación Flask.
-app = Flask(__name__)
+app = Flask(__name__, static_url_path = '/static')
 
 #Habilita el manejo de solicitudes de recursos cruzados (CORS) para permitir peticiones desde dominios diferentes al de la aplicación.
 CORS(app)
@@ -31,6 +33,7 @@ app.register_blueprint(dioses_app)
 app.register_blueprint(criaturas_app)
 app.register_blueprint(usuario_app)
 app.register_blueprint(login_app)
+app.register_blueprint(mitos_historias_app)
 
 # Función que maneja el error 404 (página no encontrada) y devuelve una respuesta HTML con un mensaje correspondiente.
 def pagina_no_encontrada(error):

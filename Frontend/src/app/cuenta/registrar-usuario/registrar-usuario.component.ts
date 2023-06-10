@@ -15,7 +15,7 @@ export class RegistrarUsuarioComponent implements OnInit {
   @Output() usuarioCreado = new EventEmitter<Usuario>();
   @Output() usuarioEditado = new EventEmitter<Usuario>();
 
-  @Input() usuario:Usuario = new Usuario("","","","","","","");
+  @Input() usuario:Usuario = new Usuario("","","","","","","",1);
 
   usuarioForm: FormGroup;
 
@@ -46,11 +46,26 @@ export class RegistrarUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
 
-      // Reiniciar el campo "contraseña" al cargar la página
-      this.usuarioForm.patchValue({
-        password: ''
-      });
+    console.log(this.usuario);
+
+    // Reiniciar el campo "contraseña" al cargar la página
+    this.usuarioForm.patchValue({
+      password: ''
+    });
   }
+
+  archivoCargado(event:any): void {
+    let archivo:File = event.target.files[0];
+    console.log(archivo);
+
+    (new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(archivo);
+      reader.onload = () => resolve(reader.result?.toString() ?? "");
+      reader.onerror = error => reject(error);
+    })).then(result => this.usuario.urlAvatar = result);
+  }
+
 
   //funciones 
   
@@ -73,7 +88,7 @@ export class RegistrarUsuarioComponent implements OnInit {
             alert("Pruebe con otro correo");
           }
           else{
-            console.log(this.usuario);
+            //console.log(this.usuario);
             this.usuarioCreado.emit(this.usuario);
             this.usuario = new Usuario("", "", "", "", "", "");
             alert("Cuenta creada exitosamente!");
@@ -86,6 +101,9 @@ export class RegistrarUsuarioComponent implements OnInit {
     }
   }
   
+  toBack(){
+    window.location.href = '/dashboard';
+  }
 
 
 
