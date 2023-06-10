@@ -143,8 +143,8 @@ def enviar_cambio_contrasena(usuario, correo, nueva_clave):
  
     # Establecer los campos del mensaje
     mensaje['Subject'] = 'Recuperar contraseña'
-    mensaje['From'] = correo
-    mensaje['To'] = 'pruebasraptorx@gmail.com'
+    mensaje['From'] = 'pruebasraptorx@gmail.com'
+    mensaje['To'] = correo
     mensaje.set_content('''
                 <!DOCTYPE html>
                 <html>
