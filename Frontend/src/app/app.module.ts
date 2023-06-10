@@ -17,7 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ModificarUsuarioComponent } from './cuenta/modificar-usuario/modificar-usuario.component';
-import { VerDetalleMitosHistoriasComponent } from './religion/ver-detalle-mitos-historias/ver-detalle-mitos-historias.component';
+
 
 
 @NgModule({
@@ -42,8 +42,7 @@ import { VerDetalleMitosHistoriasComponent } from './religion/ver-detalle-mitos-
     AdminLayoutComponent,
     VerDetalleDiosComponent,
     VerDetalleCriaturaComponent,
-    ModificarUsuarioComponent,
-    VerDetalleMitosHistoriasComponent
+    ModificarUsuarioComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -18,7 +18,7 @@ mitos_historias_app = Blueprint('mitos_historias_app', __name__)
 #
 # Método HTTP: GET
 ###################################################################################################
-@mitos_historias_app.route('/mitos-historias', methods=['GET'])
+@mitos_historias_app.route('/mitos_historias', methods=['GET'])
 def listarMitosHistorias():
     mitos_historias = MitosHistorias.listarMitosHistorias()
 
@@ -40,8 +40,8 @@ def listarMitosHistorias():
 # Parámetros de URL: <id> (int): El ID del dios para el cual se desean obtener las imágenes.
 ###################################################################################################
 
-@mitos_historias_app.route('/getMitosHistoriasById/<id>', methods=['GET'])
-def getMitosHistoriasById(id):
+@mitos_historias_app.route('/getMitosHistoriasImgById/<id>', methods=['GET'])
+def getMitosHistoriasImgById(id):
     imagenes = MitosHistorias.getMitosHistoriasImgById(id)
     if imagenes is not None:
         return jsonify({'imagenes': imagenes, 'mensaje': "Lista de imagenes de mitos e historias"})
@@ -60,8 +60,8 @@ def getMitosHistoriasById(id):
 # Método HTTP: GET
 # Parámetros de URL: <id> (int): El ID del dios que se desea obtener.
 ###################################################################################################
-@mitos_historias_app.route('/mitosHistoriasById/<id>', methods=['GET'])
-def getGodById(id):
+@mitos_historias_app.route('/getMitosHistoriasById/<id>', methods=['GET'])
+def getMitosHistoriasById(id):
     mitos_historias = MitosHistorias.getMitosHistoriasById(id)
     if mitos_historias is not None:
         return jsonify({'Mito-historia': mitos_historias, 'mensaje': "Se encontro el Dios"})

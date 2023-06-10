@@ -24,16 +24,16 @@ class MitosHistorias:
             sql = "SELECT * FROM mitos_historias"
             cursor.execute(sql)
             datos = cursor.fetchall()
-            dioses = []
+            mitos_historias = []
             for fila in datos:
-                dios = {'cod': fila[0], 
+                mito_historia = {'cod': fila[0], 
                         'titulo': fila[1], 
                         'descripcion': fila[2], 
                         'contenido': fila[3],
                         'imagen':fila[4]}
-                dioses.append(dios)        
+                mitos_historias.append(mito_historia)        
             conn.close()  
-            return dioses
+            return mitos_historias
         except Exception as ex:
             return None
         
@@ -52,7 +52,8 @@ class MitosHistorias:
                         'descripcion': fila[2], 
                         'contenido': fila[3],
                         'imagen':fila[4],
-                        'dioses_relacionados':fila[5]}
+                        'categoria':fila[5],
+                        'dioses_relacionados':fila[6]}
                 conn.close()  
                 return dios
             else:

@@ -15,14 +15,13 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '#dioses', id: 'dioses', title: 'DIOSES', icon: 'auto_stories', children: [
       { path: '/explorar-dioses', title: 'Dioses', icon: 'psychology_alt', children: null },
-      { path: '/galeria-imagenes', title: 'Imágenes', icon: 'images', children: null }
+      { path: '/galeria-imagenes', title: 'Imágenes', icon: 'images', children: null },
     ]
   },
 
   {
     path: '#mitologia', id: 'mitologia', title: 'MITOLOGÍA', icon: 'diversity_2', children: [
-      { path: '/explorar-mitologia', title: 'Mitologicas', icon: 'content_paste_search', children: null },
-      { path: '/mitos-historia', title: 'Mitos e historia', icon: 'history_edu', children: null },
+      { path: '/mitos-historias', title: 'Mitos-Historias', icon: 'history_edu', children: null },
       { path: '/criaturas-mitologicas', title: 'criaturas', icon: 'android', children: null },
       { path: 'galeria-imagenes-mitologicas', title: 'Imágenes', icon: 'images', children: null },
     ]

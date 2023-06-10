@@ -18,7 +18,7 @@ export class ConsumoServiciosService{
  * @returns Un Observable que emite un arreglo de objetos de tipo MitosHistorias.
  */
     getMitosHistorias():Observable<MitosHistorias[]>{
-        let  url =this.baseUrl+'arquitectura';
+        let  url =this.baseUrl+'mitos_historias';
         let header=new HttpHeaders();
         header.append('Content-Type', 'application/json');
         header.append('Access-Control-Allow-Origin', 'http://localhost');
@@ -37,7 +37,7 @@ export class ConsumoServiciosService{
  */
 
     getDetailsMitosHistorias(idHistoriasMitos):Observable<MitosHistorias[]>{
-        let  url =this.baseUrl+'mitosDiosesById/'+idHistoriasMitos;
+        let  url =this.baseUrl+'getMitosHistoriasById/'+idHistoriasMitos;
         let header=new HttpHeaders();
         header.append('Content-Type', 'application/json');
         header.append('Access-Control-Allow-Origin', 'http://localhost');
@@ -49,11 +49,11 @@ export class ConsumoServiciosService{
     }
 /**
  * Obtiene los detalles de las imágenes asociadas a un dios específico.
- * @param idDios El ID del dios del cual se desean obtener los detalles de las imágenes.
+ * @param idHistoriasMitos El ID del dios del cual se desean obtener los detalles de las imágenes.
  * @returns Un Observable que emite un arreglo de objetos de tipo Recurso.
  */
     getImagenesDetails(idHistoriasMitos):Observable<Recurso[]>{
-        let  url =this.baseUrl+'diosesImgById/'+idHistoriasMitos;
+        let  url =this.baseUrl+'getMitosHistoriasImgById/'+idHistoriasMitos;
         let header=new HttpHeaders();
         header.append('Content-Type', 'application/json');
         header.append('Access-Control-Allow-Origin', 'http://localhost');

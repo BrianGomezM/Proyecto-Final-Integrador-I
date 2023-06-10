@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class MitosHistoriaComponent implements OnInit {
   tarjetasDuplicadas: any[] = [];
-  public listaMitosHistorias: Array<MitosHistorias> = [];
+  listaMitosHistorias: Array<MitosHistorias> = [];
   isLoading=true;
   constructor(
     private router: Router,
@@ -19,22 +19,30 @@ export class MitosHistoriaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.obtenerMitosHistorias();
+    this.cargarMitosHistorias();
+    console.log(this.listaMitosHistorias);
   }
-
-    /**
+ /**
  * Obtiene todos los mitos e historias.
  */
-  obtenerMitosHistorias(){
+  cargarMitosHistorias(){
     this.consumoServiciosService.getMitosHistorias().subscribe(
-      (mitosHistorias: MitosHistorias[]) => {
-        this.listaMitosHistorias = mitosHistorias['mitosHistorias'];
-        
+      (mitos_historias: MitosHistorias[]) => {
+        this.listaMitosHistorias = mitos_historias['mitos_historias'];
+        console.log(this.listaMitosHistorias)
       },
       (error: any) => {
         console.log('Error al obtener los mitos e historias', error);
       }
     );
   }
+
+
+  mostrarDetalles(mitosHistorias:MitosHistorias){
+    this.router.navigate(['/detalles-mitos-historias', mitosHistorias.cod]);
+  }
+
+
+
 
 }

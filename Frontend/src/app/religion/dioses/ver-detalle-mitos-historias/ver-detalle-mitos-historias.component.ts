@@ -58,24 +58,24 @@ export class VerDetalleMitosHistoriasComponent implements OnInit {
   
       },
       (error: any) => {
-        console.log('Error al obtener las construcciones:', error); 
+        console.log('Error al obtener las mitos-historias:', error); 
       }
     ); 
     
     this.consumoServiciosService.getDetailsMitosHistorias(mitosHistoriasId).subscribe(
       (MitosHistorias: MitosHistorias[]) => {
-        this.detalleMitosHistorias = MitosHistorias['MitosDetalles'];
+        this.detalleMitosHistorias = MitosHistorias['Mito-historia'];
         this.historiaFinal = this.sanitizer.bypassSecurityTrustHtml(this.detalleMitosHistorias.contenido);
       },
       (error: any) => {
-        console.log('Error al obtener las construcciones:', error);
+        console.log('Error al obtener los mitos-historias:', error);
         // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
       }
     );
 
   }
   regresar(){
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/mitos-historias']);
   }
 
 }
