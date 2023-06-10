@@ -5,6 +5,7 @@ import { Recurso } from 'app/servicios/recursos.interface';
 import { ConsumoServiciosService } from 'app/servicios/servicios-mitos-historias/consumo-servicios.services';
 import { MitosHistorias } from 'app/servicios/servicios-mitos-historias/interface-mitos-historias';
 
+
 @Component({
   selector: 'app-ver-detalle-mitos-historias',
   templateUrl: './ver-detalle-mitos-historias.component.html',
@@ -38,18 +39,15 @@ export class VerDetalleMitosHistoriasComponent implements OnInit {
 
     
   ngOnInit(): void {
-    this.cargarDetalles();
-  }
 
-  cargarDetalles(){
     this.route.params.subscribe(params => {
       this.mitosHistoriasId = params['id'];
       console.log('ID del mito-historia:', this.mitosHistoriasId);
-      this.loadMitosHistoriasDetalles(this.mitosHistoriasId);
     });
 
-    
+    this.loadMitosHistoriasDetalles(this.mitosHistoriasId);
   }
+
 
   loadMitosHistoriasDetalles(mitosHistoriasId){  
     this.consumoServiciosService.getImagenesDetails(mitosHistoriasId).subscribe(

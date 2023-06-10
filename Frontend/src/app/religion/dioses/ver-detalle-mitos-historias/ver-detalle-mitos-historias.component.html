@@ -1,12 +1,11 @@
-
 <div class="main-content">
     <div class="container-fluid">
-        
+            
   <div class="col-md-10">
     <div class="card">
         <div class="card-header card-header-text card-header-primary">
           <div class="card-text">
-            <h4 class="card-title">Historia-Mito: {{detalleMitosHistorias.titulo}}</h4>
+            <h4 class="card-title">Título: {{detalleMitosHistorias.titulo}}</h4>
           </div>
           <div class="row">
             <div class="col-md-5">
@@ -17,8 +16,7 @@
                             </ol>
                             <div class="carousel-inner">
                                 <div class="carousel-item" *ngFor="let tarjeta of listaImagenes.imagenes; let index = index" [class.active]="index === 0">
-
-
+                                <img [src]="tarjeta" class="img" alt="Slide {{ index }}">
                                 <div class="carousel-caption">
                                     <p></p>
                                 </div>
@@ -37,15 +35,15 @@
             </div>
             <div class="col-md-6">
                 <div class="card-body">
-                    <div class="title">Dios relacionado:</div>
+                    <div class="title">Rol en la cultura egipcia:</div>
                     <p class="card-description-custom">
                         {{detalleMitosHistorias.diosesRelacionados}}
                     </p>
-                    <div class="title">Descripción:</div>
+                    <div class="title">Representación:</div>
                     <p class="card-description-custom">
                         {{detalleMitosHistorias.descripcion}}
                     </p>
-                    <div class="title">Contenido:</div>
+                    <div class="title">Historia:</div>
                     <p class="text-justify card-description-custom" [innerHTML]="historiaFinal">
                         
                     </p>
@@ -53,7 +51,6 @@
                 </div>
 
         </div>
-        
 
     </div>
 </div>
@@ -89,4 +86,3 @@
         <p>No se encontró información disponible.</p>
     </div>
 </ng-template>
-
