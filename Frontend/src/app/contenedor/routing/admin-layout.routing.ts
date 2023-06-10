@@ -6,6 +6,7 @@ import { AuthGuard } from 'app/guards/auth.guard';
 import { ExplorarDiosesComponent } from 'app/religion/dioses/explorar-dioses/explorar-dioses.component';
 import { GaleriaImagenesComponent } from 'app/religion/dioses/galeria-imagenes/galeria-imagenes.component';
 import { MitosHistoriaComponent } from 'app/religion/dioses/mitos-historia/mitos-historia.component';
+import { VerDetalleMitosHistoriasComponent } from 'app/religion/dioses/ver-detalle-mitos-historias/ver-detalle-mitos-historias.component';
 import { VerDetalleDiosComponent } from 'app/religion/dioses/verDetalleDios/ver-detalle-dios/ver-detalle-dios.component';
 import { CriaturasMitologicasComponent } from 'app/religion/mitologia/criaturas-mitologicas/criaturas-mitologicas.component';
 import { VerDetalleCriaturaComponent } from 'app/religion/mitologia/criaturas-mitologicas/ver-detalle-criatura/ver-detalle-criatura.component';
@@ -35,7 +36,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'detalleArq/:id',          canActivate: [ AuthGuard ], component:  VerDetalleArquitecturaComponent  },   
      
     
-    { path: 'mitos-historia',                   canActivate: [ AuthGuard ], component: MitosHistoriaComponent },   
+    { path: 'mitos-historias',                   canActivate: [ AuthGuard ], component: MitosHistoriaComponent },  
+    { path: 'detalles-mitos-historias/:id',                   canActivate: [ AuthGuard ], component: VerDetalleMitosHistoriasComponent },
+    { path: 'detalles-mitos-historias/:id',                   canActivate: [ AuthGuard ], component: VerDetalleMitosHistoriasComponent },   
    
     { path: 'criaturas-mitologicas',            canActivate: [ AuthGuard ], component: CriaturasMitologicasComponent},   
     { path: 'explorar-mitologia',               canActivate: [ AuthGuard ], component: ExplorarMitologiaComponent },   

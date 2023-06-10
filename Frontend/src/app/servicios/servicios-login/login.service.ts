@@ -58,6 +58,25 @@ export class LoginService{
         const item = JSON.stringify(usuario);
         localStorage.setItem('usuarioLogeado', item);
     }
+
+    obtenerLocalStorageUsuario() :Usuario {
+        let respuesta = new Usuario();
+        const item = localStorage.getItem('usuarioLogeado');
+        if (item) {
+          //this.estaLogueado.next(true);
+          respuesta = JSON.parse(item);
+          //respuesta = item;
+        }
+        else {
+          //this.estaLogueado.next(false);
+        }
+
+
+      
+        return respuesta;
+      }
+
+    
 }
 
 //     public login(usuario:Usuario){

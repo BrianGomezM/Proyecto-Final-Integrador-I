@@ -54,6 +54,19 @@ export class RegistrarUsuarioComponent implements OnInit {
     });
   }
 
+  archivoCargado(event:any): void {
+    let archivo:File = event.target.files[0];
+    console.log(archivo);
+
+    (new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(archivo);
+      reader.onload = () => resolve(reader.result?.toString() ?? "");
+      reader.onerror = error => reject(error);
+    })).then(result => this.usuario.urlAvatar = result);
+  }
+
+
   //funciones 
   
   // agregarUsuario(): void {
@@ -88,6 +101,9 @@ export class RegistrarUsuarioComponent implements OnInit {
     }
   }
   
+  toBack(){
+    window.location.href = '/dashboard';
+  }
 
 
 
