@@ -53,7 +53,7 @@ class MitosHistorias:
                         'contenido': fila[3],
                         'imagen':fila[4],
                         'categoria':fila[5],
-                        'dioses_relacionados':fila[6]}
+                        'diosesRelacionados':fila[6]}
                 conn.close()  
                 return dios
             else:

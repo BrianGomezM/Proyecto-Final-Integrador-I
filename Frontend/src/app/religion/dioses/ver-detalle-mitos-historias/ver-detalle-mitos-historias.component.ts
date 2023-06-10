@@ -45,9 +45,10 @@ export class VerDetalleMitosHistoriasComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.mitosHistoriasId = params['id'];
       console.log('ID del mito-historia:', this.mitosHistoriasId);
+      this.loadMitosHistoriasDetalles(this.mitosHistoriasId);
     });
 
-    this.loadMitosHistoriasDetalles(this.mitosHistoriasId);
+    
   }
 
   loadMitosHistoriasDetalles(mitosHistoriasId){  
