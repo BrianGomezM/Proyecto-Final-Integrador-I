@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <ng-container *ngIf="listaDioses.length > 0; else noInfoTemplate">
+            <ng-container class="container-card" *ngIf="listaDioses.length > 0; else noInfoTemplate">
                 <div class="col-md-4" *ngFor="let tarjeta of listaDioses">
                     <div class="card card-product" data-count="7">
                         <div data-header-animation="true" class="card-header card-header-image">
