@@ -35,7 +35,6 @@ export class VerDetalleArquitecturaComponent implements OnInit {
 
     this.consumoServiciosService.getConstruccionesIMG(this.oidArq).subscribe(
       (resultado: ImgConstruccion[]) => {
-        console.log(resultado['construcciones'])
         this.construccionesIMG = resultado['construcciones'];
       },
       (error: any) => {
@@ -43,9 +42,6 @@ export class VerDetalleArquitecturaComponent implements OnInit {
         // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
       }
     );
-
-    console.log(this.construcciones);
-    console.log(this.construccionesIMG);
   }
 
   regresar() {

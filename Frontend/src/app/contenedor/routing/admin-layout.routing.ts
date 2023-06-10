@@ -32,7 +32,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'galeria-imagenes',                 canActivate: [ AuthGuard ], component: GaleriaImagenesComponent  },   
     { path: 'galeria-imagenes-construcciones',  canActivate: [ AuthGuard ], component:GaleriaImagenesContruccionesComponent },  
     
-    { path: 'explorar-construcciones',          canActivate: [ AuthGuard ], component:  VerDetalleArquitecturaComponent  },   
+    { path: 'detalleArq/:id',          canActivate: [ AuthGuard ], component:  VerDetalleArquitecturaComponent  },   
      
     
     { path: 'mitos-historia',                   canActivate: [ AuthGuard ], component: MitosHistoriaComponent },   

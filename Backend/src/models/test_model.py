@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from flaskext.mysql import MySQL
 from config import config
 from flask_cors import CORS
@@ -26,29 +27,29 @@ class Test:
     @staticmethod
     def listar_preguntas():
         try:
-            conn = mysql.connect()  # Establece la conexión a la base de datos
+            conn = mysql.connect()   # Establece la conexión a la base de datos
             cursor = conn.cursor()
             print("Conexión exitosa")
-            sql = "SELECT DISTINCT p.ID_Pregunta, p.Pregunta FROM Preguntas p INNER JOIN respuestas r ON p.ID_Pregunta = r.oidPregunta ORDER BY RAND() LIMIT 10"
+            sql = "SELECT ID_Pregunta, Pregunta, tp.nombreTipo, (SELECT respuesta FROM respuestas WHERE estado = 1 AND oidPregunta = ID_Pregunta) as rep FROM (SELECT ID_Pregunta, Pregunta, tipoDato, ROW_NUMBER() OVER (PARTITION BY tipoDato ORDER BY RAND()) AS row_num  FROM Preguntas  WHERE tipoDato IN (1)) AS subquery INNER JOIN tipoDato tp ON subquery.tipoDato = tp.oid WHERE row_num <= 7 ORDER BY tipoDato;"
             cursor.execute(sql)
             datos = cursor.fetchall()
             preguntasLis = []
             for fila in datos:
                 codPregunta = fila[0]
                 pregunta = fila[1]
+                tipopregunta = fila[2]
+                verdadera = fila[3]
                 # Ejecuta la segunda consulta para obtener los valores relacionados a cada pregunta
-                sql_respuestas = "SELECT respuestas, estado FROM respuestas WHERE oidPregunta = %s"
+                sql_respuestas = "SELECT respuesta, estado FROM respuestas WHERE oidPregunta = %s"
                 cursor.execute(sql_respuestas, (codPregunta,))
                 datos1 = cursor.fetchall()
                 respuestas = []
                 for respuesta in datos1:
                     respuestas.append(respuesta[0])          
-                resultado = {'codPregunta': codPregunta, 'pregunta': pregunta, 'respuestas': respuestas}
+                resultado = {'codPregunta': codPregunta, 'pregunta': pregunta, 'tipoPregunta':tipopregunta ,'respuestaC':verdadera, 'respuestas': respuestas}
                 preguntasLis.append(resultado)        
-            conn.close()        
-            # Serializa los resultados a JSON
-            preguntas_json = json.dumps(preguntasLis)        
-            return preguntas_json
+            conn.close()            
+            return preguntasLis
         except Exception as ex:
             return None
 
@@ -58,31 +59,37 @@ class Test:
             conn = mysql.connect()  # Establece la conexión a la base de datos
             cursor = conn.cursor()
             print("Conexión exitosa")
-            
             # Verifica si el participante ya existe en la tabla podio
-            sql = "SELECT intentos FROM podio WHERE codParticipante = %s"
-            cursor.execute(sql, (usuario,))
-            datos = cursor.fetchone()
-            
-            if datos is not None:
-                # El participante ya existe, actualiza sus datos en la tabla podio
-                sql2 = "UPDATE podio SET horaInicio=%s, horaFinal=%s, calificacion=%s, intentos=(intentos+1) WHERE codParticipante = %s"
-                cursor.execute(sql2, (horaI, horaF, calificacion, usuario))
-                conn.commit()
-                conn.close()
+            sql0 = "SELECT DISTINCT u.id FROM usuario u INNER JOIN token t on u.id = t.user_id WHERE t.valor = %s"
+            cursor.execute(sql0, (usuario,))
+            datos1 = cursor.fetchall()
+            for respuesta in datos1:
+                print("entro")
+                coduser = respuesta[0]
+                # Verifica si el participante ya existe en la tabla podio
+                sql = "SELECT intentos FROM podio WHERE codParticipante = %s"
+                cursor.execute(sql, (coduser,))
+                datos = cursor.fetchone()
                 
-                # Construye el mensaje de éxito
-                respuesta = "Datos actualizados correctamente en la tabla podio."
-                return respuesta
-            else:
-                # El participante no existe, inserta sus datos en la tabla podio
-                sql3 = "INSERT INTO podio(codParticipante, horaInicio, horaFinal, calificacion, intentos) VALUES (%s, %s, %s, %s, 1)"
-                cursor.execute(sql3, (usuario, horaI, horaF, calificacion))
-                conn.commit()
-                conn.close()                
-                # Construye el mensaje de éxito
-                respuesta = "Datos insertados correctamente en la tabla podio."
-                return respuesta
+                if datos is not None:
+                    # El participante ya existe, actualiza sus datos en la tabla podio
+                    sql2 = "UPDATE podio SET horaInicio=%s, horaFinal=%s, calificacion=%s, intentos=(intentos+1) WHERE codParticipante = %s"
+                    cursor.execute(sql2, (horaI, horaF, calificacion, coduser))
+                    conn.commit()
+                    conn.close()
+                    
+                    # Construye el mensaje de éxito
+                    respuesta = "Datos actualizados correctamente en la tabla podio."
+                    return respuesta
+                else:
+                    # El participante no existe, inserta sus datos en la tabla podio
+                    sql3 = "INSERT INTO podio(codParticipante, horaInicio, horaFinal, calificacion, intentos) VALUES (%s, %s, %s, %s, 1)"
+                    cursor.execute(sql3, (coduser, horaI, horaF, calificacion))
+                    conn.commit()
+                    conn.close()                
+                    # Construye el mensaje de éxito
+                    respuesta = "Datos insertados correctamente en la tabla podio."
+                    return respuesta
         except Exception as ex:
             return None
 
