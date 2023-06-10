@@ -24,6 +24,9 @@ export class VerDetalleMitosHistoriasComponent implements OnInit {
     diosesRelacionados: ''
   };
 
+  imagen:string= "";
+
+
   historiaFinal:SafeHtml;
 
   listaImagenes:Recurso = {
@@ -54,6 +57,30 @@ export class VerDetalleMitosHistoriasComponent implements OnInit {
       (recurso: Recurso[]) => {
         this.listaImagenes.imagenes = recurso['imagenes'];
         console.log(this.listaImagenes.imagenes)
+        if(mitosHistoriasId == 1){
+          this.imagen = "./assets/mitos_historias/creacion_de_atum/2.jpg";
+        }
+        if(mitosHistoriasId == 2){
+          this.imagen = "./assets/mitos_historias/creacion_de_atum/4.jpg";
+        }
+        if(mitosHistoriasId == 3){
+          this.imagen = "./assets/mitos_historias/el_mito_de_nut/1.jpg";
+        }
+        if(mitosHistoriasId == 4){
+          this.imagen = "./assets/mitos_historias/juicio_de_osiris/1.jpg";
+        }
+        if(mitosHistoriasId == 5){
+          this.imagen = "./assets/mitos_historias/osiris_y_su_asesinato_por_su_hermano_set/1.jpg";
+        }
+        if(mitosHistoriasId == 6){
+          this.imagen = "./assets/mitos_historias/princesa_scota/1.jpg";
+        }
+        if(mitosHistoriasId == 7){
+          this.imagen = "./assets/mitos_historias/princesa_scota/1.jpg";
+        }
+        if(mitosHistoriasId == 8){
+          this.imagen = "./assets/mitos_historias/viaje_del_sol/4.jpg";
+        }
   
       },
       (error: any) => {

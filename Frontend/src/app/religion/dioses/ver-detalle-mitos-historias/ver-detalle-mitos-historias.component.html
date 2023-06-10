@@ -12,11 +12,10 @@
                 <div class="card-body">
                     <div id="carouselExample" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
-                                <li data-target="#carouselExample" [class.active]="index === 0" *ngFor="let tarjeta of listaImagenes.imagenes; let index = index" [attr.data-slide-to]="index"></li>
+                               
                             </ol>
                             <div class="carousel-inner">
-                                <div class="carousel-item" *ngFor="let tarjeta of listaImagenes.imagenes; let index = index" [class.active]="index === 0">
-                                <img [src]="tarjeta" class="img" alt="Slide {{ index }}">
+                                <img src="{{imagen}}">
                                 <div class="carousel-caption">
                                     <p></p>
                                 </div>
