@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/assets/Modelos3D/SETH/static/css/main.30c3c8a4.css",
-    "main.js": "/assets/Modelos3D/SETH/static/js/main.e92973e4.js",
+    "main.js": "/assets/Modelos3D/SETH/static/js/main.a270eb9d.js",
     "index.html": "/assets/Modelos3D/SETH/index.html",
     "main.30c3c8a4.css.map": "/assets/Modelos3D/SETH/static/css/main.30c3c8a4.css.map",
-    "main.e92973e4.js.map": "/assets/Modelos3D/SETH/static/js/main.e92973e4.js.map"
+    "main.a270eb9d.js.map": "/assets/Modelos3D/SETH/static/js/main.a270eb9d.js.map"
   },
   "entrypoints": [
     "static/css/main.30c3c8a4.css",
-    "static/js/main.e92973e4.js"
+    "static/js/main.a270eb9d.js"
   ]
 }
