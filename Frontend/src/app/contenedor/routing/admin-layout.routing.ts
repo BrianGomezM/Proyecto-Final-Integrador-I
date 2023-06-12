@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { ExplorarConstruccionesComponent } from 'app/construcciones/explorar-construcciones/explorar-construcciones.component';
 import { GaleriaImagenesContruccionesComponent } from 'app/construcciones/galeria-imagenes-contrucciones/galeria-imagenes-contrucciones.component';
+import { ModificarUsuarioComponent } from 'app/cuenta/modificar-usuario/modificar-usuario.component';
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { AuthGuard } from 'app/guards/auth.guard';
 import { ExplorarDiosesComponent } from 'app/religion/dioses/explorar-dioses/explorar-dioses.component';
@@ -25,6 +26,7 @@ import { UsuarioComponent } from 'app/usuario/usuario.component';
 
 
 export const AdminLayoutRoutes: Routes = [
+
     { path: 'usuario',                          canActivate: [ AuthGuard ], component: UsuarioComponent },
     { path: 'dashboard',                        canActivate: [ AuthGuard ], component: DashboardComponent }, 
     { path: 'explorar-dioses',                  canActivate: [ AuthGuard ], component: ExplorarDiosesComponent },
@@ -50,5 +52,9 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'rituales',                         canActivate: [ AuthGuard ], component: RitualesComponent }, 
     { path: 'prueba',                           canActivate: [ AuthGuard ], component: PruebasComponent },
     { path: 'podio',                            canActivate: [ AuthGuard ], component: PodioComponent  },
+    {
+        path: 'editar',
+        component: ModificarUsuarioComponent
+    }
     
 ];
