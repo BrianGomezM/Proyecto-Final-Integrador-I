@@ -52,12 +52,12 @@ export class ConsumoServiciosService{
  * @param idHistoriasMitos El ID del dios del cual se desean obtener los detalles de las imágenes.
  * @returns Un Observable que emite un arreglo de objetos de tipo Recurso.
  */
-    getImagenesDetails(idHistoriasMitos):Observable<Recurso[]>{
+    getImagenesDetails(idHistoriasMitos):Observable<Recurso>{
         let  url =this.baseUrl+'getMitosHistoriasImgById/'+idHistoriasMitos;
         let header=new HttpHeaders();
         header.append('Content-Type', 'application/json');
         header.append('Access-Control-Allow-Origin', 'http://localhost');
-        return this.http.get<Recurso[]>(url, { headers: header }).pipe(
+        return this.http.get<Recurso>(url, { headers: header }).pipe(
           catchError(error => {
             console.log('Error en la solicitud:', error);
             return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');

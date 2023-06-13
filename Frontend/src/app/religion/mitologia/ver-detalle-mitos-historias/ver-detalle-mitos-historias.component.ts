@@ -33,7 +33,6 @@ export class VerDetalleMitosHistoriasComponent implements OnInit {
     imagenes: []
   };
 
-
   constructor(
     private sanitizer: DomSanitizer,
     private route: ActivatedRoute,
@@ -46,42 +45,16 @@ export class VerDetalleMitosHistoriasComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.mitosHistoriasId = params['id'];
       console.log('ID del mito-historia:', this.mitosHistoriasId);
+      this.loadMitosHistoriasDetalles(this.mitosHistoriasId);
     });
-
-    this.loadMitosHistoriasDetalles(this.mitosHistoriasId);
   }
 
 
   loadMitosHistoriasDetalles(mitosHistoriasId){  
     this.consumoServiciosService.getImagenesDetails(mitosHistoriasId).subscribe(
-      (recurso: Recurso[]) => {
-        this.listaImagenes.imagenes = recurso['imagenes'];
+      (recurso: Recurso) => {
+        this.listaImagenes = recurso;
         console.log(this.listaImagenes.imagenes)
-        if(mitosHistoriasId == 1){
-          this.imagen = "./assets/mitos_historias/creacion_de_atum/2.jpg";
-        }
-        if(mitosHistoriasId == 2){
-          this.imagen = "./assets/mitos_historias/creacion_de_atum/4.jpg";
-        }
-        if(mitosHistoriasId == 3){
-          this.imagen = "./assets/mitos_historias/el_mito_de_nut/1.jpg";
-        }
-        if(mitosHistoriasId == 4){
-          this.imagen = "./assets/mitos_historias/juicio_de_osiris/1.jpg";
-        }
-        if(mitosHistoriasId == 5){
-          this.imagen = "./assets/mitos_historias/osiris_y_su_asesinato_por_su_hermano_set/1.jpg";
-        }
-        if(mitosHistoriasId == 6){
-          this.imagen = "./assets/mitos_historias/princesa_scota/1.jpg";
-        }
-        if(mitosHistoriasId == 7){
-          this.imagen = "./assets/mitos_historias/princesa_scota/1.jpg";
-        }
-        if(mitosHistoriasId == 8){
-          this.imagen = "./assets/mitos_historias/viaje_del_sol/4.jpg";
-        }
-  
       },
       (error: any) => {
         console.log('Error al obtener las mitos-historias:', error); 

@@ -1,5 +1,5 @@
 export const environment = {
-  production: true,
+  production: false,
   baseUrl: 'http://127.0.0.1:5000/',
   // Resto de las propiedades
 };

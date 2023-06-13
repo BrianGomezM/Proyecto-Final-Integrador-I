@@ -14,7 +14,7 @@ import { GaleriaImagenesContruccionesComponent } from 'app/construcciones/galeri
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { ExplorarDiosesComponent } from 'app/religion/dioses/explorar-dioses/explorar-dioses.component';
 import { GaleriaImagenesComponent } from 'app/religion/dioses/galeria-imagenes/galeria-imagenes.component';
-import { MitosHistoriaComponent } from 'app/religion/dioses/mitos-historia/mitos-historia.component';
+
 import { CriaturasMitologicasComponent } from 'app/religion/mitologia/criaturas-mitologicas/criaturas-mitologicas.component';
 import { ExplorarMitologiaComponent } from 'app/religion/mitologia/explorar-mitologia/explorar-mitologia.component';
 import { GaleriaImagenesMitologicasComponent } from 'app/religion/mitologia/galeria-imagenes-mitologicas/galeria-imagenes-mitologicas.component';
@@ -25,13 +25,13 @@ import { PracticasReligiosasComponent } from 'app/religion/religion/practicas-re
 import { RitualesComponent } from 'app/religion/religion/rituales/rituales.component';
 import { PodioComponent } from 'app/test/podio/podio.component';
 import { PruebasComponent } from 'app/test/pruebas/pruebas.component';
-import { UsuarioComponent } from 'app/usuario/usuario.component';
 import { AdminLayoutRoutes } from './admin-layout.routing';
+
 
 
 @NgModule({
   imports: [
-    CommonModule,
+    //CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
     ReactiveFormsModule,
@@ -44,12 +44,10 @@ import { AdminLayoutRoutes } from './admin-layout.routing';
   ],
   declarations: [
     DashboardComponent,
-    UsuarioComponent,
     ExplorarConstruccionesComponent,
     GaleriaImagenesContruccionesComponent,
     ExplorarDiosesComponent,
     GaleriaImagenesComponent,
-    MitosHistoriaComponent,
     CriaturasMitologicasComponent,
     ExplorarMitologiaComponent ,
     GaleriaImagenesMitologicasComponent,

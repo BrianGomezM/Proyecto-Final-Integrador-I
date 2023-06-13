@@ -39,7 +39,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,
+    //CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes, {
       useHash: true
