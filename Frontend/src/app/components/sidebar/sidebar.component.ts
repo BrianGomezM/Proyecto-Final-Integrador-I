@@ -11,7 +11,7 @@ export interface RouteInfo {
 
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard', title: 'INICIO', icon: 'home', children: null },
-  { path: '/modificar', title: 'PERFIL', icon: 'face', children: null },
+  { path: '/editar', title: 'PERFIL', icon: 'face', children: null },
   {
     path: '#dioses', id: 'dioses', title: 'DIOSES', icon: 'auto_stories', children: [
       { path: '/explorar-dioses', title: 'Dioses', icon: 'psychology_alt', children: null },

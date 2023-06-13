@@ -122,7 +122,7 @@ export class ModificarUsuarioComponent implements OnInit {
 
   //funcionalidad al botón 'regresar', envía a la ruta /dashboard
   toBack(){
-    window.location.href = '/dashboard';
+    window.location.href = '/#/dashboard';
   }
   
 
