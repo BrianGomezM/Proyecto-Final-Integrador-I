@@ -11,6 +11,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.message import EmailMessage
 
+
+#Se instala PyJWT para poder codificar
 # Configuración de la conexión a la base de datos MySQL
 app = Flask(__name__)
 CORS(app)
