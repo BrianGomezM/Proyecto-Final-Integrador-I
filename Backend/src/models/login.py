@@ -11,6 +11,17 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.message import EmailMessage
 
+from flask import Flask, redirect, url_for
+from flask_dance.contrib.google import make_google_blueprint, google
+
+# import os
+# import pathlib
+# import requests
+# from google.oauth2 import id_token
+# from google_auth_oauthlib.flow import Flow
+# from pip._vendor import cachecontrol
+# import google.auth.transport.requests
+
 
 #Se instala PyJWT para poder codificar
 # Configuración de la conexión a la base de datos MySQL
@@ -108,6 +119,35 @@ class Login:
         }
         
         return response
+    
+    # @staticmethod
+    # def login_google():
+    #     authorization_url, state = flow.authorization_url()
+    #     session["state"] = state
+    #     return redirect(authorization_url)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @staticmethod
     def recuperarClave(correoR):
         try:

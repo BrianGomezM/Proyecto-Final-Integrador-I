@@ -5,13 +5,15 @@ import { environment } from '../../../environments/environment'
 //import { RespuestaToken } from '../../models/respuestaToken';
 import { catchError, throwError  } from 'rxjs';
 
+
 @Injectable({
     providedIn: 'root'
 })
 
 export class LoginService{
 
-    constructor(private http: HttpClient) { }
+    constructor(private http:HttpClient) {
+    }
 
     UrlBase:string = environment.baseUrl;
 
@@ -76,8 +78,9 @@ export class LoginService{
         return respuesta;
       }
 
-    
-}
+      
+
+  }
 
 //     public login(usuario:Usuario){
 //         //defino la url donde esta el servicio
