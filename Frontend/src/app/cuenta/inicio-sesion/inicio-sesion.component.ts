@@ -1,15 +1,9 @@
-import {
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-  AfterViewInit,
-} from "@angular/core";
+import { Component, EventEmitter, OnInit, Output, AfterViewInit } from "@angular/core";
 import { Usuario } from "app/models/usuario";
 import { LoginService } from "app/servicios/servicios-login/login.service";
 import { TokenService } from "app/servicios/servicios-login/tokenService";
-//import { Token } from '../../models/token';
 import { Router } from "@angular/router";
+
 declare var google:any;
 
 
@@ -54,43 +48,93 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
     });
   }
 
+
   loadGoogleSignIn() {
-    const onGoogleSignInLoad = () => {
+    const handleClientLoad = () => {
       google.accounts.id.initialize({
-        client_id:
-          "961138140283-f807uodndst52h1vjtrufm086ihope4h.apps.googleusercontent.com",
-        callback: this.handleCredentialResponse
+        client_id: "961138140283-f807uodndst52h1vjtrufm086ihope4h.apps.googleusercontent.com", // Reemplaza con tu propio Client ID de Google
+        callback: this.loginWithGoogle.bind(this)
       });
     };
   
     const script = document.createElement("script");
-    script.onload = onGoogleSignInLoad;
-    script.src = "https://accounts.google.com/gsi/client";
+    script.onload = handleClientLoad;
+    script.src = "https://accounts.google.com/gsi/client"
     document.head.appendChild(script);
   }
-  
+
 
   loginWithGoogle() {
-    try {
-      console.log("doy click");
+    const handleCredentialResponse = (response: any) => {
+      const credential = response.credential;
+      const token = credential ? credential.id : null;
   
-      google.accounts.id.prompt();
-      google.accounts.id.get({ callback: this.handleCredentialResponse });
-//      google.accounts.id.get({ callback: this.handleGoogleSignIn });
-  
-    } catch (e) {
-      console.log(e);
-    }
-  }
+      if (token) {
+        // Aquí puedes realizar acciones adicionales con el token, como enviarlo al servidor
+        console.log("Respuesta de Google:", token);
+        // Ejemplo de redirección a la página principal después de iniciar sesión
+        this.router.navigate(["dashboard"]);
+      } else {
+        console.log("No se pudo obtener el token de ID de Google");
+      }
 
-  handleCredentialResponse(response:any){
-    console.log(response);
-    console.log(this.router);
-    if(response.credential){
-      localStorage.setItem("token",response.credential);
-      document.location.href = "/#/dashboard";
-    }
+      if(response.credential){
+        localStorage.setItem("token",response.credential);
+        document.location.href = "/#/dashboard";
+      }
+
+    };
+    
+  
+    google.accounts.id.initialize({
+      client_id: "961138140283-f807uodndst52h1vjtrufm086ihope4h.apps.googleusercontent.com", // Reemplaza con tu propio Client ID de Google
+      callback: handleCredentialResponse
+    });
+  
+    google.accounts.id.prompt();
   }
+  
+  
+  
+}
+
+//   loadGoogleSignIn() {
+//     const onGoogleSignInLoad = () => {
+//       google.accounts.id.initialize({
+//         client_id:
+//           "961138140283-f807uodndst52h1vjtrufm086ihope4h.apps.googleusercontent.com",
+//         callback: this.handleCredentialResponse
+//       });
+//     };
+  
+//     const script = document.createElement("script");
+//     script.onload = onGoogleSignInLoad;
+//     script.src = "https://accounts.google.com/gsi/client";
+//     document.head.appendChild(script);
+//   }
+  
+
+//   loginWithGoogle() {
+//     try {
+//       console.log("doy click");
+  
+//       google.accounts.id.prompt();
+//       google.accounts.id.get({ callback: this.handleCredentialResponse });
+// //      google.accounts.id.get({ callback: this.handleGoogleSignIn });
+  
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   }
+
+//   handleCredentialResponse(response:any){
+//     console.log(response);
+//     console.log(this.router);
+//     if(response.credential){
+//       sessionStorage.setItem("token",response.credential);
+//       document.location.href = "/#/dashboard";
+//     }
+//   }
 
   
   // handleGoogleSignIn(response: google.accounts.id.Respone) {
@@ -101,5 +145,5 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
   //   // Ejemplo de redirección a la página principal después de iniciar sesión
   //   window.location.href = "#/dashboard";
   // }
-}  
+ 
 
