@@ -10,6 +10,8 @@ import { LoginService } from "app/servicios/servicios-login/login.service";
 import { TokenService } from "app/servicios/servicios-login/tokenService";
 //import { Token } from '../../models/token';
 import { Router } from "@angular/router";
+declare var google:any;
+
 
 declare const gapi: any; // Declara gapi para evitar errores de tipo
 
@@ -54,40 +56,49 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
 
   loadGoogleSignIn() {
     const onGoogleSignInLoad = () => {
-      gapi.load("auth2", () => {
-        gapi.auth2.init({
-          client_id:
-            "961138140283-f807uodndst52h1vjtrufm086ihope4h.apps.googleusercontent.com", // Reemplaza con tu propio Client ID de Google
-        });
+      google.accounts.id.initialize({
+        client_id:
+          "961138140283-f807uodndst52h1vjtrufm086ihope4h.apps.googleusercontent.com",
+        callback: this.handleCredentialResponse
       });
     };
-
+  
     const script = document.createElement("script");
     script.onload = onGoogleSignInLoad;
-    script.src = "https://apis.google.com/js/platform.js";
+    script.src = "https://accounts.google.com/gsi/client";
     document.head.appendChild(script);
   }
+  
 
   loginWithGoogle() {
     try {
       console.log("doy click");
-      const auth2 = gapi.auth2.getAuthInstance();
-
-      auth2
-        .signIn()
-        .then((googleUser: any) => {
-          const token = googleUser.getAuthResponse().id_token;
-
-          // Aquí puedes realizar acciones adicionales con el token, como enviarlo al servidor
-          console.log("respuesta de google:", token);
-          // Ejemplo de redirección a la página principal después de iniciar sesión
-          window.location.href = "#/dashboard";
-        })
-        .catch((error: any) => {
-          console.log('error: ', error)
-        });
+  
+      google.accounts.id.prompt();
+      google.accounts.id.get({ callback: this.handleCredentialResponse });
+//      google.accounts.id.get({ callback: this.handleGoogleSignIn });
+  
     } catch (e) {
       console.log(e);
     }
   }
-}
+
+  handleCredentialResponse(response:any){
+    console.log(response);
+    console.log(this.router);
+    if(response.credential){
+      sessionStorage.setItem("token",response.credential);
+      document.location.href = "/#/dashboard";
+    }
+  }
+
+  
+  // handleGoogleSignIn(response: google.accounts.id.Respone) {
+  //   const token = response.credential;
+  
+  //   // Aquí puedes realizar acciones adicionales con el token, como enviarlo al servidor
+  //   console.log("respuesta de google:", token);
+  //   // Ejemplo de redirección a la página principal después de iniciar sesión
+  //   window.location.href = "#/dashboard";
+  // }
+}  
