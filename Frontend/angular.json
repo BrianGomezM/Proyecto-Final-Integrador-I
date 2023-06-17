@@ -72,14 +72,9 @@
               "namedChunks": true,
               "buildOptimizer": false,
               "sourceMap": true,
-              "optimization": {
-                "scripts": true,
-                "styles": {
-                  "minify": false,
-                  "inlineCritical": true
-                },
-                "fonts": true
-              },
+              "optimization": 
+                false
+              ,
               "outputHashing": "all"
             }
           }
