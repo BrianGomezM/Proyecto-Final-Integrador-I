@@ -7,7 +7,7 @@ import { Router } from "@angular/router";
 declare var google:any;
 
 
-declare const gapi: any; // Declara gapi para evitar errores de tipo
+//declare const gapi: any; // Declara gapi para evitar errores de tipo
 
 @Component({
   selector: "app-login",
@@ -24,6 +24,8 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
   @Output() usuarioLogueado = new EventEmitter<Usuario>();
 
   usuario: Usuario = new Usuario("", "", "", "", "", "", "");
+  //googleAccountData: any;
+
 
   //tokenRandom:Token = this.tokenService.procesarToken();
 
@@ -41,7 +43,7 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
 
   hacerLogin() {
     this.loginService.login(this.usuario).subscribe((respuesta) => {
-      console.log(respuesta);
+      //console.log(respuesta);
       if (respuesta["respuesta"]["status"] === 200) {
         this.router.navigate(["dashboard"]);
         this.tokenService.guardarTokenAlLocal(respuesta["respuesta"]["token"]);
@@ -66,18 +68,38 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
     document.head.appendChild(script);
   }
 
+  decodeJwtResponse(credential) {
+    const tokenParts = credential.split('.');
+    const payload = tokenParts[1];
+    const decodedPayload = atob(payload);
+    const parsedPayload = JSON.parse(decodedPayload);
+    return parsedPayload;
+  }
+  
+
 
   loginWithGoogle() {
     document.cookie = "g_state=; domain=localhost; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     const handleCredentialResponse = (response: any) => {
-      const credential = response.credential;
-      const token = credential ? credential.id : null;
+      //const credential = response.credential;
+      const token = response.credential;
+      const responsePayload = this.decodeJwtResponse(response.credential);
   
       if (token) {
         // Aquí puedes realizar acciones adicionales con el token, como enviarlo al servidor
         console.log("Respuesta de Google:", token);
         // Ejemplo de redirección a la página principal después de iniciar sesión
-        this.router.navigate(["dashboard"]);
+        //this.router.navigate(["dashboard"]);
+
+        
+
+        console.log("ID: " + responsePayload.sub);
+        console.log('Full Name: ' + responsePayload.name);
+        console.log('Given Name: ' + responsePayload.given_name);
+        console.log('Family Name: ' + responsePayload.family_name);
+        console.log("Image URL: " + responsePayload.picture);
+        console.log("Email: " + responsePayload.email);
+
       } else {
         console.log("No se pudo obtener el token de ID de Google");
       }
@@ -88,6 +110,7 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
       }
 
     };
+    
     
   
     google.accounts.id.initialize({
