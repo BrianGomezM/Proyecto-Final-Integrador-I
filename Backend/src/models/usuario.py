@@ -69,7 +69,21 @@ class Usuario:
             datos = cursor.fetchall()
             usuarios = []
             for fila in datos:
-                usuario = {'id': fila[0], 'nombre': fila[1], 'apellido': fila[2], 'telefono': fila[3], 'correo': fila[4], 'password': fila[5], 'urlAvatar': url_for('static', filename=fila[6], _external=True), 'sexo': fila[7] , 'estado': fila[8]}
+                if fila[6].startswith('https://'):
+                    url_avatar = fila[6]
+                else:
+                    url_avatar = url_for('static', filename=fila[6], _external=True)
+                usuario = {
+                    'id': fila[0],
+                    'nombre': fila[1],
+                    'apellido': fila[2],
+                    'telefono': fila[3],
+                    'correo': fila[4],
+                    'password': fila[5],
+                    'urlAvatar': url_avatar,
+                    'sexo': fila[7],
+                    'estado': fila[8]
+                }
                 usuarios.append(usuario)
             conn.close()
             return usuarios
@@ -93,7 +107,7 @@ class Usuario:
             conn = mysql.connect()  # Establecer la conexión a la base de datos
             cursor = conn.cursor()
             
-            if 'urlAvatar' in usuario and usuario['urlAvatar']:
+            if 'urlAvatar' in usuario and not usuario['urlAvatar'].startswith('https'):
                 ruta_imagen = ruta_imagenes  # Ruta de almacenamiento de las imágenes
                 os.makedirs(ruta_imagen, exist_ok=True)  # Crea la estructura de carpetas si no existe
                 datos_imagen = obtener_datos_imagen(usuario['urlAvatar'], ruta_imagen)
@@ -109,7 +123,9 @@ class Usuario:
 
             # Insertar los datos del usuario en la base de datos, se guarda ruta_relativa para guardar la ubicación de la imagen relativa al proyecto
             if 'urlAvatar' in usuario and usuario['urlAvatar']:
-                ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto).replace('\\', '/').replace('static/', '')
+                    ruta_relativa = usuario['urlAvatar']
+                    if 'urlAvatar' in usuario and not usuario['urlAvatar'].startswith('https'):
+                        ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto).replace('\\', '/').replace('static/', '') 
             else: ruta_relativa = ''
             sql = "INSERT INTO usuario (nombre, apellido, telefono, correo, password, urlAvatar, sexo, estado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
             valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], ruta_relativa, usuario['sexo'], usuario['estado'])
@@ -155,13 +171,19 @@ class Usuario:
                 print(comparador)
                 # Verificar si el resultado coincide con el urlAvatar del mismo usuario
                 if resultado and resultado[0] != comparador:
-                    ruta_imagen = ruta_imagenes  # Ruta de almacenamiento de las imágenes
-                    os.makedirs(ruta_imagen, exist_ok=True)  # Crea la estructura de carpetas si no existe
-                    datos_imagen = obtener_datos_imagen(usuario['urlAvatar'], ruta_imagen)
-                    guardar_imagen(datos_imagen[0], datos_imagen[1])
-                    ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto).replace('\\', '/').replace('static/', '')
+                    
+                    if resultado and resultado[0] == comparador.startswith('https://'):
+                        ruta_relativa = resultado[0]
+                    else:
+                        ruta_imagen = ruta_imagenes  # Ruta de almacenamiento de las imágenes
+                        os.makedirs(ruta_imagen, exist_ok=True)  # Crea la estructura de carpetas si no existe
+                        datos_imagen = obtener_datos_imagen(usuario['urlAvatar'], ruta_imagen)
+                        guardar_imagen(datos_imagen[0], datos_imagen[1])
+                        ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto).replace('\\', '/').replace('static/', '')
+
                 if resultado and resultado[0] == comparador:
                     ruta_relativa = resultado[0]
+                
             else: ruta_relativa = ''
                 
             #En estas líneas de código, se verifica que el correo que se desea actualizar no lo tenga algún otro usuario, 

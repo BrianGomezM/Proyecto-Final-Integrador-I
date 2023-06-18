@@ -3,6 +3,7 @@ import { Usuario } from "app/models/usuario";
 import { LoginService } from "app/servicios/servicios-login/login.service";
 import { TokenService } from "app/servicios/servicios-login/tokenService";
 import { Router } from "@angular/router";
+import { UsuarioService } from "app/servicios/servicios-usuarios/usuarioService";
 
 declare var google:any;
 
@@ -18,14 +19,17 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
   constructor(
     private loginService: LoginService,
     private tokenService: TokenService,
+    private servicioUsuario: UsuarioService,
     private router: Router
   ) {}
 
   @Output() usuarioLogueado = new EventEmitter<Usuario>();
 
   usuario: Usuario = new Usuario("", "", "", "", "", "", "");
-  //googleAccountData: any;
 
+  //Con esta variable vamos a registrar implícitamente el usuario que inicie sesión con google
+  //siempre y cuando no esté registrado.
+  usuarioGoogleToRegistrar: Usuario = new Usuario();
 
   //tokenRandom:Token = this.tokenService.procesarToken();
 
@@ -91,14 +95,32 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
         // Ejemplo de redirección a la página principal después de iniciar sesión
         //this.router.navigate(["dashboard"]);
 
-        
-
+  
         console.log("ID: " + responsePayload.sub);
         console.log('Full Name: ' + responsePayload.name);
         console.log('Given Name: ' + responsePayload.given_name);
         console.log('Family Name: ' + responsePayload.family_name);
         console.log("Image URL: " + responsePayload.picture);
         console.log("Email: " + responsePayload.email);
+
+        this.usuarioGoogleToRegistrar.nombre = responsePayload.given_name;
+        this.usuarioGoogleToRegistrar.apellido = responsePayload.family_name;
+        this.usuarioGoogleToRegistrar.correo = responsePayload.email;
+        this.usuarioGoogleToRegistrar.urlAvatar = responsePayload.picture;
+        this.usuarioGoogleToRegistrar.estado = 1;
+        this.servicioUsuario.crearUsuario(this.usuarioGoogleToRegistrar).subscribe(respuesta => {
+          console.log(respuesta['mensaje'])
+          if(respuesta['mensaje'] === "El correo electrónico ya está registrado"){
+            alert("No es necesario registrar");
+            this.loginService.guardarUsuarioAlLocalStorage(this.usuarioGoogleToRegistrar);
+          }
+          else{
+            console.log(this.usuarioGoogleToRegistrar);
+            this.usuario = new Usuario("", "", "", "", "", "");
+            alert("Cuenta creada exitosamente!");
+            this.loginService.guardarUsuarioAlLocalStorage(this.usuarioGoogleToRegistrar);
+          }
+        });
 
       } else {
         console.log("No se pudo obtener el token de ID de Google");
