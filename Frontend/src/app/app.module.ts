@@ -22,6 +22,8 @@ import { CommonModule } from '@angular/common';
 
 
 import { MitosHistoriaComponent } from 'app/religion/mitologia/mitos-historia/mitos-historia.component';
+import { ExplorarConstruccionesComponent } from './construcciones/explorar-construcciones/explorar-construcciones.component';
+import { ProcesoConstruccionesComponent } from './construcciones/proceso-construcciones/proceso-construcciones.component';
 
 
 @NgModule({
@@ -50,6 +52,8 @@ import { MitosHistoriaComponent } from 'app/religion/mitologia/mitos-historia/mi
     VerDetalleMitosHistoriasComponent,
     ModificarUsuarioComponent,
     MitosHistoriaComponent,
+    ExplorarConstruccionesComponent,
+    ProcesoConstruccionesComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

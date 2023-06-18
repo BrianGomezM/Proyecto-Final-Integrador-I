@@ -1,0 +1,32 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <ng-container *ngIf="listaProcesosConstrucciones.length > 0; else noInfoTemplate">
+                <div class="col-md-4" *ngFor="let tarjeta of listaProcesosConstrucciones">
+                    <div class="card card-product" data-count="7">
+                        <div data-header-animation="true" class="card-header card-header-image">
+                          <img [src]="tarjeta.imagen" alt="">
+                          </div>                          
+                        <div class="card-body">                    
+                            
+                            <h4 class="card-title titulo"><a href="#">{{ tarjeta.heramienta }}</a></h4>
+                            <div class="card-description"><h6>Descripción:</h6>{{ tarjeta.descripcion }}</div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="stats">                            
+                              <button (click)="mostrarDetalles(tarjeta)" class="btn btn-primary">Ver más</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #noInfoTemplate>
+    <div class="text-center">
+        <p>No se encontró información disponible.</p>
+    </div>
+</ng-template>
