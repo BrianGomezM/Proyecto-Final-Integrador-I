@@ -11,3 +11,5 @@ export interface ProcesoConstrucciones{
     imagen:                  string;
     estudiosArqueologicos:   string;
 }
+
+//comentario x
