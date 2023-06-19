@@ -42,7 +42,7 @@ export class GaleriaImagenesContruccionesComponent implements OnInit {
       .then((respuestas: any[]) => {
         respuestas.forEach((respuesta, index) => {
           const imagenes = respuesta.construcciones.map((imagen) => imagen.oidRecurso);
-          this.tarjetasDuplicadas.push({            
+          this.tarjetasDuplicadas.push({
             construccion: construcciones[index],
             imagenes: imagenes
           });

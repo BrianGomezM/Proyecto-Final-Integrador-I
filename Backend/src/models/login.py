@@ -11,6 +11,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.message import EmailMessage
 
+
+#Se instala PyJWT para poder codificar
 # Configuración de la conexión a la base de datos MySQL
 app = Flask(__name__)
 CORS(app)
@@ -143,8 +145,8 @@ def enviar_cambio_contrasena(usuario, correo, nueva_clave):
  
     # Establecer los campos del mensaje
     mensaje['Subject'] = 'Recuperar contraseña'
-    mensaje['From'] = correo
-    mensaje['To'] = 'pruebasraptorx@gmail.com'
+    mensaje['From'] = 'pruebasraptorx@gmail.com'
+    mensaje['To'] = correo
     mensaje.set_content('''
                 <!DOCTYPE html>
                 <html>

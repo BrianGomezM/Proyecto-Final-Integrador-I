@@ -100,24 +100,43 @@ class Test:
             conn = mysql.connect()  # Establece la conexión a la base de datos
             cursor = conn.cursor()
             print("Conexión exitosa")
-            
-            sql = "SELECT concat(u.nombre, ' ', u.apellido) as usuario, p.calificacion, TIMESTAMPDIFF(MINUTE, p.horaInicio, p.horaFinal) AS duracion_minutos, p.fechaRegistro, p.intentos FROM podio p INNER JOIN usuario u ON p.codParticipante = u.id"
+            sql = "SELECT consecutivo, usuario, urlAvatar, calificacion, duracion_segundos, fechaRegistro, intentos, icono FROM vista_podio"
             cursor.execute(sql)
             resultados = cursor.fetchall()            
-            lista_participantes = []            
+            lista_podio= []            
             for fila in resultados:
                 participante = {
-                    "usuario": fila[0],
-                    "calificacion": fila[1],
-                    "duracion_minutos": fila[2],
-                    "fechaRegistro": fila[3],
-                    "intentos": fila[4]
+                    "consecutivo": fila[0],
+                    "usuario": fila[1],
+                    "urlAvatar": fila[2],
+                    "calificacion": fila[3],
+                    "duracion_segundos": fila[4],
+                    "fechaRegistro": fila[5],
+                    "intentos": fila[6],
+                    "icono": fila[7],
                 }                
-                lista_participantes.append(participante)            
+                lista_podio.append(participante)            
             conn.close()
-            return lista_participantes
+            return lista_podio
         except Exception as ex:
             return None
 
+    @staticmethod
+    def consultar_userTest(codigo):
+        try:
+            conn = mysql.connect()  # Establece la conexión a la base de datos
+            cursor = conn.cursor()
+            print("Conexión exitosa")
+            sql = "SELECT DISTINCT concat(u.nombre,' ',u.apellido), CONCAT(IF(LEFT(u.urlAvatar, 5) != 'https', 'http://127.0.0.1:5000/static/', ''), u.urlAvatar) AS urlAvatar FROM token t INNER JOIN usuario u ON t.user_id = u.id WHERE t.valor =  %s"
+            cursor.execute(sql, (codigo,))
+            datos = cursor.fetchone()
+            if datos is not None:
+                userTest = {'nombreA': datos[0], 'urlFoto': datos[1]}
+                conn.close()
+                return userTest
+            else:
+                return None
+        except Exception as ex:
+            return None
 
     
