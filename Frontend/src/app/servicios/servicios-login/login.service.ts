@@ -20,7 +20,6 @@ export class LoginService{
         this.guardarUsuarioAlLocalStorage(usuario);
         //console.log(usuario);
         let url = this.UrlBase + 'login';
-        console.log(url)
         let header = new HttpHeaders();
         header = header.append('Content-Type', 'application/json');
         header = header.append('Access-Control-Allow-Methods', 'POST, GET, DELETE, PUT');

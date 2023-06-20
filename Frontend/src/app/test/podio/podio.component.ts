@@ -83,5 +83,11 @@ export class PodioComponent implements OnInit {
     const fechaFormateada = `${diaSemana}, ${dia} ${mes} ${anio} ${horas}:${minutos}:${segundos}`;
     return fechaFormateada;
   }
-  
+  getAvatarUrl(url: string): string {
+    if (url) {
+      return url;
+    } else {
+      return './assets/img/img-app/default-avatar.png';
+    }
+  }
 }

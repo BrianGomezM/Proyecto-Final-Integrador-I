@@ -3,18 +3,18 @@ class DevelopmentConfig:
     #Habilita el modo de depuración de Flask, lo que permite mostrar información detallada sobre los errores en el navegador.
     DEBUG = True
     #Datos del servidor MYSQL
-    #MYSQL_HOST     = '72.167.100.60'
-    #MYSQL_USER     = 'Proyecto_Integrado_I_user'
-    #MYSQL_PASSWORD = 'Proyecto_Integrado_I'
-    #MYSQL_DB       = 'Proyecto_Integrado_I'
-    #MYSQL_PORT     = 3306
+    MYSQL_HOST     = '72.167.100.60'
+    MYSQL_USER     = 'Proyecto_Integrado_I_user'
+    MYSQL_PASSWORD = 'Proyecto_Integrado_I'
+    MYSQL_DB       = 'Proyecto_Integrado_I'
+    MYSQL_PORT     = 3306
 
 
-    MYSQL_HOST = 'localhost'
-    MYSQL_USER = 'root'
-    MYSQL_PASSWORD = ''
-    MYSQL_DB = 'Proyecto_Integrado_I'
-    MYSQL_PORT = 3306
+    #MYSQL_HOST = 'localhost'
+    #MYSQL_USER = 'root'
+    #MYSQL_PASSWORD = ''
+    #MYSQL_DB = 'Proyecto_Integrado_I'
+    #MYSQL_PORT = 3306
 
 
 

@@ -29,6 +29,23 @@ export class ConsumoServiciosService {
         return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
       }));    
     }
+
+      /**
+ * Obtiene todos los dioses.
+ * @returns Un Observable que emite un arreglo de objetos de tipo Dioses.
+ */
+  getFiltro(id):Observable<Dioses[]>{
+    let  url =this.baseUrl+'filtrarDioses/'+id;
+    let header=new HttpHeaders();
+    header.append('Content-Type', 'application/json');
+    header.append('Access-Control-Allow-Origin', 'http://localhost');
+    return this.http.get<Dioses[]>(url, { headers: header }).pipe(
+      catchError(error => {
+        console.log('Error en la solicitud:', error);
+        return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
+      }));    
+    }
+
 /**
  * Obtiene los detalles de un dios específico.
  * @param idDios El ID del dios del cual se desean obtener los detalles.
