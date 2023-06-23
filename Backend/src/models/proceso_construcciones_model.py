@@ -21,7 +21,7 @@ class ProcesoConstrucciones:
             conn = mysql.connect() 
             cursor = conn.cursor()
             print("Con E")
-            sql = "SELECT * FROM proceso_contrucciones"
+            sql = "SELECT * FROM proceso_construcciones"
             cursor.execute(sql)
             datos = cursor.fetchall()
             proceso_construcciones = []
@@ -30,12 +30,12 @@ class ProcesoConstrucciones:
                         'herramienta': fila[1], 
                         'descripcion': fila[2], 
                         'etapa': fila[3],
-                        'imagen':fila[4]}
+                        'imagen':fila[5]}
                 proceso_construcciones.append(mito_historia)        
             conn.close()  
             return proceso_construcciones
         except Exception as ex:
-            return None
+            return {'mensaje': str(ex)}
         
     @staticmethod
     def getProcesoConstruccionesById(id):
@@ -59,7 +59,7 @@ class ProcesoConstrucciones:
             else:
                 return "No se encontró la herramienta"
         except Exception as ex:
-            return None
+            return {'mensaje': str(ex)}
         
             
     @staticmethod   
@@ -81,4 +81,4 @@ class ProcesoConstrucciones:
             else:
                 return "No se encontró la herramienta"
         except Exception as ex:
-            return None
+            return {'mensaje': str(ex)}

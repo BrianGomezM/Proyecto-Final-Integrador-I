@@ -57,24 +57,24 @@ export class VerDetalleProcesoConstruccionesComponent implements OnInit {
           console.log(this.listaImagenes.imagenes)
         },
         (error: any) => {
-          console.log('Error al obtener las mitos-historias:', error); 
+          console.log('Error al obtener los procesos-construcciones:', error);
         }
       ); 
     
     this.consumoServiciosService.getDetailsProcesosConstrucciones(procesoConstruccionId).subscribe(
       (ProcesoConstrucciones: ProcesoConstrucciones[]) => {
-        this.detalleProcesoConstrucciones = ProcesoConstrucciones['Proceso-Construccion'];
+        this.detalleProcesoConstrucciones = ProcesoConstrucciones['Proceso_construccion'];
         this.historiaFinal = this.sanitizer.bypassSecurityTrustHtml(this.detalleProcesoConstrucciones.etapa);
       },
       (error: any) => {
-        console.log('Error al obtener los mitos-historias:', error);
+        console.log('Error al obtener los procesos-construcciones:', error);
         // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
       }
     );
     }
 
     regresar(){
-      this.router.navigate(['/#proceso-contrucciones']);
+      this.router.navigate(['/#proceso-construcciones']);
     }
   
 

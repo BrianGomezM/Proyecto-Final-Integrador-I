@@ -28,7 +28,7 @@ export class ProcesoConstruccionesComponent implements OnInit {
   cargarProcesoConstrucciones(){
     this.consumoServiciosService.getProcesosConstrucciones().subscribe(
       (procesos_construcciones: ProcesoConstrucciones[]) => {
-        this.listaProcesosConstrucciones = procesos_construcciones['procesos_construcciones'];
+        this.listaProcesosConstrucciones = procesos_construcciones['proceso_construcciones'];
         console.log(this.listaProcesosConstrucciones)
       },
       (error: any) => {
@@ -38,7 +38,7 @@ export class ProcesoConstruccionesComponent implements OnInit {
   }
 
   mostrarDetalles(procesosConstrucciones:ProcesoConstrucciones){
-    this.router.navigate(['/#detalles-procesos-construcciones', procesosConstrucciones.cod])
+    this.router.navigate(['/detalle-proceso-construcciones', procesosConstrucciones.cod])
 
   }
 

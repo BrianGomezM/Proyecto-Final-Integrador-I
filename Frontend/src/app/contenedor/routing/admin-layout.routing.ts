@@ -2,6 +2,8 @@ import { Routes } from '@angular/router';
 import { ExplorarConstruccionesComponent } from 'app/construcciones/explorar-construcciones/explorar-construcciones.component';
 import { GaleriaImagenesContruccionesComponent } from 'app/construcciones/galeria-imagenes-contrucciones/galeria-imagenes-contrucciones.component';
 import { VerDetalleArquitecturaComponent } from 'app/construcciones/galeria-imagenes-contrucciones/ver-detalle-arquitectura/ver-detalle-arquitectura.component';
+import { ProcesoConstruccionesComponent } from 'app/construcciones/proceso-construcciones/proceso-construcciones.component';
+import { VerDetalleProcesoConstruccionesComponent } from 'app/construcciones/ver-detalle-proceso-construcciones/ver-detalle-proceso-construcciones.component';
 import { ModificarUsuarioComponent } from 'app/cuenta/modificar-usuario/modificar-usuario.component';
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
 import { AuthGuard } from 'app/guards/auth.guard';
@@ -55,6 +57,8 @@ export const AdminLayoutRoutes: Routes = [
         path: 'editar',
         component: ModificarUsuarioComponent
     },
-    { path: 'explorar-construcciones', component: ExplorarConstruccionesComponent}
+    { path: 'explorar-construcciones', component: ExplorarConstruccionesComponent},
+    { path: 'proceso-construcciones', component: ProcesoConstruccionesComponent},
+    { path: 'detalle-proceso-construcciones/:id', component : VerDetalleProcesoConstruccionesComponent}
     
 ];

@@ -39,6 +39,7 @@ export const ROUTES: RouteInfo[] = [
     path: '#construccion', id: 'construccion', title: 'CONSTRUCCIÍON', icon: 'handyman', children: [
       { path: '/explorar-construcciones', title: 'Construcciones', icon: 'change_history', children: null },
       { path: '/galeria-imagenes-construcciones', title: 'Imagenes', icon: 'images', children: null },
+      { path: '/proceso-construcciones', title: 'ProcesosConstruccion', icon: 'images', children: null }
     ]
   },
   {

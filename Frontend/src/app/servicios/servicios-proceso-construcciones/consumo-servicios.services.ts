@@ -55,7 +55,7 @@ export class ConsumoServiciosService{
  */
 
     getImagenesDetails(idProcesosContrucciones):Observable<Recurso>{
-      let  url =this.baseUrl+'getProcesoContruccionesImgById/'+idProcesosContrucciones;
+      let  url =this.baseUrl+'getProcesoConstruccionesImgById/'+idProcesosContrucciones;
       let header=new HttpHeaders();
       header.append('Content-Type', 'application/json');
       header.append('Access-Control-Allow-Origin', 'http://localhost');
