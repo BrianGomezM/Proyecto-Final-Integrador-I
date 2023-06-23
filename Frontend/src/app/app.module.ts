@@ -24,6 +24,7 @@ import { CommonModule } from '@angular/common';
 import { MitosHistoriaComponent } from 'app/religion/mitologia/mitos-historia/mitos-historia.component';
 import { ExplorarConstruccionesComponent } from './construcciones/explorar-construcciones/explorar-construcciones.component';
 import { ProcesoConstruccionesComponent } from './construcciones/proceso-construcciones/proceso-construcciones.component';
+import { VerDetalleProcesoConstruccionesComponent } from './construcciones/ver-detalle-proceso-construcciones/ver-detalle-proceso-construcciones.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ProcesoConstruccionesComponent } from './construcciones/proceso-constru
     ModificarUsuarioComponent,
     MitosHistoriaComponent,
     ExplorarConstruccionesComponent,
-    ProcesoConstruccionesComponent
+    ProcesoConstruccionesComponent,
+    VerDetalleProcesoConstruccionesComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

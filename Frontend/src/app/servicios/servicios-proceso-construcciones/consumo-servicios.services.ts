@@ -18,7 +18,7 @@ export class ConsumoServiciosService{
  * @returns Un Observable que emite un arreglo de objetos de tipo MitosHistorias.
  */
     getProcesosConstrucciones():Observable<ProcesoConstrucciones[]>{
-        let  url =this.baseUrl+'procesos_construcciones';
+        let  url =this.baseUrl+'proceso_construcciones';
         let header=new HttpHeaders();
         header.append('Content-Type', 'application/json');
         header.append('Access-Control-Allow-Origin', 'http://localhost');
@@ -37,7 +37,7 @@ export class ConsumoServiciosService{
  */
 
     getDetailsProcesosConstrucciones(idProcesosContrucciones):Observable<ProcesoConstrucciones[]>{
-        let  url =this.baseUrl+'getProcesosConstruccionesById/'+idProcesosContrucciones;
+        let  url =this.baseUrl+'getProcesoConstruccionesById/'+idProcesosContrucciones;
         let header=new HttpHeaders();
         header.append('Content-Type', 'application/json');
         header.append('Access-Control-Allow-Origin', 'http://localhost');
@@ -48,13 +48,23 @@ export class ConsumoServiciosService{
         }));    
     }
 
+    /**
+ * Obtiene los detalles de las imágenes asociadas a un dios específico.
+ * @param idProcesosContrucciones El ID del dios del cual se desean obtener los detalles de las imágenes.
+ * @returns Un Observable que emite un arreglo de objetos de tipo Recurso.
+ */
 
-
-
-
-
-
-
+    getImagenesDetails(idProcesosContrucciones):Observable<Recurso>{
+      let  url =this.baseUrl+'getProcesoContruccionesImgById/'+idProcesosContrucciones;
+      let header=new HttpHeaders();
+      header.append('Content-Type', 'application/json');
+      header.append('Access-Control-Allow-Origin', 'http://localhost');
+      return this.http.get<Recurso>(url, { headers: header }).pipe(
+        catchError(error => {
+          console.log('Error en la solicitud:', error);
+          return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
+        }));    
+  }
 
 
 
