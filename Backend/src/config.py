@@ -10,19 +10,11 @@ class DevelopmentConfig:
     MYSQL_PORT     = 3306
 
 
-<<<<<<< HEAD
     # MYSQL_HOST = 'localhost'
     # MYSQL_USER = 'root'
     # MYSQL_PASSWORD = ''
     # MYSQL_DB = 'Proyecto_Integrado_I'
     # MYSQL_PORT = 3306
-=======
-    #MYSQL_HOST = 'localhost'
-    #MYSQL_USER = 'root'
-    #MYSQL_PASSWORD = ''
-    #MYSQL_DB = 'Proyecto_Integrado_I'
-    #MYSQL_PORT = 3306
->>>>>>> origin/podio-spr3
 
 
 
