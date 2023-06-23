@@ -18,11 +18,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ModificarUsuarioComponent } from './cuenta/modificar-usuario/modificar-usuario.component';
 import { CommonModule } from '@angular/common';
+import { LightboxModule } from 'ngx-lightbox';
 
 
 
 @NgModule({
   imports: [
+    LightboxModule,
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
