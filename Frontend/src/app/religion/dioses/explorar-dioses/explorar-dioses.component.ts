@@ -3,6 +3,7 @@ import { ConsumoServiciosService } from '../../../servicios/servicios-dioses/con
 import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
 import { Router } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SharedDataService } from 'app/servicios-compartidos/shared-data-service.service';
 
 @Component({
   selector: 'app-explorar-dioses',
@@ -15,23 +16,36 @@ export class ExplorarDiosesComponent implements OnInit {
   isLoading=true;
   constructor(
     private router: Router,
-    private consumoServiciosService: ConsumoServiciosService
-
+    private consumoServiciosService: ConsumoServiciosService,
+    private sharedDataService: SharedDataService
   ) { }
 
   ngOnInit(): void {
   /**
  * Obtiene todos los dioses.
  */
-    this.consumoServiciosService.getAllGods().subscribe(
-      (dioses: Dioses[]) => {
-        this.listaDioses = dioses['dioses'];
-        
-      },
-      (error: any) => {
-        console.log('Error al obtener las construcciones:', error);
-      }
-    );
+  this.sharedDataService.searchValue$.subscribe((searchValue: string) => {
+    if (searchValue) {
+      this.consumoServiciosService.getFiltro(searchValue).subscribe(
+        (dioses: Dioses[]) => {
+          this.listaDioses = dioses['dioses'];
+          
+        },
+        (error: any) => {
+          console.log('Error al obtener las construcciones:', error);
+        }
+      );
+    } else {
+      this.consumoServiciosService.getAllGods().subscribe(
+        (dioses: Dioses[]) => {
+          this.listaDioses = dioses['dioses'];
+        },
+        (error: any) => {
+          console.log('Error al obtener las construcciones:', error);
+        }
+      );
+    }
+  });
   }
 
   /**

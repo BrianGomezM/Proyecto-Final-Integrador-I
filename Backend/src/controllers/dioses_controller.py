@@ -68,3 +68,12 @@ def getGodById(id):
     else:
         return jsonify({"mensaje": "Error"}) 
 
+
+@dioses_app.route('/filtrarDioses/<id>', methods=['GET'])
+def filtrarDioses(id):
+    dioses = Dioses.filtrarDioses(id)
+    if dioses is not None:
+        return jsonify({'dioses': dioses, 'mensaje': "Lista de dioses egipcios"})
+    else:
+        return jsonify({"mensaje": "Error"})
+    

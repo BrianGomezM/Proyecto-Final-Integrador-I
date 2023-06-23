@@ -30,7 +30,7 @@ class Test:
             conn = mysql.connect()   # Establece la conexión a la base de datos
             cursor = conn.cursor()
             print("Conexión exitosa")
-            sql = "SELECT ID_Pregunta, Pregunta, tp.nombreTipo, (SELECT respuesta FROM respuestas WHERE estado = 1 AND oidPregunta = ID_Pregunta) as rep FROM (SELECT p1.ID_Pregunta, p1.Pregunta, p1.tipoDato, (SELECT COUNT(*) FROM Preguntas p2  WHERE p2.tipoDato = p1.tipoDato AND p2.ID_Pregunta <= p1.ID_Pregunta) AS row_num  FROM Preguntas p1 WHERE tipoDato IN (1)) AS subquery INNER JOIN tipoDato tp ON subquery.tipoDato = tp.oid WHERE row_num <= 7 ORDER BY tipoDato;"
+            sql = "SELECT subquery.oid,   subquery.pregunta,  tp.nombreTipo,  (SELECT   r.respuesta  FROM  respuestas r  WHERE   r.estado = 1 AND r.oidPregunta = subquery.oid) AS rep FROM (SELECT p1.oid, p1.pregunta, p1.tipoDato,(SELECT COUNT(*) FROM preguntas p2 WHERE p2.tipoDato = p1.tipoDato AND p2.oid <= p1.oid) AS row_num FROM preguntas p1 WHERE p1.tipoDato IN(1)) AS subquery INNER JOIN tipoDato tp ON subquery.tipoDato = tp.oid WHERE subquery.row_num <= 7 ORDER BY subquery.tipoDato;"
             cursor.execute(sql)
             datos = cursor.fetchall()
             preguntasLis = []
@@ -100,24 +100,49 @@ class Test:
             conn = mysql.connect()  # Establece la conexión a la base de datos
             cursor = conn.cursor()
             print("Conexión exitosa")
-            
-            sql = "SELECT concat(u.nombre, ' ', u.apellido) as usuario, p.calificacion, TIMESTAMPDIFF(MINUTE, p.horaInicio, p.horaFinal) AS duracion_minutos, p.fechaRegistro, p.intentos FROM podio p INNER JOIN usuario u ON p.codParticipante = u.id"
+            sql = "SELECT usuario, urlAvatar, calificacion, duracion_segundos, fechaRegistro, intentos FROM vista_podio"
             cursor.execute(sql)
             resultados = cursor.fetchall()            
-            lista_participantes = []            
+            lista_podio = [] 
+            consecutivo = 0           
             for fila in resultados:
+                consecutivo += 1
+                if consecutivo == 1:
+                    icono = 'fa fa-trophy'
+                else:
+                    icono = 'fa fa-star'
+                
                 participante = {
+                    "consecutivo": consecutivo,
                     "usuario": fila[0],
-                    "calificacion": fila[1],
-                    "duracion_minutos": fila[2],
-                    "fechaRegistro": fila[3],
-                    "intentos": fila[4]
+                    "urlAvatar": fila[1],
+                    "calificacion": fila[2],
+                    "duracion_segundos": fila[3],
+                    "fechaRegistro": fila[4],
+                    "intentos": fila[5],
+                    "icono": icono,
                 }                
-                lista_participantes.append(participante)            
+                lista_podio.append(participante)            
             conn.close()
-            return lista_participantes
+            return lista_podio
         except Exception as ex:
             return None
-
+    @staticmethod
+    def consultar_userTest(codigo):
+        try:
+            conn = mysql.connect()  # Establece la conexión a la base de datos
+            cursor = conn.cursor()
+            print("Conexión exitosa")
+            sql = "SELECT DISTINCT concat(u.nombre,' ',u.apellido) as nombre, CONCAT(IF(LEFT(u.urlAvatar, 5) != 'https', 'http://127.0.0.1:5000/static/', ''), u.urlAvatar) AS urlAvatar FROM token t INNER JOIN usuario u ON t.user_id = u.id WHERE t.valor =  %s"
+            cursor.execute(sql, (codigo,))
+            datos = cursor.fetchone()
+            if datos is not None:
+                userTest = {'nombreA': datos[0], 'urlFoto': datos[1]}
+                conn.close()
+                return userTest
+            else:
+                return None
+        except Exception as ex:
+            return None
 
     

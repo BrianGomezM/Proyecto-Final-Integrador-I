@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Pregunta } from 'app/servicios/servicios-test/interface-test';
 import { ServiciosTestModule } from 'app/servicios/servicios-test/servicios-test.module';
 import { TokenService } from 'app/servicios/servicios-login/tokenService';
+import { UserLogin } from 'app/servicios/servicios-test/interface-user-login';
 
 @Component({
   selector: 'app-pruebas',
@@ -24,11 +25,21 @@ export class PruebasComponent {
   token: string = '';
   constructor(private consumoServiciosService: ServiciosTestModule, private tokenService: TokenService) {}
   mostrarCali = 0;
-
+  public userLogeado: Array<UserLogin> = []; 
 
   ngOnInit(): void {
     this.token = this.tokenService.obtenerToken();
-
+    const tokenObj = JSON.parse(this.token);
+    const tokenCodigo = tokenObj.tokenCodigo;
+    this.consumoServiciosService.userGetLogin(tokenCodigo).subscribe(
+      (response: UserLogin[]) => {
+        this.userLogeado = response['userTest'];
+      },
+      (error: any) => {
+        console.log('Error al obtener el usuario:', error);
+        // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
+      }
+    );
   }
 
 
@@ -70,7 +81,7 @@ mostrarRespuestas() {
   for (const respuesta of this.respuestasGuardadas) {
     const res = this.verificarRespuesta(respuesta.pregunta.codPregunta, respuesta.respuesta);
     if (res) {
-      calificacion = calificacion + 0.714285714;
+      calificacion = calificacion + 1;
     }
   }this.mostrarCali = Math.round( calificacion);
   const tokenObj = JSON.parse(this.token);

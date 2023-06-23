@@ -22,19 +22,19 @@ export class VerDetalleArquitecturaComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.oidArq = params['id'];
     });
-
+  
     this.consumoServiciosService.getConstruccionesCod(this.oidArq).subscribe(
       (resultado) => {
-        this.construcciones.push(resultado['construccion']);
+        this.construcciones = [resultado['construccion']];
       },
       (error: any) => {
-        console.log('Error al obtener las construccion:', error);
+        console.log('Error al obtener las construcciones:', error);
         // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
       }
     );
-
+  
     this.consumoServiciosService.getConstruccionesIMG(this.oidArq).subscribe(
-      (resultado: ImgConstruccion[]) => {
+      (resultado: ImgConstruccion[]) => {  
         this.construccionesIMG = resultado['construcciones'];
       },
       (error: any) => {
@@ -42,7 +42,9 @@ export class VerDetalleArquitecturaComponent implements OnInit {
         // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
       }
     );
+  
   }
+  
 
   regresar() {
     this.router.navigate(['/galeria-imagenes-construcciones']);
