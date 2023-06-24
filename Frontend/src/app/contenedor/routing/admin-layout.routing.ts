@@ -50,10 +50,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'rituales',                         canActivate: [ AuthGuard ], component: RitualesComponent }, 
     { path: 'prueba',                           canActivate: [ AuthGuard ], component: PruebasComponent },
     { path: 'podio',                            canActivate: [ AuthGuard ], component: PodioComponent  },
-<<<<<<< HEAD
-    { path: 'editar',        component: ModificarUsuarioComponent
-    }
-=======
     {
         path: 'editar',
         component: ModificarUsuarioComponent
@@ -62,5 +58,4 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'proceso-construcciones', component: ProcesoConstruccionesComponent},
     { path: 'detalle-proceso-construcciones/:id', component : VerDetalleProcesoConstruccionesComponent}
     
->>>>>>> origin/eyder-inicio-sesion-proveedorExterno
 ];
