@@ -27,18 +27,14 @@ import { PruebasComponent } from 'app/test/pruebas/pruebas.component';
 
 
 export const AdminLayoutRoutes: Routes = [
-<<<<<<< HEAD
 
     { path: 'dashboard',                        canActivate: [ AuthGuard ], component: DashboardComponent }, 
     { path: 'explorar-dioses',                  canActivate: [ AuthGuard ], component: ExplorarDiosesComponent },
     { path: 'detalles-dios/:id',                canActivate: [ AuthGuard ], component:VerDetalleDiosComponent}, 
     { path: 'detalles-criatura/:id',            canActivate: [ AuthGuard ], component:VerDetalleCriaturaComponent},   
     { path: 'galeria-imagenes',                 canActivate: [ AuthGuard ], component: GaleriaImagenesComponent  },   
-    { path: 'galeria-imagenes-construcciones',  canActivate: [ AuthGuard ], component:GaleriaImagenesContruccionesComponent },  
-    
-    { path: 'detalleArq/:id',          canActivate: [ AuthGuard ], component:  VerDetalleArquitecturaComponent  },   
-     
-    
+    { path: 'galeria-imagenes-construcciones',  canActivate: [ AuthGuard ], component:GaleriaImagenesContruccionesComponent }, 
+    { path: 'detalleArq/:id',          canActivate: [ AuthGuard ], component:  VerDetalleArquitecturaComponent  },       
     { path: 'mitos-historias',                   canActivate: [ AuthGuard ], component: MitosHistoriaComponent },  
     { path: 'detalles-mitos-historias/:id',                   canActivate: [ AuthGuard ], component: VerDetalleMitosHistoriasComponent },
     { path: 'criaturas-mitologicas',            canActivate: [ AuthGuard ], component: CriaturasMitologicasComponent},   
@@ -51,30 +47,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'rituales',                         canActivate: [ AuthGuard ], component: RitualesComponent }, 
     { path: 'prueba',                           canActivate: [ AuthGuard ], component: PruebasComponent },
     { path: 'podio',                            canActivate: [ AuthGuard ], component: PodioComponent  },
-    {
-        path: 'editar',
-        component: ModificarUsuarioComponent
+    { path: 'editar',        component: ModificarUsuarioComponent
     }
-    
-=======
-    { path: 'usuario', canActivate: [AuthGuard], component: UsuarioComponent },
-    { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
-    { path: 'explorar-dioses', canActivate: [AuthGuard], component: ExplorarDiosesComponent },
-    { path: 'detalles-dios/:id', canActivate: [AuthGuard], component: VerDetalleDiosComponent },
-    { path: 'detalles-criatura/:id', canActivate: [AuthGuard], component: VerDetalleCriaturaComponent },
-    { path: 'galeria-imagenes', canActivate: [AuthGuard], component: GaleriaImagenesComponent },
-    { path: 'galeria-imagenes-construcciones', canActivate: [AuthGuard], component: GaleriaImagenesContruccionesComponent },
-    { path: 'detalleArq/:id', canActivate: [AuthGuard], component: VerDetalleArquitecturaComponent },
-    { path: 'mitos-historia', canActivate: [AuthGuard], component: MitosHistoriaComponent },
-    { path: 'criaturas-mitologicas', canActivate: [AuthGuard], component: CriaturasMitologicasComponent },
-    { path: 'explorar-mitologia', canActivate: [AuthGuard], component: ExplorarMitologiaComponent },
-    { path: 'galeria-imagenes-mitologicas', canActivate: [AuthGuard], component: GaleriaImagenesMitologicasComponent },
-    { path: 'ceremonias', canActivate: [AuthGuard], component: CeremoniasComponent },
-    { path: 'expresiones-fe', canActivate: [AuthGuard], component: ExpresionesFeComponent },
-    { path: 'galeria-imagenes-religiosas', canActivate: [AuthGuard], component: GaleriaImagenesReligionComponent },
-    { path: 'practicas-religiosas', canActivate: [AuthGuard], component: PracticasReligiosasComponent },
-    { path: 'rituales', canActivate: [AuthGuard], component: RitualesComponent },
-    { path: 'prueba', canActivate: [AuthGuard], component: PruebasComponent },
-    { path: 'podio', canActivate: [AuthGuard], component: PodioComponent },
->>>>>>> origin/podio-spr3
 ];
