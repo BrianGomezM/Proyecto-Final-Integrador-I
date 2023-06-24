@@ -41,9 +41,62 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
     //this.obtenerToken();
   }
 
+<<<<<<< HEAD
+      hacerLogin() {
+        
+      this.loginService.login(this.usuario).subscribe(respuesta => {
+        console.log(respuesta);
+        if (respuesta['respuesta']['status'] === 200){
+          this.router.navigate(["dashboard"]);
+          this.tokenService.guardarTokenAlLocal(respuesta['respuesta']['token']);
+        }
+        else{
+          alert(respuesta['respuesta']['mensaje'])
+        }
+      });
+    }
+  
+
+//   hacerLogin() {
+//     this.tokenService.guardarToken();
+//     this.loginService.login(this.usuario).subscribe(respuesta => {
+//       if (this.tokenService.obtenerToken() ) {
+//         this.tokenService.guardarToken(respuesta.respuesta.token, respuesta.respuesta.idUsuario);
+//         this.router.navigate([""]);
+//       }
+//       else {
+//         alert("No se pudo iniciar sesión");
+//       }
+//     });
+//   }
+// }
+
+//   obtenerToken() {
+//     this.tokenService.proc().subscribe(
+//       (token: Token) => {
+//         this.tokenRandom = token;
+//         // Aquí puedes realizar las acciones necesarias con el token
+//       },
+//       (error) => {
+//         console.log('Error al obtener el token:', error);
+//       }
+//     );
+//   }
+// }
+
+    
+
+    // hacerLogin() {
+    //   this.loginService.login(this.usuario).subscribe(respuesta => {
+        
+    //   });
+    // }
+  
+=======
   ngAfterViewInit() {
     this.loadGoogleSignIn();
   }
+>>>>>>> origin/eyder-inicio-sesion-proveedorExterno
 
   hacerLogin() {
     this.loginService.login(this.usuario).subscribe((respuesta) => {

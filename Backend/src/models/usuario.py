@@ -61,6 +61,8 @@ class Usuario:
             conn = mysql.connect()  # Establecer la conexión a la base de datos
             cursor = conn.cursor()
             
+
+
             #ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto)
 
             sql = "SELECT correo FROM usuario WHERE correo = %s"
@@ -128,6 +130,19 @@ class Usuario:
             conn.close()  # Cerrar la conexión a la base de datos
 
             return {'mensaje': 'El usuario se actualizó correctamente'}
+        except Exception as ex:
+            print(f"Error en actualizar_usuario: {str(ex)}")
+            return {'mensaje': str(ex)}
+    @staticmethod
+    def eliminarUsuario(id):
+        try:
+            conn = mysql.connect()  
+            cursor = conn.cursor()
+            sql = "UPDATE Proyecto_Integrado_I.usuario SET estado=0 WHERE id= %s"
+            cursor.execute(sql, (id,))
+            conn.commit()  # Confirmar los cambios en la base de datos
+            conn.close()  # Cerrar la conexión a la base de datos
+            return {'mensaje': 'El usuario se elimino correctamente'}
         except Exception as ex:
             print(f"Error en actualizar_usuario: {str(ex)}")
             return {'mensaje': str(ex)}
