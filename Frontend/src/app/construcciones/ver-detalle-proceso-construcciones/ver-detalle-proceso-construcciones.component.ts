@@ -64,7 +64,7 @@ export class VerDetalleProcesoConstruccionesComponent implements OnInit {
     this.consumoServiciosService.getDetailsProcesosConstrucciones(procesoConstruccionId).subscribe(
       (ProcesoConstrucciones: ProcesoConstrucciones[]) => {
         this.detalleProcesoConstrucciones = ProcesoConstrucciones['Proceso_construccion'];
-        this.historiaFinal = this.sanitizer.bypassSecurityTrustHtml(this.detalleProcesoConstrucciones.etapa);
+        this.historiaFinal = this.sanitizer.bypassSecurityTrustHtml(this.detalleProcesoConstrucciones.tecnicas);
       },
       (error: any) => {
         console.log('Error al obtener los procesos-construcciones:', error);
@@ -74,7 +74,7 @@ export class VerDetalleProcesoConstruccionesComponent implements OnInit {
     }
 
     regresar(){
-      this.router.navigate(['/#proceso-construcciones']);
+      this.router.navigate(['/proceso-construcciones']);
     }
   
 
