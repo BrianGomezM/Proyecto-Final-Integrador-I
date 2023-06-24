@@ -38,7 +38,7 @@ export class InicioSesionComponent implements OnInit {
           this.tokenService.guardarTokenAlLocal(respuesta['respuesta']['token']);
         }
         else{
-          alert("Verifique sus credenciales de acceso")
+          alert(respuesta['respuesta']['mensaje'])
         }
       });
     }

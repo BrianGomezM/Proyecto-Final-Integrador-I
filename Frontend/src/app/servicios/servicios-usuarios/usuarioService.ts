@@ -71,6 +71,17 @@ export class UsuarioService{
             return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
           }));    
       }
+
+      public eliminarUsuario(id){
+        //defino la url donde está el servicio
+        let  url = this.UrlBase + 'eliminar_usuario';
+        return this.http.put<any>(url,id,{headers:this.tokenService.obtenerHeaders()}).pipe(
+          catchError(error => {
+            console.log('Error en la solicitud:', error);
+            // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
+            return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
+          }));    
+      }
     }
 
 

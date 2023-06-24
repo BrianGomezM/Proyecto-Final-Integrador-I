@@ -25,6 +25,7 @@ def registrar_usuario():
         return jsonify({"mensaje": "Error"})
 
 
+
 @usuario_app.route('/modificar_usuario', methods=['PUT'])
 def modificar_usuario():
     try:
@@ -35,7 +36,12 @@ def modificar_usuario():
     except Exception as ex:
         print(f"Error en modificar_usuario: {str(ex)}")
         return jsonify({"mensaje": "Error"})
-
+    
+@usuario_app.route('/eliminar_usuario', methods=['PUT'])
+def eliminar_usuario():
+        id = request.get_json()  # Obtener los datos enviados desde el frontend
+        resultado = Usuario.eliminarUsuario(id)  # Actualizar los datos en la base de datos
+        return jsonify(resultado)
 
 @usuario_app.route('/listar_usuarios', methods=['GET'])
 def listar_usuarios():
