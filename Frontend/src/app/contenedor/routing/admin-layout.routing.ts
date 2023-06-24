@@ -36,11 +36,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'detalles-dios/:id',                canActivate: [ AuthGuard ], component:VerDetalleDiosComponent}, 
     { path: 'detalles-criatura/:id',            canActivate: [ AuthGuard ], component:VerDetalleCriaturaComponent},   
     { path: 'galeria-imagenes',                 canActivate: [ AuthGuard ], component: GaleriaImagenesComponent  },   
-    { path: 'galeria-imagenes-construcciones',  canActivate: [ AuthGuard ], component:GaleriaImagenesContruccionesComponent },  
-    
-    { path: 'detalleArq/:id',          canActivate: [ AuthGuard ], component:  VerDetalleArquitecturaComponent  },   
-     
-    
+    { path: 'galeria-imagenes-construcciones',  canActivate: [ AuthGuard ], component:GaleriaImagenesContruccionesComponent }, 
+    { path: 'detalleArq/:id',          canActivate: [ AuthGuard ], component:  VerDetalleArquitecturaComponent  },       
     { path: 'mitos-historias',                   canActivate: [ AuthGuard ], component: MitosHistoriaComponent },  
     { path: 'detalles-mitos-historias/:id',                   canActivate: [ AuthGuard ], component: VerDetalleMitosHistoriasComponent },
     { path: 'criaturas-mitologicas',            canActivate: [ AuthGuard ], component: CriaturasMitologicasComponent},   
@@ -53,6 +50,10 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'rituales',                         canActivate: [ AuthGuard ], component: RitualesComponent }, 
     { path: 'prueba',                           canActivate: [ AuthGuard ], component: PruebasComponent },
     { path: 'podio',                            canActivate: [ AuthGuard ], component: PodioComponent  },
+<<<<<<< HEAD
+    { path: 'editar',        component: ModificarUsuarioComponent
+    }
+=======
     {
         path: 'editar',
         component: ModificarUsuarioComponent
@@ -61,4 +62,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'proceso-construcciones', component: ProcesoConstruccionesComponent},
     { path: 'detalle-proceso-construcciones/:id', component : VerDetalleProcesoConstruccionesComponent}
     
+>>>>>>> origin/eyder-inicio-sesion-proveedorExterno
 ];

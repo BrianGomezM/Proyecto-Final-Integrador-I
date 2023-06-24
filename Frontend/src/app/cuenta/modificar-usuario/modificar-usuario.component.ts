@@ -85,6 +85,29 @@ export class ModificarUsuarioComponent implements OnInit {
    }
 
    //Carga los usuarios que están en la base de datos
+
+  DeleteUser(){
+    if (this.usuarioForm.valid) {
+      if (confirm("¿"+ this.usuario.nombre +", estás seguro de eliminar tu cuenta?")) {
+        this.servicioUsuario.eliminarUsuario(this.usuario.id).subscribe((res: any) => {
+          console.log(res);
+          alert("Usuario eliminado exitosamente, si desea recuperar su cuenta debera contactar con un administrador.");
+          this.servicioToken.quitarToken();
+          this.router.navigate(['/login']);
+        });
+        console.log("El usuario confirmó.");
+      } else {
+        // El usuario ha hecho clic en el botón "Cancelar"
+        // Aquí puedes agregar el código que deseas ejecutar si el usuario cancela
+        console.log("El usuario canceló.");
+      }
+
+    }
+    else{
+      alert("Complete los campos requeridos");
+    }
+
+  }
   cargarUsuarios() {
     var usuarioLocalStorage = this.servicioLogin.obtenerLocalStorageUsuario();
     console.log(usuarioLocalStorage);

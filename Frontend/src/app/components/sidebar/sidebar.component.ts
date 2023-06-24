@@ -62,10 +62,10 @@ export class SidebarComponent implements OnInit {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
 
-  constructor(public tokenService:TokenService){
-    
+  constructor(public tokenService: TokenService) {
+
   }
-  
+
   isMobileMenu() {
     if ($(window).width() > 991) {
       return false;
@@ -82,7 +82,7 @@ export class SidebarComponent implements OnInit {
       this.activeMenuId = id;
     }
   }
-  cerrarSesion(){
+  cerrarSesion() {
     window.location.href = "/login";
     this.tokenService.quitarToken();
   }
