@@ -50,15 +50,10 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'rituales',                         canActivate: [ AuthGuard ], component: RitualesComponent }, 
     { path: 'prueba',                           canActivate: [ AuthGuard ], component: PruebasComponent },
     { path: 'podio',                            canActivate: [ AuthGuard ], component: PodioComponent  },
-    {
-        path: 'editar',
-        component: ModificarUsuarioComponent
-    },
     { path: 'explorar-construcciones', component: ExplorarConstruccionesComponent},
     { path: 'proceso-construcciones', component: ProcesoConstruccionesComponent},
-    { path: 'detalle-proceso-construcciones/:id', component : VerDetalleProcesoConstruccionesComponent}
+    { path: 'detalle-proceso-construcciones/:id', component : VerDetalleProcesoConstruccionesComponent},
     
-=========
     { path: 'editar',        component: ModificarUsuarioComponent
     }
 ];
