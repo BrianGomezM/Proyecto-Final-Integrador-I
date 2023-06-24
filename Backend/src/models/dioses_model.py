@@ -79,3 +79,28 @@ class Dioses:
                 return "No se encontró la construcción"
         except Exception as ex:
             return None
+        
+    @staticmethod
+    def filtrarDioses(nombre):
+        try:
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            print("Conexión exitosa")
+            sql = "SELECT * FROM dioses WHERE nombre_dios LIKE %s OR representacion LIKE %s OR historia LIKE %s OR rol LIKE %s;"
+            params = ('' + nombre + '%', '' + nombre + '%', '' + nombre + '%', '' + nombre + '%')
+            cursor.execute(sql, params)
+            datos = cursor.fetchall()
+            dioses = []
+            for fila in datos:
+                dios = {
+                    'cod': fila[0],
+                    'nombre': fila[1],
+                    'representacion': fila[2],
+                    'historia': fila[3],
+                    'imagen': fila[4]
+                }
+                dioses.append(dios)
+            conn.close()
+            return dioses
+        except Exception as ex:
+            return None

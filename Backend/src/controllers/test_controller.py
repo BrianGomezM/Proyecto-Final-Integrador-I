@@ -21,7 +21,7 @@ def listPreguntas():
 
 @test_app.route('/listarPodio', methods=['GET'])
 def listarPodio():
-    podio = Test.listar_podio
+    podio = Test.listar_podio()
 
     if podio is not None:
         return jsonify({'Podio': podio, 'mensaje': "Podio"})
@@ -35,9 +35,15 @@ def registrar_test():
     calificacion = request.json.get('calificacion')
     horaI = request.json.get('horaI')
     horaF = request.json.get('horaF')
-
     if Test.insertarPodio(usuario, calificacion, horaI, horaF):
         return jsonify({"mensaje": "Se registró correctamente"})
     else:
         return jsonify({"mensaje": "Error"})
-
+    
+@test_app.route('/listUserTest/<codigo>', methods=['GET'])
+def consultar_userTest(codigo):
+    userTest = Test.consultar_userTest(codigo)
+    if userTest is not None:
+        return jsonify({'userTest': userTest, 'mensaje': "Usuario test"})
+    else:
+        return jsonify({"mensaje": "Error"})
