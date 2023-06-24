@@ -16,6 +16,10 @@ CORS(login_app)
 def login_endpoint():
     return Login.login()
 
+# @login_app.route('/login_google', methods=['POST'])
+# def login_google():
+#     return Login.login_google()
+
 
 
 @login_app.route('/recuperarClave/', methods=['PUT'])

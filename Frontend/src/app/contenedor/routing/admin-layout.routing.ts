@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { ExplorarConstruccionesComponent } from 'app/construcciones/explorar-construcciones/explorar-construcciones.component';
 import { GaleriaImagenesContruccionesComponent } from 'app/construcciones/galeria-imagenes-contrucciones/galeria-imagenes-contrucciones.component';
 import { VerDetalleArquitecturaComponent } from 'app/construcciones/galeria-imagenes-contrucciones/ver-detalle-arquitectura/ver-detalle-arquitectura.component';
 import { ModificarUsuarioComponent } from 'app/cuenta/modificar-usuario/modificar-usuario.component';
@@ -47,6 +48,15 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'rituales',                         canActivate: [ AuthGuard ], component: RitualesComponent }, 
     { path: 'prueba',                           canActivate: [ AuthGuard ], component: PruebasComponent },
     { path: 'podio',                            canActivate: [ AuthGuard ], component: PodioComponent  },
+<<<<<<< HEAD
     { path: 'editar',        component: ModificarUsuarioComponent
     }
+=======
+    {
+        path: 'editar',
+        component: ModificarUsuarioComponent
+    },
+    { path: 'explorar-construcciones', component: ExplorarConstruccionesComponent}
+    
+>>>>>>> origin/eyder-inicio-sesion-proveedorExterno
 ];
