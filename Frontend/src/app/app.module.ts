@@ -23,6 +23,9 @@ import { LightboxModule } from 'ngx-lightbox';
 
 
 import { MitosHistoriaComponent } from 'app/religion/mitologia/mitos-historia/mitos-historia.component';
+import { ExplorarConstruccionesComponent } from './construcciones/explorar-construcciones/explorar-construcciones.component';
+import { ProcesoConstruccionesComponent } from './construcciones/proceso-construcciones/proceso-construcciones.component';
+import { VerDetalleProcesoConstruccionesComponent } from './construcciones/ver-detalle-proceso-construcciones/ver-detalle-proceso-construcciones.component';
 
 
 @NgModule({
@@ -38,7 +41,8 @@ import { MitosHistoriaComponent } from 'app/religion/mitologia/mitos-historia/mi
     MatProgressSpinnerModule,
     AppRoutingModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
@@ -52,6 +56,9 @@ import { MitosHistoriaComponent } from 'app/religion/mitologia/mitos-historia/mi
     VerDetalleMitosHistoriasComponent,
     ModificarUsuarioComponent,
     MitosHistoriaComponent,
+    ExplorarConstruccionesComponent,
+    ProcesoConstruccionesComponent,
+    VerDetalleProcesoConstruccionesComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

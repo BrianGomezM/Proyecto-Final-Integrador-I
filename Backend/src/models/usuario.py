@@ -20,54 +20,6 @@ app.config['MYSQL_DATABASE_DB'] = config['development'].MYSQL_DB
 mysql = MySQL(app)
 
 
-    
-#ruta_imagenes = "/almacenamiento/imagenes"
-#ruta_imagenes = os.path.abspath(os.path.join(os.path.dirname(_file_), "..", "almacenamiento", "imagenes"))
-# ruta_proyecto = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))  # Ruta del directorio del proyecto
-# ruta_imagenes = os.path.join(ruta_proyecto, "static", "imagenes")
-
-
-# @staticmethod
-# def crear_carpetas(ruta):
-#     try:
-#         partes = ruta.split("/")
-#         ruta_carpeta = ""
-#         for parte in partes:
-#             if parte == "":
-#                 continue
-
-#             ruta_carpeta += "/" + parte
-
-#             if not os.path.isdir(ruta_carpeta):
-#                 os.mkdir(ruta_carpeta)
-#     except Exception as ex:
-#         print(f"Error en crear_carpetas: {str(ex)}")
-
-
-# @staticmethod
-# def obtener_datos_imagen(imagen, ruta):
-#     try:
-#         encabezado, contenido = imagen.split(",", 1)
-#         extension = encabezado.split(";")
-#         extension = extension[0].split("/")
-#         nombre_archivo = str(uuid.uuid4()) + "." + extension[-1]
-#         ruta_archivo = os.path.join(ruta, nombre_archivo)
-#         return [ruta_archivo, contenido]
-#     except Exception as ex:
-#         print(f"Error en obtener_datos_imagen: {str(ex)}")
-#         return None
-
-
-# @staticmethod
-# def guardar_imagen(imagen, contenido):
-#     try:
-#         ruta_archivo = os.path.join(app.static_folder, imagen)
-#         with open(ruta_archivo, "wb") as archivo:
-#             archivo.write(base64.b64decode(contenido))
-#     except Exception as ex:
-#         print(f"Error en guardar_imagen: {str(ex)}")
-
-
 class Usuario:
     
     def listar_usuarios():
@@ -108,8 +60,7 @@ class Usuario:
                 raise Exception("'nombre' no está presente en los datos del usuario")
             conn = mysql.connect()  # Establecer la conexión a la base de datos
             cursor = conn.cursor()
-
-
+            
             #ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto)
 
             sql = "SELECT correo FROM usuario WHERE correo = %s"
@@ -117,7 +68,6 @@ class Usuario:
             resultado = cursor.fetchone()
             if resultado:
                 raise Exception("El correo electrónico ya está registrado")
-
 
             sql = "INSERT INTO usuario (nombre, apellido, telefono, correo, password, urlAvatar, sexo, estado) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
             valores = (usuario['nombre'], usuario['apellido'], usuario['telefono'], usuario['correo'], usuario['password'], usuario['urlAvatar'], usuario['sexo'], usuario['estado'])
