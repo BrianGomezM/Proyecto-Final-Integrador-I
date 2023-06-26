@@ -1,0 +1,64 @@
+li {
+    margin: 13px;
+}
+#custom-card {
+    background-image: url('https://usagif.com/wp-content/uploads/gif/confetti-4.gif.webp');
+    background-size: cover;
+    background-position: center;
+  }
+
+ 
+
+.page-item.active .page-link {
+    color: #fff !important;
+    z-index: 3;
+    color: #fff;
+    background-color: #fb8c00!important;
+    border-color: #fa9f2e !important;
+}
+a {
+    color: #fe9d1b !important;
+}
+.page-link:hover {
+    background-color: #fedbad8a !important;
+}
+
+
+.btn.btn-outline-success {
+    color: #fd9914!important;
+    background-color: transparent!important;
+    border-color: #fd9814!important;
+}
+
+.btn.btn-outline-success:focus{
+    color: #fd940e !important;
+    background-color: rgba(153, 153, 153, 0.2)!important;
+    border-color: #fea120c7!important;
+}
+
+.btn-outline-success.focus, .btn-outline-success:focus {
+    box-shadow: 0 0 0 0.2rem rgb(254 163 34 / 64%)!important;
+}
+
+.btn-outline-success:not(:disabled):not(.disabled):active {
+    color: #fff!important;
+    background-color: #fe9c1a!important;
+    border-color: #fd9712!important;
+}
+
+.btn-outline-success:not(:disabled):not(.disabled):active:focus{
+    box-shadow: 0 0 0 0.2rem rgb(253 151 18)!important;
+}
+
+
+
+
+.rotate-button {
+    transition: transform 0.3s ease;
+  }
+  
+  .rotate-button:hover {
+    transform: rotate(360deg);
+  }
+  
+  

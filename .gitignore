@@ -1,0 +1,7 @@
+Frontend/node_modules/
+Frontend/.angular/
+Frontend/dist/
+__pycache__/
+.DS_Store
+Backend/src/__pycache__/config.cpython-310.pyc
+/Frontend/node_modules/

@@ -1,0 +1,54 @@
+<div class="logo">
+  <a href="http://localhost:4200/#/dashboard" class="simple-text">
+    <div class="logo-img">
+      <img src="/assets/img/img-app/egyptian.png" />
+    </div>
+  </a>
+</div>
+<div class="sidebar-wrapper">
+  <ul class="nav">
+    <ng-container *ngFor="let menuItem of menuItems">
+      <li routerLinkActive #rla="routerLinkActive"
+        [ngClass]="rla.isActive ? (menuItem.children === null ? 'active' : '') : ''"
+        [routerLinkActiveOptions]="{exact: true}">
+        <a (click)="toggleCollapse(menuItem.id)"[style.display]="menuItem.children === null ? 'flex' : 'none'" [routerLink]="[menuItem.path]"
+          [style.color]="rla.isActive ? activeFontColor : normalFontColor">
+          <i class="material-icons">{{menuItem.icon}}</i>
+          <span>{{menuItem.title}}</span>
+        </a>
+        <div [hidden]="menuItem.children === null" class="collapse-container">
+          <a (click)="toggleCollapse(menuItem.id)" [ngClass]="{
+            'collapse-a': true,
+            'collapsed': activeMenuId !== menuItem.id,
+            'parent-active': rla.isActive
+          }" [style.color]="normalFontColor">
+            <i class="material-icons">{{menuItem.icon}}</i>
+            <span>{{menuItem.title}}</span>
+            <b class="caret" [style.color]="normalFontColor"></b>
+          </a>
+          <div id="component" class="collapse" [ngClass]="{'show': activeMenuId === menuItem.id}" [id]="[menuItem.id]">
+            <ul class="nav">
+              <ng-container *ngFor="let subItem of menuItem.children">
+                <ng-container *ngIf="subItem.id !== 'dioses'">
+                  <li routerLinkActive #subrla="routerLinkActive" [ngClass]="subrla.isActive ? 'active' : ''">
+                    <a [routerLink]="[subItem.path]" [style.color]="subrla.isActive ? activeFontColor : normalFontColor"
+                      style="height: 43px;">
+                      <i class="material-icons">{{subItem.icon}}</i>
+                      <span>{{subItem.title}}</span>
+                    </a>
+                  </li>
+                </ng-container>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ng-container>
+    <li>
+      <a (click)="cerrarSesion()" href="javascript:void(0)">
+        <i class="material-icons">disabled_by_default</i>
+        <span>CERRAR SESIÓN</span>
+      </a>
+    </li>
+  </ul>
+</div>

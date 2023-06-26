@@ -1,0 +1,128 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8 col-md-12">
+        <div class="card">
+          <div class="card-header card-header-tabs card-header-primary">
+            <div class="nav-tabs-navigation">
+              <div class="nav-tabs-wrapper">
+                <span class="nav-tabs-title">TEST:</span>
+                <ul class="nav nav-tabs" data-tabs="tabs">
+                  <li class="nav-item">
+                    <a mat-button class="nav-link active" href="#dioses1" data-toggle="tab">
+                      <i class="material-icons">psychology_alt</i> DIOSES
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" href="#mitologia1" data-toggle="tab">
+                      <i class="material-icons">diversity_2</i> MITOLOGIA
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" href="#religion1" data-toggle="tab">
+                      <i class="material-icons">brightness_high</i> RELIGIÓN
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" href="#arquitectura1" data-toggle="tab">
+                      <i class="material-icons">handyman</i> ARQUITECTURA
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a mat-button class="nav-link" href="#criaturas1" data-toggle="tab">
+                      <i class="material-icons">android</i> CRIATURAS
+                      <div class="ripple-container"></div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="tab-content">
+              <div class="tab-pane active" id="dioses1">
+                <table class="table">
+                  <tbody>
+                    <ng-container *ngFor="let pregunta of getPreguntasByTipo('dioses1'); let preguntaIndex = index">
+                      <tr>
+                        <td colspan="7" style="font-weight: bold; font-family: inherit; border-top: none;"><strong>{{
+                            pregunta.pregunta }}</strong></td>
+                        <td style="font-weight: bold; font-family: inherit; border-top: none;"><span class="respuesta"
+                            *ngIf="mostrarRespuesta"><strong style="color: #fc9109;">Respuesta:{{
+                              pregunta.respuestaC}}</strong></span></td>
+                      </tr>
+                      <tr>
+                        <ng-container *ngFor="let respuesta of pregunta.respuestas; let respuestaIndex = index">
+                          <td>
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input class="form-check-input" type="radio" [name]="'pregunta-' + preguntaIndex"
+                                  [checked]="respuestasSeleccionadas[preguntaIndex] === respuestaIndex"
+                                  (change)="toggleRespuesta(preguntaIndex, respuestaIndex)">
+                                <span class="form-check-sign">
+                                  <span class="check"></span>
+                                </span>
+                              </label>
+                            </div>
+                          </td>
+                          <td>{{ respuesta }}</td>
+                        </ng-container>
+                      </tr>
+                      <tr>
+                        <td colspan="8"></td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card card-profile">
+          <div class="card-avatar">
+            <a href="javascript:void(0)">
+              <img class="img" [src]="userLogeado['urlFoto']" />
+            </a>
+          </div>
+          <div class="card-body">
+
+            <h6 class="card-category text-gray">Participante:</h6>
+            <h4 class="card-title">{{userLogeado['nombreA']}}</h4>
+            <h3 [ngClass]="obtenerClaseTiempo()">
+              {{ mostrarTiempo() }}
+            </h3>
+            <p class="card-description">
+              Este test tiene como objetivo brindar un panorama general del conocimiento sobre la
+              civilización egipcia. A través de una serie de preguntas, nos permite evaluar el nivel de
+              comprensión y retención de información relacionada con la antigua civilización del Antiguo
+              Egipto.
+            </p>
+            <a href="javascript:void(0)" (click)="iniciarCronometro()" class="btn btn-success btn-round"
+              *ngIf="mostrarBotonEmpezar">Empezar</a>
+            <a href="javascript:void(0)" class="btn btn-danger btn-round" *ngIf="mostrarBotonEnviar"
+              (click)="mostrarRespuestas()">Enviar</a>
+            <a href="javascript:void(0)" class="btn btn-danger btn-round" *ngIf="mostrarBotonVolverAP"
+              (click)="volverIntentar()">Volver a presentar</a>
+          </div>
+        </div>
+        <div class="card card-profile" *ngIf="resultTest">
+          <div class="card-avatar">
+            <a href="javascript:void(0)">
+              <img class="img" src="./assets/img/img-app/test.gif" />
+            </a>
+          </div>
+          <div class="card-body">
+            <h6 class="card-title">Calificación: {{mostrarCali}}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

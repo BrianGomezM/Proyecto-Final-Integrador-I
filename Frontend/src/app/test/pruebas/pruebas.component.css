@@ -1,0 +1,16 @@
+.red-text {
+    color: red;
+  }
+  
+  .orange-text {
+    color: orange;
+  }
+  
+  .green-text {
+    color: green;
+  }
+  .card .table tr:first-child td {
+    font-weight: bold;
+    font-family: inherit;
+    border-top: none;
+}

@@ -1,0 +1,115 @@
+<nav
+  color-on-scroll="500"
+  class="navbar navbar-expand-lg bg-primary navbar-transparent navbar-absolute"
+>
+  <div class="container">
+    <div class="navbar-wrapper">
+      <a class="navbar-brand d-none d-sm-none d-md-block" href="#/dashboard">
+      </a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrapper wrapper-full-page">
+  <div filter-color="black" class="page-header login-page header-filter">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6 ml-auto mr-auto">
+          <form
+            novalidate=""
+            method=""
+            action=""
+            class="form ng-untouched ng-pristine ng-valid"
+          >
+            <div class="card card-login card-hidden">
+              <div
+                style="max-width: 100%; max-height: 100%; text-align: center"
+              >
+                <img
+                  src="/assets/img/img-app/egyptian_gold.png"
+                  style="width: 35%; height: 35%"
+                />
+              </div>
+              <div style="text-align: center">
+                <span class="bmd-form-group">
+                  <h3 class="font-weight-bold" style="color: rgb(204, 166, 68)">
+                    Inicio de Sesión
+                  </h3>
+                </span>
+              </div>
+              <div class="card-body">
+                <p class="card-description text-center"></p>
+                <span class="bmd-form-group">
+                  <label style="color: rgb(204, 166, 68)">Correo:</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">email</i>
+                      </span>
+                    </div>
+                    <input
+                      type="email"
+                      placeholder="Ingrese su correo"
+                      class="form-control"
+                      name="correo"
+                      [(ngModel)]="usuario.correo"
+                    />
+                  </div>
+                </span>
+                <span class="bmd-form-group">
+                  <label style="color: rgb(204, 166, 68); margin-top: 20px"
+                    >Contraseña:</label
+                  >
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">lock_outline</i>
+                      </span>
+                    </div>
+                    <input
+                      type="password"
+                      placeholder="Ingrese su contraseña"
+                      class="form-control"
+                      name="password"
+                      [(ngModel)]="usuario.password"
+                    />
+                  </div>
+                </span>
+                <span class="bmd-form-group">
+                  <p style="margin-top: 30px">
+                    <a href="#/olvidoClave">¿Olvidó su Contraseña</a>?
+                  </p>
+                  <p style="margin-bottom: 5px">
+                    <a href="#/registrar">Crear cuenta</a>
+                  </p>
+                  <a href="/" class="btn btn-just-icon btn-link">
+                    <i
+                      class="fa fa-facebook-official"
+                      style="font-size: 36px"
+                    ></i>
+                  </a>
+                  <a
+                    class="btn btn-just-icon btn-link"
+                    (click)="loginWithGoogle()"
+                  >
+                    <i class="fa fa-google" style="font-size: 36px"></i>
+                  </a>
+                </span>
+              </div>
+
+              <div style="text-align: center">
+                <button
+                  class="btn btn-warning"
+                  style="margin-top: 5px"
+                  (click)="hacerLogin()"
+                >
+                  Ingresar
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

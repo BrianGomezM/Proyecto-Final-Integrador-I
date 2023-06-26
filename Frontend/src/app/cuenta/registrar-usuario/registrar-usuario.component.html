@@ -1,0 +1,162 @@
+<form [formGroup]="usuarioForm">
+  <!-- Resto del formulario -->
+
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon"><i class="material-icons">face</i></div>
+            <h4 class="card-title">Registrar Usuario</h4>
+          </div>
+          <div data-color="rose" id="wizardProfile" class="card-body card-wizard">
+            <div class="row">
+              <div class="col-md-12 col-sm-4 d-flex justify-content-center">
+                <div class="picture-container">
+                  <div class="picture">
+                    <img src="{{usuario.urlAvatar}}" id="wizardPicturePreview" title="" class="picture-src">
+                    <input formControlName="urlAvatar" type="file" #ImagenUsuario accept="image/*" (change)="archivoCargado($event)">
+                  </div>
+                  <h6 class="description">
+                    Choose Picture
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10 col-sm-4 d-flex justify-content-center">
+                <div class="col-sm-5 text-center">
+                  <div class="input-group form-control-lg mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">
+                          face
+                        </i>
+                      </span>
+                      <mat-form-field class="example-full-width">
+                        <input formControlName="nombre" matInput placeholder="Nombre" type="text" [(ngModel)]="usuario.nombre" required>
+                        <mat-error *ngIf="usuarioForm.controls['nombre'].hasError('required')">
+                          Nombre es requerido
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">
+                          face
+                        </i>
+                      </span>
+                      <mat-form-field class="example-full-width">
+                        <input formControlName="apellido" matInput placeholder="Apellido" type="text" [(ngModel)]="usuario.apellido" required>
+                        <mat-error *ngIf="usuarioForm.controls['apellido'].hasError('required')">
+                          Apellido es requerido
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">
+                          call
+                        </i>
+                      </span>
+                      <mat-form-field class="example-full-width">
+                        <input formControlName="telefono" matInput placeholder="Teléfono" type="string" [(ngModel)]="usuario.telefono">
+                      </mat-form-field>
+                    </div>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">
+                          mail
+                        </i>
+                      </span>
+                      <mat-form-field class="example-full-width">
+                        <input formControlName="correo" matInput placeholder="Correo" type="email" [(ngModel)]="usuario.correo" required>
+                        <mat-error *ngIf="usuarioForm.controls['correo'].hasError('required')">
+                          Correo es requerido
+                        </mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">
+                          password
+                        </i>
+                      </span>
+                      <mat-form-field class="example-full-width">
+                        <input formControlName="password" matInput placeholder="Escriba su contraseña" type="password" required minlength="8">
+                        <mat-error *ngIf="usuarioForm.controls['password'].hasError('required')">
+                          Contraseña es requerida
+                        </mat-error>
+                          <mat-error *ngIf="usuarioForm.controls['password'].hasError('minlength')">La contraseña debe tener al menos 8 caracteres</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">
+                          password
+                        </i>
+                      </span>
+                      <mat-form-field class="example-full-width">
+                        <input formControlName="confirmPassword" matInput placeholder="Repetir contraseña" type="password" [(ngModel)]="usuario.password" required passwordMismatch>
+                        <mat-error *ngIf="usuarioForm.controls['confirmPassword'].hasError('required')">
+                          Contraseña es requerida
+                        </mat-error>
+                        <mat-error *ngIf="usuarioForm.controls['confirmPassword'].hasError('passwordMismatch')">Las contraseñas no coinciden</mat-error>
+                      </mat-form-field>
+                      </div>
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="material-icons">
+                          transgender
+                        </i>
+                      </span>
+                      <div style="margin-top: 30px;"class="radio-group">
+                        <div class="radio">
+                          <label>
+                            <input formControlName="sexo" type="radio" name="optionsRadios" value="masculino" [(ngModel)]="usuario.sexo"> Masculino
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label>
+                            <input formControlName="sexo" type="radio" name="optionsRadios" value="femenino" [(ngModel)]="usuario.sexo"> Femenino
+                          </label>
+                        </div>
+                        <div class="radio">
+                          <label>
+                            <input formControlName="sexo" type="radio" name="optionsRadios" value="otro" [(ngModel)]="usuario.sexo"> Otro
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer d-flex justify-content-center">
+            <button mat-raised-button="" type="submit" class="btn btn-fill btn-rose mat-raised-button mat-button-base" (click)="toBack()">
+              <span class="mat-button-wrapper">
+                Cancelar
+              </span>
+              <div matripple="" class="mat-ripple mat-button-ripple">
+              </div>
+              <div class="mat-button-focus-overlay">
+              </div>
+            </button>
+            <button mat-raised-button="" type="submit" class="btn btn-fill btn-warning mat-raised-button mat-button-base" (click)="agregarUsuario()">
+              <span class="mat-button-wrapper">
+                Registrarse
+              </span>
+              <div matripple="" class="mat-ripple mat-button-ripple">
+              </div>
+              <div class="mat-button-focus-overlay">
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</form>

@@ -1,0 +1,60 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <ng-container *ngIf="tarjetasDuplicadas.length > 0; else noInfoTemplate">
+        <div class="col-md-4" *ngFor="let tarjeta of tarjetasDuplicadas; let i = index">
+          <div class="card card-product" data-count="7">
+            <div data-header-animation="true" class="card-header card-header-image">
+              <div [id]="'carouselExample' + i" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li [attr.data-target]="'#carouselExample' + i" [class.active]="index === 0"
+                    *ngFor="let imagen of tarjeta.imagenes; let index = index" [attr.data-slide-to]="index"></li>
+                </ol>
+                <div class="carousel-inner">
+                  <div class="carousel-item" *ngFor="let imagen of tarjeta.imagenes; let index = index"
+                    [class.active]="index === 0">
+                    <img [src]="imagen" class="img" alt="Slide {{ index }}">
+                  </div>
+                </div>
+                <a class="carousel-control-prev" [attr.href]="'#carouselExample' + i" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" [attr.href]="'#carouselExample' + i" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
+            </div>
+            <div class="card-body">
+              <h4 class="card-title"><a href="#pablo">{{ tarjeta.construccion.nombre }}</a></h4>
+              <!--div class="card-description" style="text-align: justify;">
+                {{ tarjeta.construccion.resumen }}
+              </div -->                      
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <a [href]="tarjeta.construccion.ubicacion" target="_blank">
+                  <i class="material-icons" style="color: #fb9006;">place</i>
+                </a>
+                <p class="card-category">{{ tarjeta.construccion.lugar }}</p>
+              </div>
+              <div class="stats">
+                <div class="card-footer justify-content-center">
+                  <button mat-raised-button type="submit" (click)="abrirModal(tarjeta.construccion.cod)" class="btn btn-danger pull-right">Ver más</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>
+
+<ng-template #noInfoTemplate>
+  <div class="text-center">
+    <p>Buscando Información...</p>
+    <img src="../../../assets/img/img-app/cargando.gif" width="100px">
+  </div>
+</ng-template>
