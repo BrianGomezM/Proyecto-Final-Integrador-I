@@ -61,7 +61,7 @@ class Practicas:
             return None
         
     @staticmethod   
-    def getMitosHistoriasImgById(id):
+    def getPracticasImgById(id):
         try:
             imagenes=[]
             conn = mysql.connect() 
@@ -77,6 +77,6 @@ class Practicas:
                         fila = cursor.fetchone()
                 return imagenes
             else:
-                return "No se encontró el mito-historia"
+                return "No se encontró la práctica religiosa"
         except Exception as ex:
             return None

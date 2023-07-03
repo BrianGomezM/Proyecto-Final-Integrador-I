@@ -23,6 +23,7 @@ import { ExpresionesFeComponent } from 'app/religion/religion/expresiones-fe/exp
 import { GaleriaImagenesReligionComponent } from 'app/religion/religion/galeria-imagenes-religion/galeria-imagenes-religion.component';
 import { PracticasReligiosasComponent } from 'app/religion/religion/practicas-religiosas/practicas-religiosas.component';
 import { RitualesComponent } from 'app/religion/religion/rituales/rituales.component';
+import { VerDetallePracticasComponent } from 'app/religion/religion/ver-detalle-practicas/ver-detalle-practicas.component';
 import { PodioComponent } from 'app/test/podio/podio.component';
 import { PruebasComponent } from 'app/test/pruebas/pruebas.component';
 
@@ -56,6 +57,8 @@ export const AdminLayoutRoutes: Routes = [
     },
     { path: 'explorar-construcciones', component: ExplorarConstruccionesComponent},
     { path: 'proceso-construcciones', component: ProcesoConstruccionesComponent},
-    { path: 'detalle-proceso-construcciones/:id', component : VerDetalleProcesoConstruccionesComponent}
+    { path: 'detalle-proceso-construcciones/:id', component : VerDetalleProcesoConstruccionesComponent},
+    { path: 'practicas-religiosas', component:PracticasReligiosasComponent},
+    { path: 'detalle-practicas/:id', component : VerDetallePracticasComponent}
     
 ];

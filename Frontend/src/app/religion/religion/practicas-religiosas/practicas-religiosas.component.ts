@@ -38,4 +38,10 @@ export class PracticasReligiosasComponent implements OnInit {
     );
   }
 
+  
+  mostrarDetalles(practicas:Practicas){
+    this.router.navigate(['/detalle-practicas', practicas.cod]);
+  }
+
+
 }
