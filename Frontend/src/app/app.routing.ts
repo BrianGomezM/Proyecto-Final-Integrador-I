@@ -44,9 +44,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes, {
-      useHash: false
-    })
+    RouterModule.forRoot(routes)
   ],
   exports: [
     RouterModule
