@@ -60,11 +60,11 @@ export class VerDetallePracticasComponent implements OnInit {
 
     this.consumoServiciosService.getDetailsPracticas(practicasId).subscribe(
       (practicas: Practicas[]) => {
-        this.detallePracticas = practicas['Practica-religiosa'];
+        this.detallePracticas = practicas['Practicas_religiosas'];
         this.historiaFinal = this.sanitizer.bypassSecurityTrustHtml(this.detallePracticas.contenido);
       },
       (error: any) => {
-        console.log('Error al obtener los mitos-historias:', error);
+        console.log('Error al obtener la práctica religiosa:', error);
         // Realiza acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
       }
     );

@@ -63,6 +63,6 @@ def getPracticasImgById(id):
 def getPracticasById(id):
     practicas = Practicas.getPracticasById(id)
     if practicas is not None:
-        return jsonify({'Proceso_construccion': practicas, 'mensaje': "Se encontró el proceso de construcción"})
+        return jsonify({'Practicas_religiosas': practicas, 'mensaje': "Se encontró el proceso de construcción"})
     else:
         return jsonify({"mensaje": "Error"})  

@@ -67,7 +67,7 @@ class Practicas:
             conn = mysql.connect() 
             cursor = conn.cursor()
             print("Conexión exitosa")
-            sql = "SELECT imagen_url FROM imagenes WHERE oidTabla=4 and oidRecurso  = %s"
+            sql = "SELECT imagen_url FROM imagenes WHERE oidTabla=6 and oidRecurso  = %s"
             cursor.execute(sql, (id,))
             fila = cursor.fetchone()
             if fila is not None:
