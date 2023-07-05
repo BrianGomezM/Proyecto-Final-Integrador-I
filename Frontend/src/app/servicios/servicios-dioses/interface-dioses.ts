@@ -9,5 +9,5 @@ export interface Dioses{
     historia:  string;
     imagen:string;
     roles:string;
-
+    estado:boolean;
 }

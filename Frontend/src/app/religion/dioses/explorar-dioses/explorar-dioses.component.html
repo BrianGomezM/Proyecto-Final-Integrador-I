@@ -9,13 +9,21 @@
                           </div>                          
                         <div class="card-body">                    
                             
-                            <h4 class="card-title titulo"><a href="#">{{ tarjeta.nombre }}</a></h4>
+                            <h4 class="card-title titulo"><a href="#">{{ tarjeta.nombre }}
+                            </a>
+
+                            <span *ngIf="tarjeta.estado" class="badge badge-success"><i class="material-icons">verified</i>Visto</span>
+                            <span *ngIf="!tarjeta.estado" class="badge badge-warning"><i class="material-icons">report</i>Pendiente</span>
+                            </h4>
                             <div class="card-description"><h6>representación:</h6>{{ tarjeta.representacion }}</div>
                         </div>
                         <div class="card-footer">
                             <div class="stats">                            
                               <button (click)="mostrarDetalles(tarjeta)" class="btn btn-primary">Ver más</button>
                             </div>
+
+
+                        
                         </div>
                     </div>
                 </div>

@@ -19,7 +19,8 @@ export class VerDetalleDiosComponent implements OnInit {
     representacion: '',
     historia: '',
     imagen: '',
-    roles: ''
+    roles: '',
+    estado:false
   };
 
   listaModelos:string[]=[ "assets/Modelos3D/RA/index.html",

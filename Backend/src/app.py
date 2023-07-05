@@ -10,6 +10,7 @@ from controllers.controllerUsuario import usuario_app
 from controllers.test_controller import test_app
 from controllers.controller_mitos_historias import mitos_historias_app
 from controllers.controller_proceso_construcciones import proceso_construcciones_app
+from controllers.lecciones_controller import lecciones_app
 
 #FIRMA DE LA CLASE APP.PY
 #configurar y ejecutar una aplicación Flask que proporciona una API web. 
@@ -37,7 +38,7 @@ app.register_blueprint(login_app)
 app.register_blueprint(test_app)
 app.register_blueprint(mitos_historias_app)
 app.register_blueprint(proceso_construcciones_app)
-
+app.register_blueprint(lecciones_app)
 # Función que maneja el error 404 (página no encontrada) y devuelve una respuesta HTML con un mensaje correspondiente.
 def pagina_no_encontrada(error):
     return "<h1>La página que intentas buscar no existe....</h1>"
