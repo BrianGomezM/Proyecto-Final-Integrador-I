@@ -23,7 +23,8 @@ export class VerDetalleCriaturaComponent implements OnInit {
     origen:'',
     caracteristicas:'',
     rol:'',
-    imagen:''
+    imagen:'',
+    estado:false
   };
   historiaFinal:SafeHtml;
   listaImagenes:Recurso = {
@@ -78,6 +79,7 @@ export class VerDetalleCriaturaComponent implements OnInit {
   regresar(){
     this.router.navigate(['/criaturas-mitologicas']);
   }
+  
   
 
 }
