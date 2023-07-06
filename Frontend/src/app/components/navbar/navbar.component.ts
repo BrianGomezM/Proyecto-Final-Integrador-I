@@ -4,6 +4,9 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TokenService } from 'app/servicios/servicios-login/tokenService';
 import { SharedDataService } from 'app/servicios-compartidos/shared-data-service.service';
+import { Usuario } from 'app/models/usuario';
+import { LoginService } from 'app/servicios/servicios-login/login.service';
+import { UsuarioService } from 'app/servicios/servicios-usuarios/usuarioService';
 
 
 @Component({
@@ -21,10 +24,14 @@ export class NavbarComponent implements OnInit {
   private toggleButton: any;
   private sidebarVisible: boolean;
 
-  constructor(private sharedDataService: SharedDataService, location: Location, private element: ElementRef, public tokenService: TokenService, private router: Router) {
+  constructor(private sharedDataService: SharedDataService, location: Location, private element: ElementRef, public tokenService: TokenService, private router: Router, private servicioLogin : LoginService, private servicioUsuario : UsuarioService) {
     this.location = location;
     this.sidebarVisible = false;
   }
+
+  usuarios : Usuario[]=[];
+  usuario:Usuario = new Usuario("","","","","","","",1);
+
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
@@ -38,6 +45,7 @@ export class NavbarComponent implements OnInit {
         this.mobile_menu_visible = 0;
       }
     });
+    this.cargarUsuarios();
   }
 
 
@@ -156,10 +164,28 @@ export class NavbarComponent implements OnInit {
       this.mostrarComponente = false;
     }
   }
+  cargarUsuarios() {
+    var usuarioLocalStorage = this.servicioLogin.obtenerLocalStorageUsuario();
+    console.log(usuarioLocalStorage);
+    // Reiniciar el campo "contraseña" al cargar la página
+    //Compara el correo que se ingresó en el login con los que están en la base de datos,
+    //al encontrarlo, obtengo los datos de ese usuario para mostrarlos en el formulario,
+    //y así con más facilidad el usuario puede actualizar sus datos
+    this.servicioUsuario.getUsuarios().subscribe((res: any) => {
+      if (res && res.usuarios) {
+        this.usuarios = res.usuarios;
+        console.log(this.usuarios);
+  
+        // Buscar el usuario logueado en el arreglo de usuarios
+        this.usuario = this.usuarios.find(u => u.correo === usuarioLocalStorage.correo);
+        console.log(this.usuario);
+      }
+    });
+  }
   
   cerrarSesion() {
-    window.location.href = "/pagina_principal";
     this.tokenService.quitarToken();
+    window.location.href = '/#/dashboard';
   }
 
   emitSearchValue() {
