@@ -143,3 +143,38 @@ a.btn.btn-rose.btn-link.btn-lg {
   color: #fb9006;
 }
 
+.card-body {
+  display: flex;  /* Aplicar flexbox */
+  align-items: center;  /* Alinear verticalmente al centro */
+}
+
+.card-title {
+  margin-right: 10px;  /* Margen derecho entre el título y los elementos de la derecha */
+}
+
+.badge {
+  margin-right: 10px;  /* Margen derecho entre los elementos de la derecha */
+}
+
+.mat-raised-button.btn.btn-danger, .mat-raised-button.btn:not([class*=mat-elevation-z]).btn-danger, .btn.btn-danger {
+  color: #fff;
+  background-color: #fb9006;
+  border-color: #e88404;
+  box-shadow: 0 2px 2px 0 rgba(156, 39, 176, 0.14), 0 3px 1px -2px rgba(156, 39, 176, 0.2), 0 1px 5px 0 rgba(156, 39, 176, 0.12);}
+
+  span.badge.badge-success {
+    display: flex;
+    align-items: center;
+} 
+span.badge.badge-warning {
+  display: flex;
+  align-items: center;
+}
+
+i.material-icons {
+  margin-right: 5px;
+}
+
+.align-right {
+  margin-left: auto;
+}

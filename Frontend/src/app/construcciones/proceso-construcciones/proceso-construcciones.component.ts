@@ -6,7 +6,7 @@ import { ConsumoServiciosService } from 'app/servicios/servicios-proceso-constru
 @Component({
   selector: 'app-proceso-construcciones',
   templateUrl: './proceso-construcciones.component.html',
-  styleUrls: ['./proceso-construcciones.component.scss']
+  styleUrls: ['./proceso-construcciones.component.css']
 })
 export class ProcesoConstruccionesComponent implements OnInit {
 
@@ -29,7 +29,6 @@ export class ProcesoConstruccionesComponent implements OnInit {
     this.consumoServiciosService.getProcesosConstrucciones().subscribe(
       (procesos_construcciones: ProcesoConstrucciones[]) => {
         this.listaProcesosConstrucciones = procesos_construcciones['proceso_construcciones'];
-        console.log(this.listaProcesosConstrucciones)
       },
       (error: any) => {
         console.log('Error al obtener las herramientas', error);

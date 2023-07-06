@@ -6,5 +6,6 @@ export interface Construccion{
     ubicacion: string;
     lugar:     string;
     fecha:     string;
+    estadoLeccion: boolean;
 }
 

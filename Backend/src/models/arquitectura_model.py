@@ -32,17 +32,17 @@ class Arquitectura:
     #Entradas: No recibe ningún parámetro.
     #Salida: Devuelve una lista de diccionarios, donde cada diccionario representa una construcción de arquitectura. 
     # En caso de error o si no se encontraron construcciones, retorna None.  
-    def listar_construcciones():
+    def listar_construcciones(correo):
         try:
             conn = mysql.connect()  # Establece la conexión a la base de datos
             cursor = conn.cursor()
             print("Conexión exitosa")
-            sql = "SELECT * FROM arquitectura"
-            cursor.execute(sql)
+            sql = "SELECT a.*, IFNULL((SELECT el.estado FROM estado_lecciones el WHERE el.correoUsuario =  %s and el.id_tabla = 1 AND el.id_leccion = a.oid),0) as estado FROM arquitectura a WHERE 1"
+            cursor.execute(sql, (correo,))
             datos = cursor.fetchall()
             construcciones = []
             for fila in datos:
-                construccion = {'cod': fila[0], 'nombre': fila[1], 'resumen': fila[2], 'historia': fila[3], 'ubicacion': fila[4], 'lugar': fila[5], 'fecha': fila[6]}
+                construccion = {'cod': fila[0], 'nombre': fila[1], 'resumen': fila[2], 'historia': fila[3], 'ubicacion': fila[4], 'lugar': fila[5], 'fecha': fila[6], 'estadoLeccion': fila[7]}
                 construcciones.append(construccion)
             conn.close()
             return construcciones
@@ -152,6 +152,32 @@ class Arquitectura:
             construcciones = []
             for fila in datos:
                 construccion = {'cod': fila[0], 'imagen_url': fila[3], 'oidRecurso': fila[1], 'oidTabla': fila[2]}
+                construcciones.append(construccion)
+            conn.close()
+            return construcciones
+        except Exception as ex:
+            return None
+        
+    @staticmethod
+    #Este método establece una conexión a la base de datos MySQL y ejecuta una consulta para obtener todas las imagenes de construcciones de la tabla 
+    #Imagenes". Luego, los datos obtenidos se almacenan en una lista de diccionarios, 
+    #donde cada diccionario representa una construcción. Finalmente, se cierra la conexión a la base de datos y se devuelve la lista de construcciones.
+    #En caso de error, se devuelve
+    # Firma: @staticmethod def listar_construcciones() -> json
+    #Entradas: No recibe ningún parámetro.
+    #Salida: Devuelve una lista de diccionarios, donde cada diccionario representa una construcción de arquitectura. 
+    # En caso de error o si no se encontraron construcciones, retorna None.  
+    def listarConstruE(correo):
+        try:
+            conn = mysql.connect()  # Establece la conexión a la base de datos
+            cursor = conn.cursor()
+            print("Conexión exitosa")
+            sql = "SELECT id_leccion, estado FROM estado_lecciones WHERE correoUsuario = %s AND id_tabla = 7"
+            cursor.execute(sql, (correo,))
+            datos = cursor.fetchall()
+            construcciones = []
+            for fila in datos:
+                construccion = {'id_leccion': fila[0], 'estado': fila[1]}
                 construcciones.append(construccion)
             conn.close()
             return construcciones

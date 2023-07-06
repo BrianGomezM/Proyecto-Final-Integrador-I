@@ -2,12 +2,14 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4 col-sm-5">
-                <button mat-raised-button="" data-toggle="modal" data-target="#exampleModal" (click)="verificarModelo(8)" class="btn btn-youtube mat-raised-button mat-button-base"><span class="mat-button-wrapper">
-                    <i class="fa fa-youtube-play"></i> Egipto - Youtube </span>
+                <button mat-raised-button="" data-toggle="modal" data-target="#exampleModal"
+                    (click)="verificarModelo(8)" class="btn btn-youtube mat-raised-button mat-button-base"><span
+                        class="mat-button-wrapper">
+                        <i class="fa fa-youtube-play"></i> Egipto - Youtube </span>
                     <div matripple="" class="mat-ripple mat-button-ripple"></div>
                     <div class="mat-button-focus-overlay"></div>
                 </button>
-               
+
             </div>
         </div>
         <div class="row">
@@ -16,11 +18,23 @@
                     <img src="https://images.unsplash.com/photo-1668113399129-4b4f8520b9dc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                         class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-title">Templo egipcio</h4>
+                        <div class="title-row">
+                            <h4 class="card-title">Templo egipcio</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 1">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion1">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
                         <p class="card-category">
                             Es importante destacar que la arquitectura de los templos egipcios evolucionó a lo largo de
                             los años, y las características específicas podían variar según la época y la región en la
-                            que se construyeran
+                            que se construyeran.
                         </p>
                     </div>
                     <div class="card-footer" style="display: flex; justify-content: center;">
@@ -41,7 +55,19 @@
                     <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                         class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-title">Pirámide</h4>
+                        <div class="title-row">
+                            <h4 class="card-title">Pirámide</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 2">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion2">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
                         <p class="card-category">
                             las pirámides egipcias eran importantes por su significado religioso, su simbolismo de
                             poder, su importancia arquitectónica y su capacidad para preservar y conservar la historia y
@@ -66,7 +92,19 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Museo_Arqueol%C3%B3gico_Nacional_de_Espa%C3%B1a_-_Sarc%C3%B3fago.jpg/1280px-Museo_Arqueol%C3%B3gico_Nacional_de_Espa%C3%B1a_-_Sarc%C3%B3fago.jpg"
                         class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-title">Sarcófago saíta</h4>
+                        <div class="title-row">
+                            <h4 class="card-title">Sarcófago saíta</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 3">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion3">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
                         <p class="card-category">
                             son importantes para entender el arte y la cultura del antiguo Egipto durante el período
                             saíta. Estas obras proporcionan valiosa información sobre las creencias religiosas, los
@@ -91,7 +129,19 @@
                     <img src="https://images.unsplash.com/photo-1582729704907-f07a96126069?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                         class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-title">La Esfinge</h4>
+                        <div class="title-row">
+                            <h4 class="card-title">La Esfinge</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 4">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion4">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
                         <p class="card-category">
                             La Gran Esfinge de Guiza es un símbolo icónico de la antigua civilización egipcia y una
                             destacada atracción turística en Egipto. Su antigüedad, diseño enigmático y asociación con
@@ -116,7 +166,19 @@
                     <img src="https://media.sketchfab.com/models/e25c0cdeda154e9f83b70a4dbe1e962f/thumbnails/f5684a8b374c427caba399dc95bca59b/75cbe18f41da45e1a1e0d33f17c43937.jpeg"
                         class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-title">Cofre canópico</h4>
+                        <div class="title-row">
+                            <h4 class="card-title">Cofre canópico</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 5">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion5">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
                         <p class="card-category">
                             Los cofres canópicos eran elaboradas piezas de artesanía que requerían conocimientos
                             especializados en carpintería, tallado y pintura. Estos cofres eran parte integral de los
@@ -141,7 +203,19 @@
                     <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Ob%C3%A9lisque_Louqsor_Concorde_a.jpg"
                         class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-title">Obeliscos</h4>
+                        <div class="title-row">
+                            <h4 class="card-title">Obeliscos</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 6">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion6">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
                         <p class="card-category">
                             Los obeliscos son pilares de piedra altos y delgados que solían ser erigidos en parejas
                             frente a los templos. El Obelisco Inacabado en Asuán y el Obelisco Lateranense en Roma son
@@ -166,7 +240,19 @@
                     <img src="https://gobookmart.com/wp-content/uploads/2023/02/Rise-and-Fall-of-The-Egyptian-Empire-A-tale-of-Glory-and-Tragedy.jpg"
                         class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-title">Fortalezas</h4>
+                        <div class="title-row">
+                            <h4 class="card-title">Fortalezas</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 7">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion7">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
                         <p class="card-category">
                             En diferentes épocas, se construyeron fortalezas en lugares estratégicos a lo largo del Nilo
                             para defender el territorio y proteger las fronteras del antiguo Egipto. El Fuerte de
@@ -192,7 +278,19 @@
                     <img src="https://i0.wp.com/landioustravel.com/wp-content/uploads/2021/06/Complejo-Deir-el-Bahari-e1624654697382.jpg?fit=1200%2C675&ssl=1"
                         class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h4 class="card-title">Templos funerarios</h4>
+                        <div class="title-row">
+                            <h4 class="card-title">Templos funerarios</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 8">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion8">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
                         <p class="card-category">
                             Junto a las pirámides, se construyeron templos funerarios que servían como lugares de culto
                             y adoración para los faraones. El Templo del Valle de Keops y el Templo del Valle de
@@ -228,9 +326,7 @@
             </div>
             <div class="modal-body">
                 <div class="embed-responsive embed-responsive-16by9" id="iframeContainer">
-                    <iframe class="embed-responsive-item" frameborder="0"
-                        src=""
-                        allowfullscreen></iframe>
+                    <iframe class="embed-responsive-item" frameborder="0" src="" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

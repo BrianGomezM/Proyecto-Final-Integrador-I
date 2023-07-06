@@ -20,9 +20,9 @@ arquitectura_app = Blueprint('arquitectura_app', __name__)
 #Datos de salida: Devuelve un JSON con una lista de construcciones y un mensaje 
 #indicando que se trata de una lista de construcciones egipcias. 
 #En caso de error, devuelve un mensaje de error.
-@arquitectura_app.route('/arquitectura', methods=['GET'])
-def listar_construcciones():
-    construcciones = Arquitectura.listar_construcciones()
+@arquitectura_app.route('/arquitectura/<correo>', methods=['GET'])
+def listar_construcciones(correo):
+    construcciones = Arquitectura.listar_construcciones(correo)
     if construcciones is not None:
         return jsonify({'construcciones': construcciones, 'mensaje': "Lista de construcciones egipcias"})
     else:
@@ -33,7 +33,7 @@ def listar_construcciones():
 #Datos de salida: Devuelve un JSON con los detalles de la construcción encontrada y un mensaje 
 #indicando que se encontró la construcción. En caso de no encontrar la construcción,
 #devuelve un mensaje indicando que no se encontró. .
-@arquitectura_app.route('/arquitectura/<codigo>', methods=['GET'])
+@arquitectura_app.route('/arquitecturaf/<codigo>', methods=['GET'])
 def buscar_construccion(codigo):
     construccion = Arquitectura.buscar_construccion(codigo)
 
@@ -89,5 +89,18 @@ def listar_construccionesIMG(codigo):
     imagenes = Arquitectura.listar_construccionesIMG(codigo)
     if imagenes is not None:
         return jsonify({'construcciones': imagenes, 'mensaje': "Lista imagenes de construcciones egipcias"})
+    else:
+        return jsonify({"mensaje": "Error"})
+    
+
+#Método: GET
+#Datos de entrada: No se requieren datos de entrada.
+#Datos de salida: Devuelve un JSON con una lista de imagenes 
+#En caso de error, devuelve un mensaje de error.
+@arquitectura_app.route('/listarConstruE/<correo>', methods=['GET'])
+def listarConstruE(correo):
+    varlistarConstruE = Arquitectura.listarConstruE(correo)
+    if varlistarConstruE is not None:
+        return jsonify({'construcciones': varlistarConstruE, 'mensaje': "Lista imagenes de construcciones egipcias"})
     else:
         return jsonify({"mensaje": "Error"})

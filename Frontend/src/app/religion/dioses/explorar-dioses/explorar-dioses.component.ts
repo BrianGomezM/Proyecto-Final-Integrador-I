@@ -47,7 +47,7 @@ export class ExplorarDiosesComponent implements OnInit {
       this.consumoServiciosService.getFiltro(searchValue).subscribe(
         (dioses: Dioses[]) => {
           this.listaDioses = dioses['dioses'];
-          
+          this.cargarEstado();
           
         },
         (error: any) => {
