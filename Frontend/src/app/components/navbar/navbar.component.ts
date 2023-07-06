@@ -158,7 +158,7 @@ export class NavbarComponent implements OnInit {
   }
   
   cerrarSesion() {
-    window.location.href = "/pagina_principal";
+    window.location.href = "/#/login";
     this.tokenService.quitarToken();
   }
 
