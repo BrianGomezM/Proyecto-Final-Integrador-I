@@ -4,6 +4,8 @@ import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
 import { Router } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SharedDataService } from 'app/servicios-compartidos/shared-data-service.service';
+import { LeccionesService } from 'app/servicios-compartidos/lecciones.service';
+import { LoginService } from 'app/servicios/servicios-login/login.service';
 
 @Component({
   selector: 'app-explorar-dioses',
@@ -14,21 +16,38 @@ export class ExplorarDiosesComponent implements OnInit {
   tarjetasDuplicadas: any[] = [];
   public listaDioses: Array<Dioses> = [];
   isLoading=true;
+  usuarioCorreo = "";
+  listaLecciones=[];
+
   constructor(
     private router: Router,
     private consumoServiciosService: ConsumoServiciosService,
-    private sharedDataService: SharedDataService
+    private sharedDataService: SharedDataService,
+    private leccionesService: LeccionesService,
+    public servicioLogin:LoginService
   ) { }
 
   ngOnInit(): void {
   /**
  * Obtiene todos los dioses.
  */
+  this.usuarioCorreo = this.servicioLogin.obtenerLocalStorageUsuario().correo;
+  
+  this.leccionesService.getLecciones(this.usuarioCorreo,2).subscribe(
+    (lecciones: any[]) => {
+      this.listaLecciones = lecciones['Lecciones']
+    },
+    (error: any) => {
+      console.log('Error al obtener las construcciones:', error);
+    }
+  );
+
   this.sharedDataService.searchValue$.subscribe((searchValue: string) => {
     if (searchValue) {
       this.consumoServiciosService.getFiltro(searchValue).subscribe(
         (dioses: Dioses[]) => {
           this.listaDioses = dioses['dioses'];
+          this.cargarEstado();
           
         },
         (error: any) => {
@@ -39,6 +58,8 @@ export class ExplorarDiosesComponent implements OnInit {
       this.consumoServiciosService.getAllGods().subscribe(
         (dioses: Dioses[]) => {
           this.listaDioses = dioses['dioses'];
+          this.cargarEstado();
+         
         },
         (error: any) => {
           console.log('Error al obtener las construcciones:', error);
@@ -54,7 +75,36 @@ export class ExplorarDiosesComponent implements OnInit {
  */
   mostrarDetalles(dios:Dioses){
     this.router.navigate(['/detalles-dios', dios.cod]);
+    this.insertarVisto(dios)
   }
+
+
+
+  cargarEstado(){
+    for(let i = 0; i<this.listaLecciones.length;i++){
+      if(this.listaDioses.find((d: Dioses) => d.cod === this.listaLecciones[i].idLeccion)!== undefined){
+        this.listaDioses.find((d: Dioses) => d.cod === this.listaLecciones[i].idLeccion).estado=true;
+      }
+    }
+    for(let i = 0; i<this.listaDioses.length;i++){
+      if(this.listaDioses[i].estado != true){
+        this.listaDioses[i].estado=false;
+      }
+    }
+    console.log(this.listaDioses)
   }
+
+  insertarVisto(dios:Dioses){
+    if(!dios.estado){
+      this.leccionesService.insertarLecciones(2,dios.cod,this.usuarioCorreo).subscribe(
+        () => {
+        },
+        (error) => {
+        }
+      );
+    }
+  }
+}
+
   
 

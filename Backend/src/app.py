@@ -10,6 +10,7 @@ from controllers.controllerUsuario import usuario_app
 from controllers.test_controller import test_app
 from controllers.controller_mitos_historias import mitos_historias_app
 from controllers.controller_proceso_construcciones import proceso_construcciones_app
+from controllers.lecciones_controller import lecciones_app
 from controllers.controller_practicas import practicas_app
 
 #FIRMA DE LA CLASE APP.PY
@@ -37,7 +38,7 @@ app.register_blueprint(usuario_app)
 app.register_blueprint(login_app)
 app.register_blueprint(test_app)
 app.register_blueprint(mitos_historias_app)
-app.register_blueprint(proceso_construcciones_app)
+app.register_blueprint(lecciones_app)
 app.register_blueprint(practicas_app)
 
 # Función que maneja el error 404 (página no encontrada) y devuelve una respuesta HTML con un mensaje correspondiente.

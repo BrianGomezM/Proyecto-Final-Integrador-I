@@ -28,9 +28,8 @@
             </div>
             <div class="card-body">
               <h4 class="card-title"><a href="#pablo">{{ tarjeta.construccion.nombre }}</a></h4>
-              <!--div class="card-description" style="text-align: justify;">
-                {{ tarjeta.construccion.resumen }}
-              </div -->                      
+              <span *ngIf="tarjeta.construccion.estadoLeccion" class="badge badge-success align-right"><i class="material-icons">verified</i>Visto</span>
+              <span *ngIf="!tarjeta.construccion.estadoLeccion" class="badge badge-warning align-right"><i class="material-icons">report</i>Pendiente</span>                     
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -41,7 +40,7 @@
               </div>
               <div class="stats">
                 <div class="card-footer justify-content-center">
-                  <button mat-raised-button type="submit" (click)="abrirModal(tarjeta.construccion.cod)" class="btn btn-danger pull-right">Ver más</button>
+                  <button mat-raised-button type="submit" (click)="abrirModal(tarjeta.construccion.estadoLeccion, tarjeta.construccion.cod)" class="btn btn-danger pull-right">Ver más</button>
                 </div>
               </div>
             </div>

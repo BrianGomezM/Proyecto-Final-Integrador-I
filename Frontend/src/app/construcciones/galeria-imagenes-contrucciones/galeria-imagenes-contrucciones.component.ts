@@ -3,7 +3,8 @@ import { Construccion } from 'app/servicios/servicios-contruccion/interface-cons
 import { ConsumoServiciosService } from '../../servicios/servicios-contruccion/consumo-servicios.service';
 import { ImgConstruccion } from 'app/servicios/servicios-contruccion/interface-img-construccion';
 import { Router } from '@angular/router';
-
+import { LoginService } from 'app/servicios/servicios-login/login.service';
+import { LeccionesService } from 'app/servicios-compartidos/lecciones.service';
 
 @Component({
   selector: 'app-galeria-imagenes-contrucciones',
@@ -18,10 +19,12 @@ export class GaleriaImagenesContruccionesComponent implements OnInit {
   mostrarFormulario : boolean = false; 
   public datosArquitectura: any;
   public datosArquitecturaIMG: any;
-  constructor( private router: Router, private consumoServiciosService: ConsumoServiciosService, private elementRef: ElementRef) { }
+  usuarioCorreo = "";
+  constructor( private router: Router, private consumoServiciosService: ConsumoServiciosService, private elementRef: ElementRef,  public servicioLogin:LoginService,     private leccionesService: LeccionesService) { }
 
   ngOnInit(): void {
-    this.consumoServiciosService.getConstrucciones().subscribe(
+    this.usuarioCorreo = this.servicioLogin.obtenerLocalStorageUsuario().correo;
+    this.consumoServiciosService.getConstrucciones(this.usuarioCorreo).subscribe(
       (construcciones: Construccion[]) => {
         this.construcciones = construcciones;
         this.duplicarTarjetas(this.construcciones['construcciones']);   
@@ -53,7 +56,19 @@ export class GaleriaImagenesContruccionesComponent implements OnInit {
         // Realiza acciones de manejo de errores aquí
       });
   }
-  public abrirModal(varCod): void {
+  public abrirModal(estadoLeccion, varCod): void {
+    this.insertarVisto(estadoLeccion, varCod);
     this.router.navigate(['/detalleArq', varCod]);
+  }
+
+  insertarVisto(estado, cod){
+    if(!estado){
+      this.leccionesService.insertarLecciones(1,cod,this.usuarioCorreo).subscribe(
+        () => {
+        },
+        (error) => {
+        }
+      );
+    }
   }
 }

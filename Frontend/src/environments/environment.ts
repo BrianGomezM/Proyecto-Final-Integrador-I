@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  //baseUrl: 'http://127.0.0.1:5000/',
-  baseUrl: 'https://egyptianapi.onrender.com/',
+  // baseUrl: 'https://egyptianapi.onrender.com/',
+  baseUrl: 'http://127.0.0.1:5000/'
   // Resto de las propiedades
 };
 
