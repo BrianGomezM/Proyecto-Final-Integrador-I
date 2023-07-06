@@ -144,9 +144,9 @@ class Usuario:
             conn = mysql.connect()  # Establecer la conexión a la base de datos
             cursor = conn.cursor()
             
-            comparador = os.path.relpath(usuario['urlAvatar'], '').replace('\\', '//').replace('https://egiptianapionrender.com/static', '')
+            comparador = os.path.relpath(usuario['urlAvatar'], '').replace('\\', '/').replace('http:/127.0.0.1:5000/static/', '')
             
-            if comparador != 'https://egiptianapionrender.com/static':
+            if comparador != 'http:/127.0.0.1:5000/static':
                 sql = "SELECT urlAvatar FROM usuario WHERE id = %s"
                 cursor.execute(sql, (usuario['id'],))
                 resultado = cursor.fetchone()
@@ -157,7 +157,7 @@ class Usuario:
                     os.makedirs(ruta_imagen, exist_ok=True)  # Crea la estructura de carpetas si no existe
                     datos_imagen = Usuario.obtener_datos_imagen(usuario['urlAvatar'], ruta_imagen)
                     Usuario.guardar_imagen(datos_imagen[0], datos_imagen[1])
-                    ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto).replace('\\', '//').replace('static/', '')
+                    ruta_relativa = os.path.relpath(datos_imagen[0], ruta_proyecto).replace('\\', '/').replace('static/', '')
                 if resultado and resultado[0] == comparador:
                     ruta_relativa = resultado[0]
             else: ruta_relativa = ''
