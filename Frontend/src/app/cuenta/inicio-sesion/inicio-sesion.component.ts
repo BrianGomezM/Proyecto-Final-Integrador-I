@@ -111,13 +111,13 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
         this.servicioUsuario.crearUsuario(this.usuarioGoogleToRegistrar).subscribe(respuesta => {
           console.log(respuesta['mensaje'])
           if(respuesta['mensaje'] === "El correo electrónico ya está registrado"){
-            alert("No es necesario registrar");
+            //alert("No es necesario registrar");
             this.loginService.guardarUsuarioAlLocalStorage(this.usuarioGoogleToRegistrar);
           }
           else{
             console.log(this.usuarioGoogleToRegistrar);
             this.usuario = new Usuario("", "", "", "", "", "");
-            alert("Cuenta creada exitosamente!");
+            //alert("Cuenta creada exitosamente!");
             this.loginService.guardarUsuarioAlLocalStorage(this.usuarioGoogleToRegistrar);
           }
         });
@@ -128,8 +128,8 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
 
       if(response.credential){
         localStorage.setItem("token",response.credential);
-        //document.location.href = "/dashboard";
-        this.router.navigate(["dashboard"]);
+        document.location.href = "dashboard";
+        //this.router.navigate(["dashboard"]);
       }
 
     };
