@@ -128,7 +128,8 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
 
       if(response.credential){
         localStorage.setItem("token",response.credential);
-        document.location.href = "/dashboard";
+        //document.location.href = "/dashboard";
+        this.router.navigate(["dashboard"]);
       }
 
     };
