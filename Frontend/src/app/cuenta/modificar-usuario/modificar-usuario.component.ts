@@ -76,7 +76,7 @@ export class ModificarUsuarioComponent implements OnInit {
             alert("Ingrese con sus nuevos datos");
             this.servicioToken.quitarToken();
             //this.router.navigate(['login']);
-            window.location.href = '/#/login';
+            window.location.href = 'login';
           }
         });
     } else {
