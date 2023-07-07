@@ -16,23 +16,17 @@ export const ROUTES: RouteInfo[] = [
   {
     path: '#dioses', id: 'dioses', title: 'DIOSES', title2: '► Dioses', icon: 'auto_stories', children: [
       { path: '/explorar-dioses', title: 'DIOSES', title2: 'Dioses ► Dioses', icon: 'psychology_alt', children: null },
-      { path: '/galeria-imagenes', title: 'IMÁGENES', title2: 'Dioses ► Imágenes', icon: 'images', children: null },
     ]
   },
   {
     path: '#mitologia', id: 'mitologia', title: 'MITOLOGÍA', title2: '► Mitología', icon: 'diversity_2', children: [
       { path: '/mitos-historias', title: 'HISTORIAS', title2: 'Mitología ► Historias', icon: 'history_edu', children: null },
       { path: '/criaturas-mitologicas', title: 'CRIATURAS', title2: 'Mitología ► Criaturas', icon: 'android', children: null },
-      { path: '/galeria-imagenes-mitologicas', title: 'IMÁGENES', title2: 'Mitología ► Imágenes', icon: 'images', children: null },
     ]
   },
   {
     path: '#reli', id: 'reli', title: 'RELIGIÓN', title2: '► Religión', icon: 'brightness_high', children: [
-      { path: '/rituales', title: 'RITUALES', title2: 'Religión ► Rituales', icon: 'local_fire_department', children: null },
-      { path: '/ceremonias', title: 'CEREMONIAS', title2: 'Religión ► Ceremonias', icon: 'diversity_3', children: null },
       { path: '/practicas-religiosas', title: 'PRACTICAS', title2: 'Religión ► Practicas', icon: 'assignment', children: null },
-      { path: '/expresiones-fe', title: 'EXPRESIONES', title2: 'Religión ► Expresiones de fe', icon: 'volunteer_activism', children: null },
-      { path: '/galeria-imagenes-religiosas', title: 'IMÁGENES', title2: 'Religión ► Imágenes', icon: 'images', children: null }
     ]
   },
   {
