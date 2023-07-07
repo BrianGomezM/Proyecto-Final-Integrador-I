@@ -9,7 +9,10 @@
                           </div>                          
                         <div class="card-body">                    
                             
-                            <h4 class="card-title titulo"><a href="#">{{ criatura.nombre }}</a></h4>
+                            <h4 class="card-title titulo"><a href="#">{{ criatura.nombre }}  </a>
+                                <span *ngIf="criatura.estado" class="badge badge-success"><i class="material-icons">verified</i>Visto</span>
+                                <span *ngIf="!criatura.estado" class="badge badge-warning"><i class="material-icons">report</i>Pendiente</span>
+                            </h4>
                             <div class="card-description"><h6>representación:</h6>{{ criatura.representacion }}</div>
                         </div>
                         <div class="card-footer">

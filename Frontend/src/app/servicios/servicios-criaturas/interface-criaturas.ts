@@ -10,4 +10,5 @@ export interface Criatura{
     caracteristicas:string;
     rol:string;
     imagen:string;
+    estado:boolean;
 }
