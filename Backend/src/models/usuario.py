@@ -190,13 +190,16 @@ class Usuario:
                 
                 
             #En estas líneas de código, se verifica que el correo que se desea actualizar no lo tenga algún otro usuario, 
-            # excepto si la variable resultado coincide con el correo del mismo usuario
+            # excepto si la variable respuesta coincide con el correo del mismo usuario
             sql = "SELECT correo FROM usuario WHERE correo = %s"
             cursor.execute(sql, (usuario['correo'],))
-            resultado = cursor.fetchone()
+            respuesta = cursor.fetchone()
+            
+            print(respuesta)
+            print(respuesta[0])
 
-            # Verificar si el resultado coincide con el correo del mismo usuario
-            if resultado and resultado[0] != usuario['correo']:
+            # Verificar si el respuesta coincide con el correo del mismo usuario
+            if respuesta and respuesta[0] != usuario['correo']:
                 raise Exception("El correo electrónico ya está registrado")
             
             # Actualizar los datos del usuario en la base de datos

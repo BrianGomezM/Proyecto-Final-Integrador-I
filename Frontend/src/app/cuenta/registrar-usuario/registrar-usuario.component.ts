@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 import { UsuarioService } from 'app/servicios/servicios-usuarios/usuarioService';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+declare var $: any;
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -85,14 +86,14 @@ export class RegistrarUsuarioComponent implements OnInit {
         this.servicioUsuario.crearUsuario(this.usuario).subscribe(respuesta => {
           console.log(respuesta['mensaje'])
           if(respuesta['mensaje'] === "El correo electrónico ya está registrado"){
-            alert("Pruebe con otro correo");
+            this.showNotification('top','center', 'danger', 'Pruebe con un correo diferente', 'dangerous') 
           }
           else{
             //console.log(this.usuario);
             this.usuarioCreado.emit(this.usuario);
             this.usuario = new Usuario("", "", "", "", "", "");
             alert("Cuenta creada exitosamente!");
-            this.router.navigate(['/login']);
+            this.router.navigate(['login']);
           }
         });
     } else {
@@ -102,10 +103,37 @@ export class RegistrarUsuarioComponent implements OnInit {
   }
   
   toBack(){
-    window.location.href = '/login';
+    window.location.href = 'login';
   }
 
 
+  showNotification(from, align, type, mensaje, icon){
+    // const type = ['','info','success','warning','danger'];
+
+     const color = Math.floor((Math.random() * 4) + 1);
+
+     $.notify({
+         icon: "Notificación",
+         message: mensaje
+     },{
+         type:  type,
+         timer: 4000,
+         placement: {
+             from: from,
+             align: align
+         },
+         template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
+           '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+           '<i class="material-icons" data-notify="icon">'+icon+'</i> ' +
+           '<span data-notify="title">{1}</span> ' +
+           '<span data-notify="message">{2}</span>' +
+           '<div class="progress" data-notify="progressbar">' +
+             '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+           '</div>' +
+           '<a href="{3}" target="{4}" data-notify="url"></a>' +
+         '</div>'
+     });
+ }
 
   
 

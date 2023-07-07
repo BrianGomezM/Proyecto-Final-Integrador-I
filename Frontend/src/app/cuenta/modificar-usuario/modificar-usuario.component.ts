@@ -5,6 +5,7 @@ import { UsuarioService } from 'app/servicios/servicios-usuarios/usuarioService'
 import { Router } from '@angular/router';
 import { LoginService } from 'app/servicios/servicios-login/login.service';
 import { TokenService } from 'app/servicios/servicios-login/tokenService';
+declare var $: any;
 
 @Component({
   selector: 'app-modificar-usuario',
@@ -66,14 +67,13 @@ export class ModificarUsuarioComponent implements OnInit {
         this.servicioUsuario.modificarUsuario(this.usuario).subscribe(respuesta => {
           console.log(respuesta['mensaje'])
           if(respuesta['mensaje'] === "El correo electrónico ya está registrado"){
-            alert("Pruebe con otro correo");
+            this.showNotification('top','center', 'danger', 'Pruebe con un correo diferente', 'dangerous') 
           }
           else{
             //console.log(this.usuario);
             this.usuarioModificado.emit(this.usuario);
             this.usuario = new Usuario("", "", "", "", "", "");
-            alert("Cuenta modificada exitosamente!");
-            alert("Ingrese con sus nuevos datos");
+            this.showNotification('top','center', 'success', 'Cuenta modificada exitosamente!, ingrese con sus nuevos datos', 'download_done')
             this.servicioToken.quitarToken();
             //this.router.navigate(['login']);
             window.location.href = 'login';
@@ -149,6 +149,34 @@ export class ModificarUsuarioComponent implements OnInit {
   toBack(){
     window.location.href = '/#/dashboard';
   }
+
+  showNotification(from, align, type, mensaje, icon){
+    // const type = ['','info','success','warning','danger'];
+
+     const color = Math.floor((Math.random() * 4) + 1);
+
+     $.notify({
+         icon: "Notificación",
+         message: mensaje
+     },{
+         type:  type,
+         timer: 4000,
+         placement: {
+             from: from,
+             align: align
+         },
+         template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
+           '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
+           '<i class="material-icons" data-notify="icon">'+icon+'</i> ' +
+           '<span data-notify="title">{1}</span> ' +
+           '<span data-notify="message">{2}</span>' +
+           '<div class="progress" data-notify="progressbar">' +
+             '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+           '</div>' +
+           '<a href="{3}" target="{4}" data-notify="url"></a>' +
+         '</div>'
+     });
+ }
   
 
 }

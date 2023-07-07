@@ -38,6 +38,7 @@ app.register_blueprint(usuario_app)
 app.register_blueprint(login_app)
 app.register_blueprint(test_app)
 app.register_blueprint(mitos_historias_app)
+app.register_blueprint(proceso_construcciones_app)
 app.register_blueprint(lecciones_app)
 app.register_blueprint(practicas_app)
 
