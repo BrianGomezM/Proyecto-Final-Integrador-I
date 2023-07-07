@@ -46,4 +46,18 @@ export class LeccionesService {
       );
     }
 
+  
+    getlistarConstruE(correo: string): Observable<any[]> {
+      let url = this.baseUrl + 'listarPinturasL/' + correo;
+      let header = new HttpHeaders();
+      header.append('Content-Type', 'application/json');
+      header.append('Access-Control-Allow-Origin', 'http://localhost');
+      return this.http.get<any[]>(url, { headers: header }).pipe(
+        catchError(error => {
+          console.log('Error en la solicitud:', error);
+          // Puedes realizar acciones de manejo de errores aquí, como mostrar un mensaje al usuario o realizar alguna otra acción necesaria
+          return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
+        }));
+    }
+
 }

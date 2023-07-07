@@ -1,0 +1,334 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-sm-5">
+                <!-- <button mat-raised-button="" data-toggle="modal" data-target="#exampleModal"
+                    (click)="verificarModelo(8)" class="btn btn-youtube mat-raised-button mat-button-base"><span
+                        class="mat-button-wrapper">
+                        <i class="fa fa-youtube-play"></i> Egipto - Youtube </span>
+                    <div matripple="" class="mat-ripple mat-button-ripple"></div>
+                    <div class="mat-button-focus-overlay"></div>
+                </button> -->
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card card-chart">
+                    <img src="https://historia.nationalgeographic.com.es/medio/2019/01/30/el-descubrimiento-del-rey-tut_e6233a3f_1200x630.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="title-row">
+                            <h4 class="card-title">Tumba de Tutankamón</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 1">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion1">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
+                        <p class="card-category">
+                            La tumba de Tutankamón, también conocida como la Tumba KV62, es una de las tumbas más famosas y fascinantes del antiguo Egipto. 
+                            Descubierta en 1922 por el arqueólogo Howard Carter, la tumba de Tutankamón es especial debido a que se encontraba prácticamente intacta, 
+                            lo que permitió revelar una gran cantidad de tesoros y artefactos funerarios.
+                        </p>
+                    </div>
+                    <div class="card-footer" style="display: flex; justify-content: center;">
+                        <div class="stats" style="align-items: center;">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                (click)="verificarModelo(0)">
+                                <i _ngcontent-ptt-c107="" _ngcontent-dfa-c50="" class="material-icons" style="
+                                    top: 0px !important;
+                                    font-size: 21px !important;
+                                ">view_in_ar</i> VER VIDEO
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-chart">
+                    <img src="https://www.biografiasyvidas.com/monografia/ramses_ii/fotos/ramses_ii_luxor.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="title-row">
+                            <h4 class="card-title">Tumba de Ramsés II</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 2">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion2">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
+                        <p class="card-category">
+                            La tumba de Ramsés II, uno de los faraones más poderosos del antiguo Egipto, 
+                            se encuentra en el Valle de los Reyes y es conocida como la Tumba KV7. 
+                            Esta imponente tumba es una de las más grandes y complejas de la región, 
+                            reflejando la grandeza y el legado duradero de Ramsés II.
+                        </p>
+                    </div>
+                    <div class="card-footer" style="display: flex; justify-content: center;">
+                        <div class="stats" style="align-items: center;">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                (click)="verificarModelo(1)">
+                                <i _ngcontent-ptt-c107="" _ngcontent-dfa-c50="" class="material-icons" style="
+                                    top: 0px !important;
+                                    font-size: 21px !important;
+                                ">view_in_ar</i> MODELO 3D
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-chart">
+                    <img src="https://www.civitatis.com/f/egipto/egipto/guia/templo-hatsepsut.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="title-row">
+                            <h4 class="card-title">Tumba de Hatshepsut</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 3">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion3">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
+                        <p class="card-category">
+                            La tumba de Hatshepsut, también conocida como la Tumba KV20, 
+                            es una estructura arquitectónica notable ubicada en el Valle de los Reyes. 
+                            Esta tumba es famosa por ser el lugar de descanso final de Hatshepsut, 
+                            una de las pocas mujeres faraónicas que gobernaron en el antiguo Egipto.
+                        </p>
+                    </div>
+                    <div class="card-footer" style="display: flex; justify-content: center;">
+                        <div class="stats" style="align-items: center;">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                (click)="verificarModelo(2)">
+                                <i _ngcontent-ptt-c107="" _ngcontent-dfa-c50="" class="material-icons" style="
+                                    top: 0px !important;
+                                    font-size: 21px !important;
+                                ">view_in_ar</i> VER VIDEO
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-chart">
+                    <img src="https://images.unsplash.com/photo-1582729704907-f07a96126069?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="title-row">
+                            <h4 class="card-title">Jeroglifico de Horus</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 4">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion4">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
+                        <p class="card-category">
+                            Un jeroglífico representando a Horus, uno de los dioses más importantes y venerados en la antigua cultura egipcia,
+                             mostraría al dios con rasgos distintivos. Horus es generalmente representado como un hombre con cabeza de halcón, 
+                             símbolo de su conexión con el cielo y los aspectos celestiales.
+                        </p>
+                    </div>
+                    <div class="card-footer" style="display: flex; justify-content: center;">
+                        <div class="stats" style="align-items: center;">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                (click)="verificarModelo(3)">
+                                <i _ngcontent-ptt-c107="" _ngcontent-dfa-c50="" class="material-icons" style="
+                                    top: 0px !important;
+                                    font-size: 21px !important;
+                                ">view_in_ar</i> MODELO 3D
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-chart">
+                    <img src="https://estaticos-cdn.prensaiberica.es/clip/074d02c8-4c6b-4467-ab3c-f631e7e612aa_16-9-aspect-ratio_default_0.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="title-row">
+                            <h4 class="card-title">Jeroglificos en templo de de Ramsés II</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 5">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion5">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
+                        <p class="card-category">
+                            Los jeroglíficos en el templo de Ramsés II, también conocido como el Templo de Abu Simbel, 
+                            son una muestra impresionante del arte y la escritura egipcia. Estos jeroglíficos tallados 
+                            en las paredes y columnas del templo representan diversos aspectos de la vida y los logros 
+                            del poderoso faraón.
+                        </p>
+                    </div>
+                    <div class="card-footer" style="display: flex; justify-content: center;">
+                        <div class="stats" style="align-items: center;">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                (click)="verificarModelo(4)">
+                                <i _ngcontent-ptt-c107="" _ngcontent-dfa-c50="" class="material-icons" style="
+                                    top: 0px !important;
+                                    font-size: 21px !important;
+                                ">view_in_ar</i> MODELO 3D
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-chart">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Rosetta_Stone.JPG"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="title-row">
+                            <h4 class="card-title">Piedra Rosetta</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 6">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion6">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
+                        <p class="card-category">
+                            La Piedra Rosetta es uno de los hallazgos más significativos en la historia de la decodificación de jeroglíficos egipcios.
+                             Es una losa de granito que fue descubierta en 1799 en Rosetta (Rashid), una ciudad de Egipto, durante la ocupación francesa.
+                        </p>
+                    </div>
+                    <div class="card-footer" style="display: flex; justify-content: center;">
+                        <div class="stats" style="align-items: center;">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                (click)="verificarModelo(5)">
+                                <i _ngcontent-ptt-c107="" _ngcontent-dfa-c50="" class="material-icons" style="
+                                    top: 0px !important;
+                                    font-size: 21px !important;
+                                ">view_in_ar</i> MODELO 3D
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-chart">
+                    <img src="https://masdearte.com/media/g_museoelcairo.jpg"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="title-row">
+                            <h4 class="card-title">Piezas del Museo Egipcio en El Cairo</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 7">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion7">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
+                        <p class="card-category">
+                            Estas dos piezas son dos piedras con jeroglíficos que destacan por su importancia histórica y su valor arqueológico. 
+                            Estas piedras, junto con otros artefactos y tesoros del museo, 
+                            representan una ventana al antiguo Egipto y su rica civilización.
+                        </p>
+                    </div>
+                    <div class="card-footer" style="display: flex; justify-content: center;">
+                        <div class="stats" style="align-items: center;">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                (click)="verificarModelo(6)">
+                                <i _ngcontent-ptt-c107="" _ngcontent-dfa-c50="" class="material-icons" style="
+                                    top: 0px !important;
+                                    font-size: 21px !important;
+                                ">view_in_ar</i> MODELO 3D
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card card-chart">
+                    <img src="https://i0.wp.com/landioustravel.com/wp-content/uploads/2021/06/Complejo-Deir-el-Bahari-e1624654697382.jpg?fit=1200%2C675&ssl=1"
+                        class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <div class="title-row">
+                            <h4 class="card-title">El muro en el templo de Ramsés III</h4>
+                            <ng-container *ngFor="let item of construcciones; let i = index">
+                                <ng-container *ngIf="item.estado === 1 && item.id_leccion === 8">
+                                    <span class="badge badge-success align-right"><i
+                                            class="material-icons">verified</i>Visto</span>
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="encontradaLeccion8">
+                                <span class="badge badge-warning align-right"><i
+                                        class="material-icons">report</i>Pendiente</span>
+                            </ng-container>
+                        </div>
+                        <p class="card-category">
+                            El muro en el templo de Ramsés III es una destacada estructura que posee una gran relevancia histórica y arqueológica. 
+                            Este muro, ubicado en el templo de Medinet Habu en Luxor, Egipto, es una muestra impresionante del arte y la arquitectura del antiguo Egipto.
+                        </p>
+                    </div>
+                    <div class="card-footer" style="display: flex; justify-content: center;">
+                        <div class="stats" style="align-items: center;">
+                            <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                (click)="verificarModelo(7)">
+                                <i _ngcontent-ptt-c107="" _ngcontent-dfa-c50="" class="material-icons" style="
+                                    top: 0px !important;
+                                    font-size: 21px !important;
+                                ">view_in_ar</i> MODELO 3D
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-xl" id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ titulo }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-16by9" id="iframeContainer">
+                    <iframe class="embed-responsive-item" frameborder="0" src="" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

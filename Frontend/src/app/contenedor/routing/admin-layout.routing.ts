@@ -3,6 +3,7 @@ import { ExplorarConstruccionesComponent } from 'app/construcciones/explorar-con
 import { GaleriaImagenesContruccionesComponent } from 'app/construcciones/galeria-imagenes-contrucciones/galeria-imagenes-contrucciones.component';
 import { VerDetalleArquitecturaComponent } from 'app/construcciones/galeria-imagenes-contrucciones/ver-detalle-arquitectura/ver-detalle-arquitectura.component';
 import { ProcesoConstruccionesComponent } from 'app/construcciones/proceso-construcciones/proceso-construcciones.component';
+import { TumbasPinturasComponent } from 'app/construcciones/tumbas-pinturas/tumbas-pinturas.component';
 import { VerDetalleProcesoConstruccionesComponent } from 'app/construcciones/ver-detalle-proceso-construcciones/ver-detalle-proceso-construcciones.component';
 import { ModificarUsuarioComponent } from 'app/cuenta/modificar-usuario/modificar-usuario.component';
 import { DashboardComponent } from 'app/dashboard/dashboard.component';
@@ -56,6 +57,7 @@ export const AdminLayoutRoutes: Routes = [
     },
     { path: 'explorar-construcciones', component: ExplorarConstruccionesComponent},
     { path: 'proceso-construcciones', component: ProcesoConstruccionesComponent},
-    { path: 'detalle-proceso-construcciones/:id', component : VerDetalleProcesoConstruccionesComponent}
+    { path: 'detalle-proceso-construcciones/:id', component : VerDetalleProcesoConstruccionesComponent},
+    { path: 'tumbas-pinturas', component : TumbasPinturasComponent}
     
 ];

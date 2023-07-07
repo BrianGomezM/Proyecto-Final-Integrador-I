@@ -39,7 +39,8 @@ export const ROUTES: RouteInfo[] = [
     path: '#construccion', id: 'construccion', title: 'CONSTRUCCIÍON', title2: '► Construcción', icon: 'handyman', children: [
       { path: '/explorar-construcciones', title: 'CONSTRUCCIIONES', title2: 'Construcción ► Construcción', icon: 'change_history', children: null },
       { path: '/proceso-construcciones', title: 'HERRAMIENTAS', title2: 'Construcción ► Herramientas', icon: 'home_repair_service', children: null },
-      { path: '/galeria-imagenes-construcciones', title: 'IMÁGENES', title2: 'Construcción ► Imágenes', icon: 'images', children: null }
+      { path: '/galeria-imagenes-construcciones', title: 'IMÁGENES', title2: 'Construcción ► Imágenes', icon: 'images', children: null },
+      { path: '/tumbas-pinturas', title: 'TUMBAS Y PINTURAS', title2: 'Construcción ► Tumbas y pinturas', icon: 'images', children: null }
     ]
   },
   {

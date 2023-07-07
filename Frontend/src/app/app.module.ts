@@ -26,6 +26,7 @@ import { MitosHistoriaComponent } from 'app/religion/mitologia/mitos-historia/mi
 import { ExplorarConstruccionesComponent } from './construcciones/explorar-construcciones/explorar-construcciones.component';
 import { ProcesoConstruccionesComponent } from './construcciones/proceso-construcciones/proceso-construcciones.component';
 import { VerDetalleProcesoConstruccionesComponent } from './construcciones/ver-detalle-proceso-construcciones/ver-detalle-proceso-construcciones.component';
+import { TumbasPinturasComponent } from './construcciones/tumbas-pinturas/tumbas-pinturas.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { VerDetalleProcesoConstruccionesComponent } from './construcciones/ver-d
     MitosHistoriaComponent,
     ExplorarConstruccionesComponent,
     ProcesoConstruccionesComponent,
-    VerDetalleProcesoConstruccionesComponent
+    VerDetalleProcesoConstruccionesComponent,
+    TumbasPinturasComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
