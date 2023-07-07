@@ -56,24 +56,18 @@ export class PracticasReligiosasComponent implements OnInit {
           }
         );
       } else {
-        this.cargarPracticas();
+        this.consumoServiciosService.getPracticas().subscribe(
+          (practicas_religiosas: Practicas[]) => {
+            this.listaPracticas = practicas_religiosas['practicas_religiosas'];
+            console.log(this.listaPracticas);
+            this.cargarEstado();
+          },
+          (error: any) => {
+            console.log('Error al obtener las prácticas religiosas', error);
+          }
+        );
       }
     });
-  
-  }
-
-
-  cargarPracticas(){
-    this.consumoServiciosService.getPracticas().subscribe(
-      (practicas_religiosas: Practicas[]) => {
-        this.listaPracticas = practicas_religiosas['practicas_religiosas'];
-        console.log(this.listaPracticas);
-        this.cargarEstado();
-      },
-      (error: any) => {
-        console.log('Error al obtener las prácticas religiosas', error);
-      }
-    );
   }
 
   
@@ -97,7 +91,7 @@ export class PracticasReligiosasComponent implements OnInit {
 
   insertarVisto(practicas:Practicas){
     if(!practicas.estado){
-      this.leccionesService.insertarLecciones(2,practicas.cod,this.usuarioCorreo).subscribe(
+      this.leccionesService.insertarLecciones(9,practicas.cod,this.usuarioCorreo).subscribe(
         () => {
         },
         (error) => {
