@@ -27,29 +27,65 @@ export class MitosHistoriaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cargarMitosHistorias();
     console.log(this.listaMitosHistorias);
-  }
- /**
- * Obtiene todos los mitos e historias.
- */
-  cargarMitosHistorias(){
-    this.consumoServiciosService.getMitosHistorias().subscribe(
-      (mitos_historias: MitosHistorias[]) => {
-        this.listaMitosHistorias = mitos_historias['mitos_historias'];
-        console.log(this.listaMitosHistorias)
-      },
-      (error: any) => {
-        console.log('Error al obtener los mitos e historias', error);
-      }
-    );
-  }
 
+    this.usuarioCorreo = this.servicioLogin.obtenerLocalStorageUsuario().correo;
+    this.obtenerLecciones();
+  }
 
   mostrarDetalles(mitosHistorias:MitosHistorias){
     this.router.navigate(['/detalles-mitos-historias', mitosHistorias.cod]);
+    this.insertarVisto(mitosHistorias);
   }
 
+  async  obtenerLecciones(): Promise<void> {
+    try {
+      const lecciones: any[] = await this.leccionesService.getLecciones(this.usuarioCorreo, 4)
+        .pipe()
+        .toPromise();
+      this.obtenerPracticas();
+      this.listaLecciones = lecciones['Lecciones'];
+      console.log('Lecciones obtenidas:', this.listaLecciones);
+  
+      // Continuar con el flujo de tu código aquí
+      // ...
+    } catch (error) {
+      console.error('Error al obtener las prácticas-religiosas:', error);
+    }
+  }
+
+
+ /**
+ * Obtiene todos los mitos e historias.
+ */
+
+ obtenerPracticas(){
+  this.sharedDataService.searchValue$.subscribe((searchValue: string) => {
+    if (searchValue) {
+      this.consumoServiciosService.getFiltro(searchValue).subscribe(
+        (mitos_historias: MitosHistorias[]) => {
+          this.listaMitosHistorias = mitos_historias['mitos_historias'];
+          this.cargarEstado();
+          
+        },
+        (error: any) => {
+          console.log('Error al obtener las construcciones:', error);
+        }
+      );
+    } else {
+      this.consumoServiciosService.getMitosHistorias().subscribe(
+        (mitos_historias: MitosHistorias[]) => {
+          this.listaMitosHistorias = mitos_historias['mitos_historias'];
+          console.log(this.listaMitosHistorias);
+          this.cargarEstado();
+        },
+        (error: any) => {
+          console.log('Error al obtener los mitos-historias', error);
+        }
+      );
+    }
+  });
+}
 
   cargarEstado(){
     for(let i = 0; i<this.listaLecciones.length;i++){
@@ -67,7 +103,7 @@ export class MitosHistoriaComponent implements OnInit {
 
   insertarVisto(mitosHistroias:MitosHistorias){
     if(!mitosHistroias.estado){
-      this.leccionesService.insertarLecciones(2,mitosHistroias.cod,this.usuarioCorreo).subscribe(
+      this.leccionesService.insertarLecciones(4,mitosHistroias.cod,this.usuarioCorreo).subscribe(
         () => {
         },
         (error) => {
