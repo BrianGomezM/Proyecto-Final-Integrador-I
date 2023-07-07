@@ -81,3 +81,29 @@ class MitosHistorias:
                 return "No se encontró el mito-historia"
         except Exception as ex:
             return None
+
+    @staticmethod
+    def filtrarMitosHistorias(nombre):
+        try:
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            print("Conexión exitosa")
+            sql = "SELECT * FROM mitos_historias WHERE nombre LIKE %s OR descripcion LIKE %s OR contenido LIKE %s OR diosesRelaconados LIKE %s;"
+            params = ('' + nombre + '%', '' + nombre + '%', '' + nombre + '%', '' + nombre + '%')
+            cursor.execute(sql, params)
+            datos = cursor.fetchall()
+            practicas = []
+            for fila in datos:
+                practica = {
+                    'cod': fila[0],
+                    'titulo': fila[1],
+                    'descripcion': fila[2], 
+                    'contenido': fila[3],
+                    'imagen':fila[4],
+                    'diosesRelacionados':fila[5]
+                }
+                practicas.append(practica)
+            conn.close()
+            return practicas
+        except Exception as ex:
+            return None
