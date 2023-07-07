@@ -6,7 +6,7 @@ import { Router } from "@angular/router";
 import { UsuarioService } from "app/servicios/servicios-usuarios/usuarioService";
 
 declare var google:any;
-declare var $: any;
+
 
 //declare const gapi: any; // Declara gapi para evitar errores de tipo
 
@@ -52,8 +52,7 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
         this.router.navigate(["dashboard"]);
         this.tokenService.guardarTokenAlLocal(respuesta["respuesta"]["token"]);
       } else {
-        this.showNotification('top','center', 'danger', 'Verifique sus credenciales de acceso', 'dangerous')    
-        //alert("Verifique sus credenciales de acceso");
+        alert("Verifique sus credenciales de acceso");
       }
     });
   }
@@ -112,13 +111,13 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
         this.servicioUsuario.crearUsuario(this.usuarioGoogleToRegistrar).subscribe(respuesta => {
           console.log(respuesta['mensaje'])
           if(respuesta['mensaje'] === "El correo electrónico ya está registrado"){
-            //alert("No es necesario registrar");
+            alert("No es necesario registrar");
             this.loginService.guardarUsuarioAlLocalStorage(this.usuarioGoogleToRegistrar);
           }
           else{
             console.log(this.usuarioGoogleToRegistrar);
             this.usuario = new Usuario("", "", "", "", "", "");
-            //alert("Cuenta creada exitosamente!");
+            alert("Cuenta creada exitosamente!");
             this.loginService.guardarUsuarioAlLocalStorage(this.usuarioGoogleToRegistrar);
           }
         });
@@ -129,9 +128,7 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
 
       if(response.credential){
         localStorage.setItem("token",response.credential);
-        //window.location.href = '/#/dashboard';
-        //document.location.href = "dashboard";
-        this.router.navigate(["dashboard"]);
+        document.location.href = "/dashboard";
       }
 
     };
@@ -145,34 +142,4 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
   
     google.accounts.id.prompt();
   }
-
-
-  showNotification(from, align, type, mensaje, icon){
-    // const type = ['','info','success','warning','danger'];
-
-     const color = Math.floor((Math.random() * 4) + 1);
-
-     $.notify({
-         icon: "Notificación",
-         message: mensaje
-     },{
-         type:  type,
-         timer: 4000,
-         placement: {
-             from: from,
-             align: align
-         },
-         template: '<div data-notify="container" class="col-xl-4 col-lg-4 col-11 col-sm-4 col-md-4 alert alert-{0} alert-with-icon" role="alert">' +
-           '<button mat-button  type="button" aria-hidden="true" class="close mat-button" data-notify="dismiss">  <i class="material-icons">close</i></button>' +
-           '<i class="material-icons" data-notify="icon">'+icon+'</i> ' +
-           '<span data-notify="title">{1}</span> ' +
-           '<span data-notify="message">{2}</span>' +
-           '<div class="progress" data-notify="progressbar">' +
-             '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-           '</div>' +
-           '<a href="{3}" target="{4}" data-notify="url"></a>' +
-         '</div>'
-     });
- }
 }
-
