@@ -55,3 +55,22 @@ class Lecciones:
         except Exception as ex:
             print(f"Error en guardar_usuario: {str(ex)}")
             return {'mensaje': str(ex)}
+    @staticmethod
+    def listarPinturasL(correo):
+        try:
+            conn = mysql.connect()  # Establece la conexión a la base de datos
+            cursor = conn.cursor()
+            print("Conexión exitosa")
+            sql = "SELECT id_leccion, estado FROM estado_lecciones WHERE correoUsuario = %s AND id_tabla = 8"
+            cursor.execute(sql, (correo,))
+            datos = cursor.fetchall()
+            construcciones = []
+            for fila in datos:
+                construccion = {'id_leccion': fila[0], 'estado': fila[1]}
+                construcciones.append(construccion)
+            conn.close()
+            return construcciones
+        except Exception as ex:
+            return None
+        
+        

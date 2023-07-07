@@ -28,3 +28,12 @@ def registrar_leccion():
         print(f"Error en registrar leccion: {str(ex)}")
         return jsonify({"mensaje": "Error"})
     
+@lecciones_app.route('/listarPinturasL/<correo>', methods=['GET'])
+def listarPinturasL(correo):
+    varlistarConstruE = Lecciones.listarPinturasL(correo)
+    if varlistarConstruE is not None:
+        return jsonify({'pinturas': varlistarConstruE, 'mensaje': "Lista imagenes de construcciones egipcias"})
+    else:
+        return jsonify({"mensaje": "Error"})
+
+
