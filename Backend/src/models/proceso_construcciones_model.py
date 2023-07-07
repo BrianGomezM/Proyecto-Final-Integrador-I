@@ -82,3 +82,30 @@ class ProcesoConstrucciones:
                 return "No se encontró la herramienta"
         except Exception as ex:
             return {'mensaje': str(ex)}
+
+    @staticmethod
+    def filtrarProcesoConstrucciones(nombre):
+        try:
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            print("Conexión exitosa")
+            sql = "SELECT * FROM proceso_construcciones WHERE herramienta LIKE %s OR descripcion LIKE %s OR etapa LIKE %s OR tecnicas LIKE %s;"
+            params = ('' + nombre + '%', '' + nombre + '%', '' + nombre + '%', '' + nombre + '%')
+            cursor.execute(sql, params)
+            datos = cursor.fetchall()
+            mitos_historias = []
+            for fila in datos:
+                mito_historia = {
+                    'cod': fila[0],
+                    'herramienta': fila[1],
+                    'descripcion': fila[2], 
+                    'etapa': fila[3],
+                    'imagen':fila[4],
+                    'estudiosArqueologicos':fila[5]
+                }
+                mitos_historias.append(mito_historia)
+            conn.close()
+            return mitos_historias
+        except Exception as ex:
+            return None
+

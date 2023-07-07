@@ -68,3 +68,11 @@ def getMitosHistoriasById(id):
     else:
         return jsonify({"mensaje": "Error"}) 
 
+@mitos_historias_app.route('/filtrarMitosHistorias/<id>', methods=['GET'])
+def filtrarPracticas(id):
+    mitos_historias = MitosHistorias.filtrarMitosHistorias(id)
+    if mitos_historias is not None:
+        return jsonify({'practicas': mitos_historias, 'mensaje': "Lista de mitos-historias"})
+    else:
+        return jsonify({"mensaje": "Error"})
+    

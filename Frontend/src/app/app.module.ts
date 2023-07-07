@@ -27,6 +27,8 @@ import { ExplorarConstruccionesComponent } from './construcciones/explorar-const
 import { ProcesoConstruccionesComponent } from './construcciones/proceso-construcciones/proceso-construcciones.component';
 import { VerDetalleProcesoConstruccionesComponent } from './construcciones/ver-detalle-proceso-construcciones/ver-detalle-proceso-construcciones.component';
 import { TumbasPinturasComponent } from './construcciones/tumbas-pinturas/tumbas-pinturas.component';
+import { VerDetallePracticasComponent } from './religion/religion/ver-detalle-practicas/ver-detalle-practicas.component';
+
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import { TumbasPinturasComponent } from './construcciones/tumbas-pinturas/tumbas
     ExplorarConstruccionesComponent,
     ProcesoConstruccionesComponent,
     VerDetalleProcesoConstruccionesComponent,
-    TumbasPinturasComponent
+    TumbasPinturasComponent,
+    VerDetallePracticasComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

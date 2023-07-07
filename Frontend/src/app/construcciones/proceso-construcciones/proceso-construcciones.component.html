@@ -9,7 +9,11 @@
                           </div>                          
                         <div class="card-body">                    
                             
-                            <h4 class="card-title titulo"><a href="#">{{ tarjeta.etapa}}</a></h4>
+                            <h4 class="card-title titulo"><a href="#">{{ tarjeta.etapa}}
+                            </a>
+                            <span *ngIf="tarjeta.estado" class="badge badge-success"><i class="material-icons">verified</i>Visto</span>
+                            <span *ngIf="!tarjeta.estado" class="badge badge-warning"><i class="material-icons">report</i>Pendiente</span>
+                            </h4>
                             <div class="card-description">{{ tarjeta.descripcion }}</div>
                         </div>
                         <div class="card-footer">
@@ -27,6 +31,7 @@
 
 <ng-template #noInfoTemplate>
     <div class="text-center">
-        <p>No se encontró información disponible.</p>
+        <p>Buscando Información...</p>
+        <img src="../../../assets/img/img-app/cargando.gif" width="100px">
     </div>
 </ng-template>

@@ -10,6 +10,7 @@ export interface ProcesoConstrucciones{
     tecnicas:                string;
     imagen:                  string;
     estudiosArqueologicos:   string;
+    estado:                  boolean;
 }
 
 //comentario x

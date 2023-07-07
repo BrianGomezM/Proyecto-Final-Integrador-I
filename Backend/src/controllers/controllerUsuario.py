@@ -55,3 +55,18 @@ def listar_usuarios():
     except Exception as ex:
         print(f"Error en listar_usuarios: {str(ex)}")
         return jsonify({"mensaje": "Error"})
+    
+    
+@usuario_app.route('/upload', methods=['POST'])
+def upload():
+    try:
+        imagen = Usuario.upload()
+        
+        if imagen is not None:
+            return jsonify({'usuarios': imagen, 'mensaje': "imagen recibida de manera satisfactoria"})
+        else:
+            return jsonify({"mensaje": "Error, imagen no recibida o proccesada"})
+    except Exception as ex:
+        print(f"Error upload: {str(ex)}")
+        return jsonify({"mensaje": "Error"})
+

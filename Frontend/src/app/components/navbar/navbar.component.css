@@ -13,3 +13,20 @@
 .form-control::placeholder {
     color: #f4c17d8f;
   }
+
+.profile-image-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile-image {
+
+  height: 100%;
+}
+
+.profile-text{
+    float: right;
+    margin-left: 60%;
+}

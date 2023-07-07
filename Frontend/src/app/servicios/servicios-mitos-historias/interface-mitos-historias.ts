@@ -11,6 +11,7 @@ export interface MitosHistorias{
     imagen:             string;
     categoria:          string;
     diosesRelacionados: string;
+    estado:             boolean;
 
 }
 

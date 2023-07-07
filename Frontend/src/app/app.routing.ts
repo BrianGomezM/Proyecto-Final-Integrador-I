@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/#/login',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {
@@ -44,7 +44,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {useHash:true})
   ],
   exports: [
     RouterModule
