@@ -10,4 +10,5 @@ export interface Practicas{
     contenido:          string;
     imagen:             string;
     diosesRelacionados: string;
+    estado:             boolean;
 }

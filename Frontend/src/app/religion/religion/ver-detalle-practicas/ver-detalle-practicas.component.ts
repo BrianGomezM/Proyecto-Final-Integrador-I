@@ -20,7 +20,8 @@ export class VerDetallePracticasComponent implements OnInit {
     descripcion: '',
     contenido: '',
     imagen:'',
-    diosesRelacionados: ''
+    diosesRelacionados: '',
+    estado: false
   };
 
   imagen:string= "";
