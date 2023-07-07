@@ -66,3 +66,12 @@ def getPracticasById(id):
         return jsonify({'Practicas_religiosas': practicas, 'mensaje': "Se encontró el proceso de construcción"})
     else:
         return jsonify({"mensaje": "Error"})  
+    
+@practicas_app.route('/filtrarPracticas/<id>', methods=['GET'])
+def filtrarPracticas(id):
+    practicas = Practicas.filtrarPracticas(id)
+    if practicas is not None:
+        return jsonify({'practicas': practicas, 'mensaje': "Lista de practicas religiosas"})
+    else:
+        return jsonify({"mensaje": "Error"})
+    

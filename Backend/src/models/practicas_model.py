@@ -80,3 +80,29 @@ class Practicas:
                 return "No se encontró la práctica religiosa"
         except Exception as ex:
             return None
+        
+    @staticmethod
+    def filtrarPracticas(nombre):
+        try:
+            conn = mysql.connect()
+            cursor = conn.cursor()
+            print("Conexión exitosa")
+            sql = "SELECT * FROM practicas WHERE nombre LIKE %s OR descripcion LIKE %s OR contenido LIKE %s OR diosesRelaconados LIKE %s;"
+            params = ('' + nombre + '%', '' + nombre + '%', '' + nombre + '%', '' + nombre + '%')
+            cursor.execute(sql, params)
+            datos = cursor.fetchall()
+            practicas = []
+            for fila in datos:
+                practica = {
+                    'cod': fila[0],
+                    'nombre': fila[1],
+                    'descripcion': fila[2], 
+                    'contenido': fila[3],
+                    'imagen':fila[4],
+                    'diosesRelacionados':fila[5]
+                }
+                practicas.append(practica)
+            conn.close()
+            return practicas
+        except Exception as ex:
+            return None

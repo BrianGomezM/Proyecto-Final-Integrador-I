@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MitosHistorias } from 'app/servicios/servicios-mitos-historias/interface-mitos-historias';
 import { ConsumoServiciosService } from 'app/servicios/servicios-mitos-historias/consumo-servicios.services';
 import { Router } from '@angular/router';
+import { LeccionesService } from 'app/servicios-compartidos/lecciones.service';
+import { SharedDataService } from 'app/servicios-compartidos/shared-data-service.service';
+import { LoginService } from 'app/servicios/servicios-login/login.service';
 
 @Component({
   selector: 'app-mitos-historia',
@@ -12,9 +15,14 @@ export class MitosHistoriaComponent implements OnInit {
   tarjetasDuplicadas: any[] = [];
   listaMitosHistorias: Array<MitosHistorias> = [];
   isLoading=true;
+  usuarioCorreo = "";
+  listaLecciones=[];
   constructor(
     private router: Router,
-    private consumoServiciosService: ConsumoServiciosService
+    private consumoServiciosService: ConsumoServiciosService,
+    private sharedDataService: SharedDataService,
+    private leccionesService: LeccionesService,
+    public servicioLogin:LoginService
 
   ) { }
 

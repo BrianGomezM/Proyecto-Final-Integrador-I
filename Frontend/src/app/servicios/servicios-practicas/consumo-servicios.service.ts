@@ -65,6 +65,22 @@ export class ConsumoServiciosService {
             return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
           }));    
     }
+
+          /**
+ * Obtiene todos los practicas.
+ * @returns Un Observable que emite un arreglo de objetos de tipo Practicas.
+ */
+  getFiltro(id):Observable<Practicas[]>{
+    let  url =this.baseUrl+'filtrarPracticas/'+id;
+    let header=new HttpHeaders();
+    header.append('Content-Type', 'application/json');
+    header.append('Access-Control-Allow-Origin', 'http://localhost');
+    return this.http.get<Practicas[]>(url, { headers: header }).pipe(
+      catchError(error => {
+        console.log('Error en la solicitud:', error);
+        return throwError('Ocurrió un error en la solicitud. Por favor, intenta nuevamente más tarde.');
+      }));    
+    }
   
 
 

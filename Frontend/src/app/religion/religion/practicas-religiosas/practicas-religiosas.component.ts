@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LeccionesService } from 'app/servicios-compartidos/lecciones.service';
 import { SharedDataService } from 'app/servicios-compartidos/shared-data-service.service';
-import { Dioses } from 'app/servicios/servicios-dioses/interface-dioses';
 import { LoginService } from 'app/servicios/servicios-login/login.service';
 import { ConsumoServiciosService } from 'app/servicios/servicios-practicas/consumo-servicios.service';
 import { Practicas } from 'app/servicios/servicios-practicas/interface-practicas';
@@ -31,7 +30,7 @@ export class PracticasReligiosasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cargarPracticas();
+
     console.log(this.listaPracticas);
 
     this.usuarioCorreo = this.servicioLogin.obtenerLocalStorageUsuario().correo;
@@ -44,6 +43,22 @@ export class PracticasReligiosasComponent implements OnInit {
         console.log('Error al obtener las construcciones:', error);
       }
     );
+    this.sharedDataService.searchValue$.subscribe((searchValue: string) => {
+      if (searchValue) {
+        this.consumoServiciosService.getFiltro(searchValue).subscribe(
+          (practicas: Practicas[]) => {
+            this.listaPracticas = practicas['practicas'];
+            this.cargarEstado();
+            
+          },
+          (error: any) => {
+            console.log('Error al obtener las construcciones:', error);
+          }
+        );
+      } else {
+        this.cargarPracticas();
+      }
+    });
   
   }
 
@@ -52,7 +67,8 @@ export class PracticasReligiosasComponent implements OnInit {
     this.consumoServiciosService.getPracticas().subscribe(
       (practicas_religiosas: Practicas[]) => {
         this.listaPracticas = practicas_religiosas['practicas_religiosas'];
-        console.log(this.listaPracticas)
+        console.log(this.listaPracticas);
+        this.cargarEstado();
       },
       (error: any) => {
         console.log('Error al obtener las prácticas religiosas', error);
@@ -79,9 +95,9 @@ export class PracticasReligiosasComponent implements OnInit {
     console.log(this.listaPracticas)
   }
 
-  insertarVisto(dios:Dioses){
-    if(!dios.estado){
-      this.leccionesService.insertarLecciones(2,dios.cod,this.usuarioCorreo).subscribe(
+  insertarVisto(practicas:Practicas){
+    if(!practicas.estado){
+      this.leccionesService.insertarLecciones(2,practicas.cod,this.usuarioCorreo).subscribe(
         () => {
         },
         (error) => {
