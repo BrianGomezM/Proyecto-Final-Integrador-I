@@ -21,7 +21,8 @@ export class VerDetalleMitosHistoriasComponent implements OnInit {
     contenido: '',
     imagen:'',
     categoria: '',
-    diosesRelacionados: ''
+    diosesRelacionados: '',
+    estado: false
   };
 
   imagen:string= "";

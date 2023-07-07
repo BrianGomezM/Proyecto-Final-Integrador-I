@@ -51,6 +51,34 @@ export class MitosHistoriaComponent implements OnInit {
   }
 
 
+  cargarEstado(){
+    for(let i = 0; i<this.listaLecciones.length;i++){
+      if(this.listaMitosHistorias.find((d: MitosHistorias) => d.cod === this.listaLecciones[i].idLeccion)!== undefined){
+        this.listaMitosHistorias.find((d: MitosHistorias) => d.cod === this.listaLecciones[i].idLeccion).estado=true;
+      }
+    }
+    for(let i = 0; i<this.listaMitosHistorias.length;i++){
+      if(this.listaMitosHistorias[i].estado != true){
+        this.listaMitosHistorias[i].estado=false;
+      }
+    }
+    console.log(this.listaMitosHistorias)
+  }
+
+  insertarVisto(mitosHistroias:MitosHistorias){
+    if(!mitosHistroias.estado){
+      this.leccionesService.insertarLecciones(2,mitosHistroias.cod,this.usuarioCorreo).subscribe(
+        () => {
+        },
+        (error) => {
+        }
+      );
+    }
+  }
+
+
+
+
 
 
 }

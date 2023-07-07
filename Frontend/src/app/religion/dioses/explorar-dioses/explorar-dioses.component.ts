@@ -32,41 +32,7 @@ export class ExplorarDiosesComponent implements OnInit {
  * Obtiene todos los dioses.
  */
   this.usuarioCorreo = this.servicioLogin.obtenerLocalStorageUsuario().correo;
-  
-  this.leccionesService.getLecciones(this.usuarioCorreo,2).subscribe(
-    (lecciones: any[]) => {
-      this.listaLecciones = lecciones['Lecciones']
-    },
-    (error: any) => {
-      console.log('Error al obtener las construcciones:', error);
-    }
-  );
-
-  this.sharedDataService.searchValue$.subscribe((searchValue: string) => {
-    if (searchValue) {
-      this.consumoServiciosService.getFiltro(searchValue).subscribe(
-        (dioses: Dioses[]) => {
-          this.listaDioses = dioses['dioses'];
-          this.cargarEstado();
-          
-        },
-        (error: any) => {
-          console.log('Error al obtener las construcciones:', error);
-        }
-      );
-    } else {
-      this.consumoServiciosService.getAllGods().subscribe(
-        (dioses: Dioses[]) => {
-          this.listaDioses = dioses['dioses'];
-          this.cargarEstado();
-         
-        },
-        (error: any) => {
-          console.log('Error al obtener las construcciones:', error);
-        }
-      );
-    }
-  });
+  this.obtenerLecciones();
   }
 
   /**
@@ -78,7 +44,49 @@ export class ExplorarDiosesComponent implements OnInit {
     this.insertarVisto(dios)
   }
 
+  async  obtenerLecciones(): Promise<void> {
+    try {
+      const lecciones: any[] = await this.leccionesService.getLecciones(this.usuarioCorreo, 2)
+        .pipe()
+        .toPromise();
+      this.obtenerDioses();
+      this.listaLecciones = lecciones['Lecciones'];
+      console.log('Lecciones obtenidas:', this.listaLecciones);
+  
+      // Continuar con el flujo de tu código aquí
+      // ...
+    } catch (error) {
+      console.error('Error al obtener las criaturas:', error);
+    }
+  }
 
+  obtenerDioses(){
+    this.sharedDataService.searchValue$.subscribe((searchValue: string) => {
+      if (searchValue) {
+        this.consumoServiciosService.getFiltro(searchValue).subscribe(
+          (dioses: Dioses[]) => {
+            this.listaDioses = dioses['dioses'];
+            this.cargarEstado();
+            console.log(this.listaDioses)
+          },
+          (error: any) => {
+            console.log('Error al obtener las construcciones:', error);
+          }
+        );
+      } else {
+        this.consumoServiciosService.getAllGods().subscribe(
+          (dioses: Dioses[]) => {
+            this.listaDioses = dioses['dioses'];
+            this.cargarEstado();
+           
+          },
+          (error: any) => {
+            console.log('Error al obtener las construcciones:', error);
+          }
+        );
+      }
+    });
+  }
 
   cargarEstado(){
     for(let i = 0; i<this.listaLecciones.length;i++){
@@ -105,6 +113,4 @@ export class ExplorarDiosesComponent implements OnInit {
     }
   }
 }
-
-  
 

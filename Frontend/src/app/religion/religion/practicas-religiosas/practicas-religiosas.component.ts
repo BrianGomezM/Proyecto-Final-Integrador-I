@@ -14,7 +14,7 @@ import { Practicas } from 'app/servicios/servicios-practicas/interface-practicas
 export class PracticasReligiosasComponent implements OnInit {
 
   tarjetasDuplicadas: any[] = [];
-  listaPracticas: Array<Practicas> = [];
+  public listaPracticas: Array<Practicas> = [];
   usuarioCorreo = "";
   isLoading=true;
   listaLecciones=[];
@@ -34,20 +34,38 @@ export class PracticasReligiosasComponent implements OnInit {
     console.log(this.listaPracticas);
 
     this.usuarioCorreo = this.servicioLogin.obtenerLocalStorageUsuario().correo;
+    this.obtenerLecciones();
+
+  }
+
+  mostrarDetalles(practicas:Practicas){
+    this.router.navigate(['/detalle-practicas', practicas.cod]);
+    this.insertarVisto(practicas);
+  }
+
+  async  obtenerLecciones(): Promise<void> {
+    try {
+      const lecciones: any[] = await this.leccionesService.getLecciones(this.usuarioCorreo, 6)
+        .pipe()
+        .toPromise();
+      this.obtenerPracticas();
+      this.listaLecciones = lecciones['Lecciones'];
+      console.log('Lecciones obtenidas:', this.listaLecciones);
   
-    this.leccionesService.getLecciones(this.usuarioCorreo,2).subscribe(
-      (lecciones: any[]) => {
-        this.listaLecciones = lecciones['Lecciones']
-      },
-      (error: any) => {
-        console.log('Error al obtener las construcciones:', error);
-      }
-    );
+      // Continuar con el flujo de tu código aquí
+      // ...
+    } catch (error) {
+      console.error('Error al obtener las prácticas-religiosas:', error);
+    }
+  }
+
+
+  obtenerPracticas(){
     this.sharedDataService.searchValue$.subscribe((searchValue: string) => {
       if (searchValue) {
         this.consumoServiciosService.getFiltro(searchValue).subscribe(
-          (practicas: Practicas[]) => {
-            this.listaPracticas = practicas['practicas'];
+          (practicas_religiosas: Practicas[]) => {
+            this.listaPracticas = practicas_religiosas['practicas_religiosas'];
             this.cargarEstado();
             
           },
@@ -69,11 +87,8 @@ export class PracticasReligiosasComponent implements OnInit {
       }
     });
   }
-
   
-  mostrarDetalles(practicas:Practicas){
-    this.router.navigate(['/detalle-practicas', practicas.cod]);
-  }
+
 
   cargarEstado(){
     for(let i = 0; i<this.listaLecciones.length;i++){
@@ -91,7 +106,7 @@ export class PracticasReligiosasComponent implements OnInit {
 
   insertarVisto(practicas:Practicas){
     if(!practicas.estado){
-      this.leccionesService.insertarLecciones(9,practicas.cod,this.usuarioCorreo).subscribe(
+      this.leccionesService.insertarLecciones(6,practicas.cod,this.usuarioCorreo).subscribe(
         () => {
         },
         (error) => {
