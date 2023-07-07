@@ -22,7 +22,8 @@ export class VerDetalleProcesoConstruccionesComponent implements OnInit {
     etapa: '',
     tecnicas:'',
     imagen: '',
-    estudiosArqueologicos: ''
+    estudiosArqueologicos: '',
+    estado: false
   };
 
   imagen:string= "";
