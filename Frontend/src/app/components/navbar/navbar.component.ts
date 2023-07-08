@@ -193,4 +193,7 @@ export class NavbarComponent implements OnInit {
     this.sharedDataService.updateSearchValue(this.searchPlaceholder);
     console.log("origen ",this.searchPlaceholder); // Aquí puedes realizar la lógica deseada con el valor capturado
   }
+  editarPerfil(){
+    this.router.navigate(['/editar']);
+  }
 }
