@@ -49,7 +49,7 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
     this.loginService.login(this.usuario).subscribe((respuesta) => {
       //console.log(respuesta);
       if (respuesta["respuesta"]["status"] === 200) {
-        this.router.navigate(["/dashboard"]);
+        this.router.navigate(["dashboard"]);
         this.tokenService.guardarTokenAlLocal(respuesta["respuesta"]["token"]);
       } else {
         alert("Verifique sus credenciales de acceso");
@@ -111,15 +111,16 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
         this.servicioUsuario.crearUsuario(this.usuarioGoogleToRegistrar).subscribe(respuesta => {
           console.log(respuesta['mensaje'])
           if(respuesta['mensaje'] === "El correo electrónico ya está registrado"){
-           // alert("No es necesario registrar");
+            //alert("No es necesario registrar");
             this.loginService.guardarUsuarioAlLocalStorage(this.usuarioGoogleToRegistrar);
-           
+            location.reload();
           }
           else{
             console.log(this.usuarioGoogleToRegistrar);
             this.usuario = new Usuario("", "", "", "", "", "");
-           // alert("Cuenta creada exitosamente!");
+            //alert("Cuenta creada exitosamente!");
             this.loginService.guardarUsuarioAlLocalStorage(this.usuarioGoogleToRegistrar);
+            location.reload();
           }
         });
 
@@ -129,13 +130,12 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
 
       if(response.credential){
         localStorage.setItem("token",response.credential);
-        window.location.href = '/';
-        // this.router.navigate(['/dashboard']);
       }
 
     };
     
-   
+    
+  
     google.accounts.id.initialize({
       client_id: "961138140283-f807uodndst52h1vjtrufm086ihope4h.apps.googleusercontent.com", // Reemplaza con tu propio Client ID de Google
       callback: handleCredentialResponse
@@ -143,6 +143,4 @@ export class InicioSesionComponent implements OnInit, AfterViewInit {
   
     google.accounts.id.prompt();
   }
-
-  
 }
