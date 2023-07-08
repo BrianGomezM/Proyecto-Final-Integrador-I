@@ -76,7 +76,7 @@ export class ModificarUsuarioComponent implements OnInit {
             this.showNotification('top','center', 'success', 'Cuenta modificada exitosamente!, ingrese con sus nuevos datos', 'download_done')
             this.servicioToken.quitarToken();
             //this.router.navigate(['login']);
-            window.location.href = 'login';
+            this.router.navigate(['/dashboard']);
           }
         });
     } else {
@@ -94,7 +94,7 @@ export class ModificarUsuarioComponent implements OnInit {
           console.log(res);
           alert("Usuario eliminado exitosamente, si desea recuperar su cuenta debera contactar con un administrador.");
           this.servicioToken.quitarToken();
-          window.location.href = '/#/dashboard';
+          window.location.href = '/#/login';
           //this.router.navigate(['/login']);
         });
         console.log("El usuario confirmó.");

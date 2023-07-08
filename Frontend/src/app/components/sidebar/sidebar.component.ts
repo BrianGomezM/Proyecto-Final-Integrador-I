@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'app/servicios/servicios-login/tokenService';
-
+import { Router } from "@angular/router";
 export interface RouteInfo {
   path: string;
   title: string;
@@ -57,7 +57,7 @@ export class SidebarComponent implements OnInit {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
   }
 
-  constructor(public tokenService: TokenService) {
+  constructor(public tokenService: TokenService, private router: Router) {
 
   }
 
@@ -78,7 +78,7 @@ export class SidebarComponent implements OnInit {
     }
   }
   cerrarSesion() {
-    window.location.href = "/login";
+    this.router.navigate(["login"]);
     this.tokenService.quitarToken();
   }
 }
